@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Shield, 
-  History, 
-  BookOpen, 
-  Menu, 
+import React, { useState, useEffect } from "react";
+import {
+  Shield,
+  History,
+  BookOpen,
+  Menu,
   X,
   Lock,
   Unlock,
   FileText,
   FileCheck,
   BarChart3,
-  ChevronRight
-} from 'lucide-react';
-import { useSecureBox } from '../context/SecureBoxContext';
+  ChevronRight,
+} from "lucide-react";
+import { useSecureBox } from "../context/SecureBoxContext";
 
 export const Navigation: React.FC = () => {
   const { activeTab, setActiveTab, history } = useSecureBox();
@@ -25,16 +25,16 @@ export const Navigation: React.FC = () => {
         setMobileMenuOpen(false);
       }
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const navItems = [
-    { id: 'encrypt', label: 'Encrypt', icon: Lock },
-    { id: 'decrypt', label: 'Decrypt', icon: Unlock },
-    { id: 'file-encrypt', label: 'File Encrypt', icon: FileText },
-    { id: 'file-decrypt', label: 'File Decrypt', icon: FileCheck },
-    { id: 'compare', label: 'Benchmark', icon: BarChart3 },
+    { id: "encrypt", label: "Encrypt", icon: Lock },
+    { id: "decrypt", label: "Decrypt", icon: Unlock },
+    { id: "file-encrypt", label: "File Encrypt", icon: FileText },
+    { id: "file-decrypt", label: "File Decrypt", icon: FileCheck },
+    { id: "compare", label: "Benchmark", icon: BarChart3 },
   ];
 
   const handleSelectTab = (id: string) => {
@@ -44,14 +44,22 @@ export const Navigation: React.FC = () => {
 
   const getActiveTabTitle = () => {
     switch (activeTab) {
-      case 'encrypt': return 'Encrypt';
-      case 'decrypt': return 'Decrypt';
-      case 'file-encrypt': return 'File Encrypt';
-      case 'file-decrypt': return 'File Decrypt';
-      case 'compare': return 'Benchmark';
-      case 'history': return 'History';
-      case 'how-it-works': return 'Spec';
-      default: return 'SecureBox';
+      case "encrypt":
+        return "Encrypt";
+      case "decrypt":
+        return "Decrypt";
+      case "file-encrypt":
+        return "File Encrypt";
+      case "file-decrypt":
+        return "File Decrypt";
+      case "compare":
+        return "Benchmark";
+      case "history":
+        return "History";
+      case "how-it-works":
+        return "Spec";
+      default:
+        return "SecureBox";
     }
   };
 
@@ -60,9 +68,9 @@ export const Navigation: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 gap-4">
           {/* Brand Logo (Left - Prominent & Bold) */}
-          <div 
+          <div
             className="flex items-center space-x-3 cursor-pointer select-none flex-shrink-0 group"
-            onClick={() => handleSelectTab('encrypt')}
+            onClick={() => handleSelectTab("encrypt")}
           >
             <div className="w-10 h-10 rounded-base bg-ash border border-charcoal text-phosphor flex items-center justify-center transition-all duration-200 group-hover:border-phosphor group-hover:scale-105">
               <Shield className="w-5 h-5 stroke-[1.75]" />
@@ -77,8 +85,8 @@ export const Navigation: React.FC = () => {
             </div>
           </div>
 
-          {/* Desktop Nav Links (Center - Prominent 80px Height & 15px Font) */}
-          <nav className="hidden lg:flex items-center space-x-1 sm:space-x-2 h-20">
+          {/* Desktop Nav Links (Center - Prominent 80px Height & 14px/15px Font) */}
+          <nav className="hidden lg:flex items-center space-x-1 lg:space-x-2 h-20 flex-shrink-0">
             {navItems.map((item) => {
               const isActive = activeTab === item.id;
               const Icon = item.icon;
@@ -86,16 +94,18 @@ export const Navigation: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => handleSelectTab(item.id)}
-                  className={`relative flex items-center space-x-2 px-4 lg:px-5 h-20 text-sm sm:text-base font-normal transition-all duration-150 cursor-pointer ${
+                  className={`relative flex items-center space-x-2 px-3 lg:px-4 h-20 text-sm font-normal whitespace-nowrap flex-shrink-0 transition-all duration-150 cursor-pointer ${
                     isActive
-                      ? 'text-snow font-medium'
-                      : 'text-silver hover:text-snow hover:bg-ash/50'
+                      ? "text-snow font-medium"
+                      : "text-silver hover:text-snow hover:bg-ash/50"
                   }`}
                 >
-                  <Icon className={`w-4.5 h-4.5 ${isActive ? 'text-phosphor' : 'text-smoke'}`} />
-                  <span>{item.label}</span>
+                  <Icon
+                    className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-phosphor" : "text-smoke"}`}
+                  />
+                  <span className="whitespace-nowrap">{item.label}</span>
                   {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-[3px] bg-phosphor rounded-full" />
+                    <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-phosphor rounded-full" />
                   )}
                 </button>
               );
@@ -106,16 +116,18 @@ export const Navigation: React.FC = () => {
           <div className="hidden sm:flex items-center space-x-3 flex-shrink-0">
             {/* History Pill */}
             <button
-              onClick={() => handleSelectTab('history')}
+              onClick={() => handleSelectTab("history")}
               className={`pill-status !py-2 !px-4 cursor-pointer transition-all duration-150 hover:border-graphite hover:scale-[1.02] active:scale-[0.98] ${
-                activeTab === 'history'
-                  ? 'border-phosphor text-snow bg-ash'
-                  : 'text-silver hover:text-snow'
+                activeTab === "history"
+                  ? "border-phosphor text-snow bg-ash"
+                  : "text-silver hover:text-snow"
               }`}
               title="Activity History"
             >
               <History className="w-4 h-4 text-smoke" />
-              <span className="hidden md:inline font-sans text-sm">History</span>
+              <span className="hidden md:inline font-sans text-sm">
+                History
+              </span>
               {history.length > 0 && (
                 <span className="text-xs px-2 py-0.5 rounded-full bg-charcoal text-phosphor font-mono font-medium">
                   {history.length}
@@ -125,11 +137,11 @@ export const Navigation: React.FC = () => {
 
             {/* Protocol Spec Pill */}
             <button
-              onClick={() => handleSelectTab('how-it-works')}
+              onClick={() => handleSelectTab("how-it-works")}
               className={`btn-pill-ghost !py-2 !px-4 !text-sm ${
-                activeTab === 'how-it-works'
-                  ? '!border-phosphor !text-phosphor'
-                  : ''
+                activeTab === "how-it-works"
+                  ? "!border-phosphor !text-phosphor"
+                  : ""
               }`}
               title="Protocol Specification & Architecture"
             >
@@ -149,7 +161,11 @@ export const Navigation: React.FC = () => {
               className="p-2.5 text-silver hover:text-snow bg-ash border border-charcoal rounded-base transition-all duration-150 hover:border-graphite cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -163,9 +179,11 @@ export const Navigation: React.FC = () => {
               <span className="text-xs font-normal text-smoke uppercase tracking-terminal">
                 Cryptographic Tools
               </span>
-              <span className="text-[10px] text-smoke font-mono">5 MODULES</span>
+              <span className="text-[10px] text-smoke font-mono">
+                5 MODULES
+              </span>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {navItems.map((item) => {
                 const isActive = activeTab === item.id;
@@ -176,12 +194,14 @@ export const Navigation: React.FC = () => {
                     onClick={() => handleSelectTab(item.id)}
                     className={`w-full text-left px-4 py-3 rounded-base text-sm sm:text-base transition-all duration-150 cursor-pointer flex items-center justify-between border ${
                       isActive
-                        ? 'bg-ash text-snow font-medium border-phosphor'
-                        : 'bg-obsidian/50 border-charcoal text-silver hover:bg-ash/50 hover:text-snow hover:border-graphite'
+                        ? "bg-ash text-snow font-medium border-phosphor"
+                        : "bg-obsidian/50 border-charcoal text-silver hover:bg-ash/50 hover:text-snow hover:border-graphite"
                     }`}
                   >
                     <div className="flex items-center space-x-3">
-                      <Icon className={`w-4.5 h-4.5 ${isActive ? 'text-phosphor' : 'text-smoke'}`} />
+                      <Icon
+                        className={`w-4.5 h-4.5 ${isActive ? "text-phosphor" : "text-smoke"}`}
+                      />
                       <span>{item.label}</span>
                     </div>
                     {isActive ? (
@@ -201,9 +221,11 @@ export const Navigation: React.FC = () => {
             </span>
             <div className="grid grid-cols-2 gap-2.5">
               <button
-                onClick={() => handleSelectTab('history')}
+                onClick={() => handleSelectTab("history")}
                 className={`pill-status justify-between px-4 py-3 cursor-pointer !rounded-base ${
-                  activeTab === 'history' ? 'border-phosphor text-snow bg-ash' : ''
+                  activeTab === "history"
+                    ? "border-phosphor text-snow bg-ash"
+                    : ""
                 }`}
               >
                 <div className="flex items-center space-x-2 text-sm">
@@ -218,9 +240,11 @@ export const Navigation: React.FC = () => {
               </button>
 
               <button
-                onClick={() => handleSelectTab('how-it-works')}
+                onClick={() => handleSelectTab("how-it-works")}
                 className={`btn-pill-ghost !py-3 !px-4 !text-sm justify-center !rounded-base ${
-                  activeTab === 'how-it-works' ? '!border-phosphor !text-phosphor' : ''
+                  activeTab === "how-it-works"
+                    ? "!border-phosphor !text-phosphor"
+                    : ""
                 }`}
               >
                 <BookOpen className="w-4 h-4" />
