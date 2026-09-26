@@ -126,105 +126,120 @@ export const FileDecrypt: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center space-x-3 pb-2 border-b border-slate-200">
-        <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-          <FileCheck className="w-6 h-6" />
+      {/* Page Header */}
+      <div className="flex items-center space-x-3 pb-3 border-b border-graphite-lift">
+        <div className="w-9 h-9 bg-electric-indigo text-pure-signal rounded-sm flex items-center justify-center">
+          <FileCheck className="w-5 h-5" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Decrypt File</h1>
-          <p className="text-xs text-slate-500">
-            Upload the encrypted binary (.enc) and supply the correct passphrase and cryptographic metadata.
+          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Decrypt File</h1>
+          <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
+            AUTHENTICATED BINARY DECRYPTION (.ENC) WITH RECONSTRUCTED KEY & METADATA CHECK
           </p>
         </div>
       </div>
 
       {/* Step-by-Step Decryption Flow */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
-        <div className="flex items-center space-x-2 text-emerald-700 font-semibold text-xs uppercase tracking-wider">
-          <Layers className="w-4 h-4" />
-          <span>Alur Kerja Proses Dekripsi Berkas (File Decryption Flow)</span>
+      <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 space-y-4">
+        <div className="flex items-center space-x-2 text-warm-filament font-mono text-xs uppercase tracking-wider">
+          <Layers className="w-4 h-4 text-electric-indigo" />
+          <span>// FILE DECRYPTION PIPELINE (4 STEPS)</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-600 block">Langkah 1: Muat Berkas & JSON</span>
-            <p className="text-slate-600">
-              Unggah berkas <code>.enc</code> & isi metadata (Salt/Session Key, Nonce, Tag) manual atau dari JSON.
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-bold text-electric-indigo text-sm">01. LOAD FILE</span>
+              <span className="text-[10px] font-mono text-soft-mist/40">STEP 1</span>
+            </div>
+            <p className="text-soft-mist text-[12px] leading-relaxed">
+              Upload <code>.enc</code> payload & load metadata JSON or enter params.
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-600 block">Langkah 2: Dekripsi Kunci</span>
-            <p className="text-slate-600">
-              Kunci AES didekripsi via RSA-OAEP atau diturunkan melalui password & <strong>scrypt</strong>.
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-bold text-electric-indigo text-sm">02. KEY RECON</span>
+              <span className="text-[10px] font-mono text-soft-mist/40">STEP 2</span>
+            </div>
+            <p className="text-soft-mist text-[12px] leading-relaxed">
+              scrypt or RSA-OAEP derives 256-bit symmetric session key.
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-600 block">Langkah 3: Verifikasi Tag</span>
-            <p className="text-slate-600">
-              AEAD memverifikasi Auth Tag 128-bit. Jika password salah/berkas dirusak, dekripsi ditolak.
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-bold text-electric-indigo text-sm">03. TAG CHECK</span>
+              <span className="text-[10px] font-mono text-soft-mist/40">STEP 3</span>
+            </div>
+            <p className="text-soft-mist text-[12px] leading-relaxed">
+              AEAD verifies 128-bit MAC tag. Rejects if tampered/wrong password.
             </p>
           </div>
 
-          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-700 block">Langkah 4: Unduh Berkas Asli</span>
-            <p className="text-slate-700">
-              Berkas asli berhasil dipulihkan secara utuh dan siap diunduh kembali.
+          <div className="p-4 bg-graphite-lift border border-lime-beacon/50 rounded-sm space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-bold text-lime-beacon text-sm">04. RECOVER</span>
+              <span className="text-[10px] font-mono text-lime-beacon">VERIFIED</span>
+            </div>
+            <p className="text-soft-mist text-[12px] leading-relaxed">
+              Original file binary recovered bit-for-bit and ready to download.
             </p>
           </div>
         </div>
       </div>
 
-      <form onSubmit={handleDecrypt} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-5">
+      <form onSubmit={handleDecrypt} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 max-w-[600px] mx-auto shadow-none">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-              Upload Encrypted File (.enc)
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
+              // ENCRYPTED FILE PAYLOAD (.ENC)
             </label>
             {(file || password || salt || encrypted_session_key || downloadInfo) && (
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs text-slate-500 hover:text-rose-600 flex items-center space-x-1"
+                className="text-xs font-mono text-soft-mist/60 hover:text-orchid-whisper flex items-center space-x-1 cursor-pointer transition min-h-[36px] px-2"
               >
-                <RotateCcw className="w-3 h-3" />
-                <span>Reset</span>
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>RESET</span>
               </button>
             )}
           </div>
           <FileUpload onFileSelect={setFile} selectedFile={file} maxSizeMB={10} />
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100">
-          <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
-            Decryption Parameters
+        <div className="flex items-center justify-between pt-2 border-t border-graphite-lift">
+          <span className="text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
+            // DECRYPTION PARAMETERS
           </span>
-          <label className="cursor-pointer text-xs font-medium text-indigo-600 hover:text-indigo-800 flex items-center space-x-1">
+          <label className="btn-secondary !py-1.5 !px-3 cursor-pointer min-h-[36px]">
             <UploadCloud className="w-3.5 h-3.5" />
-            <span>Load Metadata JSON</span>
+            <span>LOAD METADATA JSON</span>
             <input type="file" accept=".json,application/json" onChange={handleJsonUpload} className="hidden" />
           </label>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-medium text-slate-600 mb-1">Passphrase {algorithm === 'hybrid' && <span className="text-slate-400 font-normal">(Auto RSA Private Key)</span>}</label>
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider mb-2">
+              // PASSPHRASE {algorithm === 'hybrid' && <span className="text-smoke font-normal">(AUTO RSA)</span>}
+            </label>
             <div className="relative">
-              <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+              <KeyRound className="w-4 h-4 text-smoke absolute left-3 top-3.5" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 disabled={algorithm === 'hybrid'}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={algorithm === 'hybrid' ? 'Decrypted using backend RSA Private Key' : 'Enter original password'}
-                className="w-full pl-9 pr-10 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-slate-100 disabled:text-slate-400"
+                className="input-protocol pl-9 pr-10 disabled:bg-midnight-void disabled:text-smoke disabled:border-graphite"
               />
               {algorithm !== 'hybrid' && (
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 transition"
+                  className="min-h-[44px] min-w-[44px] absolute right-1 top-0 text-smoke hover:text-pure-signal transition cursor-pointer flex items-center justify-center"
                   title={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -234,11 +249,13 @@ export const FileDecrypt: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-600 mb-1">Encryption Mode</label>
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider mb-2">
+              // ENCRYPTION MODE
+            </label>
             <select
               value={algorithm}
               onChange={(e) => setAlgorithm(e.target.value as any)}
-              className="w-full text-sm border border-slate-300 rounded-lg p-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="input-protocol bg-carbon-panel text-pure-signal cursor-pointer"
             >
               <option value="aes-256-gcm">AES-256-GCM</option>
               <option value="chacha20-poly1305">ChaCha20-Poly1305</option>
@@ -249,43 +266,43 @@ export const FileDecrypt: React.FC = () => {
 
         {algorithm === 'hybrid' ? (
           <div className="space-y-3">
-            <div className="p-4 bg-indigo-50/80 border border-indigo-200 rounded-lg text-xs space-y-1">
-              <div className="font-bold text-indigo-900 tracking-wide">Mode: HYBRID</div>
-              <div className="text-indigo-800"><span className="font-semibold">Data Cipher:</span> AES-256-GCM</div>
-              <div className="text-indigo-800"><span className="font-semibold">Key Protection:</span> RSA-OAEP</div>
+            <div className="p-3.5 bg-midnight-void border border-graphite-lift rounded-sm text-xs font-mono space-y-1">
+              <div className="font-bold text-pure-signal tracking-wide">// MODE: HYBRID DECRYPTION</div>
+              <div className="text-soft-mist/80"><span className="text-warm-filament">Data Cipher:</span> AES-256-GCM</div>
+              <div className="text-soft-mist/80"><span className="text-warm-filament">Key Protection:</span> RSA-OAEP 2048-bit</div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div className="md:col-span-3">
-                <label className="block text-xs font-medium text-slate-600 mb-1">Encrypted Session Key (Base64)</label>
+                <label className="block text-xs font-mono text-soft-mist/70 mb-1 uppercase">// ENCRYPTED SESSION KEY (BASE64)</label>
                 <input
                   type="text"
                   value={encrypted_session_key}
                   onChange={(e) => setEncryptedSessionKey(e.target.value)}
                   placeholder="Paste RSA-encrypted AES session key..."
-                  className="w-full text-xs font-mono border border-slate-300 rounded-md p-2"
+                  className="input-protocol-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Nonce (Base64)</label>
+                <label className="block text-xs font-mono text-soft-mist/70 mb-1 uppercase">// NONCE (BASE64)</label>
                 <input
                   type="text"
                   value={nonce}
                   onChange={(e) => setNonce(e.target.value)}
                   placeholder="e.g. 7kLm...=="
-                  className="w-full text-xs font-mono border border-slate-300 rounded-md p-2"
+                  className="input-protocol-mono"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-medium text-slate-600 mb-1">Auth Tag (Base64)</label>
+              <div className="md:col-span-2">
+                <label className="block text-xs font-mono text-soft-mist/70 mb-1 uppercase">// AUTH TAG (BASE64)</label>
                 <input
                   type="text"
                   value={tag}
                   onChange={(e) => setTag(e.target.value)}
                   placeholder="e.g. Qx9z...=="
-                  className="w-full text-xs font-mono border border-slate-300 rounded-md p-2"
+                  className="input-protocol-mono"
                 />
               </div>
             </div>
@@ -293,69 +310,75 @@ export const FileDecrypt: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-medium text-slate-600 mb-1">Salt (Base64)</label>
+              <label className="block text-xs font-mono text-soft-mist/70 mb-1 uppercase">// SALT (BASE64)</label>
               <input
                 type="text"
                 value={salt}
                 onChange={(e) => setSalt(e.target.value)}
                 placeholder="e.g. jH4s...=="
-                className="w-full text-xs font-mono border border-slate-300 rounded-md p-2"
+                className="input-protocol-mono"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-600 mb-1">Nonce (Base64)</label>
+              <label className="block text-xs font-mono text-soft-mist/70 mb-1 uppercase">// NONCE (BASE64)</label>
               <input
                 type="text"
                 value={nonce}
                 onChange={(e) => setNonce(e.target.value)}
                 placeholder="e.g. 7kLm...=="
-                className="w-full text-xs font-mono border border-slate-300 rounded-md p-2"
+                className="input-protocol-mono"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-600 mb-1">Auth Tag (Base64)</label>
+              <label className="block text-xs font-mono text-soft-mist/70 mb-1 uppercase">// AUTH TAG (BASE64)</label>
               <input
                 type="text"
                 value={tag}
                 onChange={(e) => setTag(e.target.value)}
                 placeholder="e.g. Qx9z...=="
-                className="w-full text-xs font-mono border border-slate-300 rounded-md p-2"
+                className="input-protocol-mono"
               />
             </div>
           </div>
         )}
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs font-medium text-rose-700">
-            {error}
+          <div className="p-3.5 bg-orchid-whisper/10 border border-orchid-whisper text-orchid-whisper rounded-sm text-xs font-mono flex items-center space-x-2">
+            <span>{error}</span>
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={loading || !file}
-          className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition flex items-center justify-center space-x-2 disabled:opacity-50"
-        >
-          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Unlock className="w-4 h-4" />}
-          <span>{loading ? 'Authenticating & Decrypting...' : 'Decrypt File'}</span>
-        </button>
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={loading || !file}
+            className="btn-primary w-full sm:w-auto"
+          >
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Unlock className="w-4 h-4" />}
+            <span>{loading ? 'AUTHENTICATING & DECRYPTING...' : 'DECRYPT FILE'}</span>
+          </button>
+        </div>
       </form>
 
       {downloadInfo && (
-        <div className="bg-white rounded-xl border border-emerald-200 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-carbon-panel border border-lime-beacon/40 rounded-sm p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-[600px] mx-auto">
           <div>
-            <h3 className="text-base font-semibold text-emerald-800">Decryption Successful!</h3>
-            <p className="text-xs text-slate-600 mt-0.5">Integrity check passed (Auth Tag matched).</p>
+            <h3 className="text-base font-bold text-pure-signal tracking-tight font-sans">
+              Decryption Successful!
+            </h3>
+            <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
+              INTEGRITY CHECK PASSED // AUTH TAG MATCHED (128-BIT)
+            </p>
           </div>
           <a
             href={downloadInfo.url}
             download={downloadInfo.filename}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm flex items-center space-x-1.5 transition self-start sm:self-auto"
+            className="btn-primary text-xs self-start sm:self-auto"
           >
-            <Download className="w-4 h-4" />
-            <span>Download {downloadInfo.filename}</span>
+            <Download className="w-3.5 h-3.5" />
+            <span>DOWNLOAD {downloadInfo.filename}</span>
           </a>
         </div>
       )}

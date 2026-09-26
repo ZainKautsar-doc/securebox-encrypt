@@ -7,18 +7,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        'electric-indigo': '#415fe6ff', // Soft, modern indigo primary accent
-        'cobalt-pulse': '#5374f0',    // Soft hover blue
-        'periwinkle-veil': '#8193f8ff', // Soft border / highlight veil
-        'lime-beacon': '#7fd579',
-        'orchid-whisper': '#d896ff',
-        'midnight-void': '#0d0d0d',
-        'carbon-panel': '#161616',
-        'graphite-lift': '#252525',
-        'steel-hover': '#3b3b3b',
-        'pure-signal': '#ffffff',
-        'soft-mist': '#eaeaea',
-        'warm-filament': '#b8ad97',
+        'electric-indigo': '#0000ff', // Pure Vana Electric Indigo
+        'cobalt-pulse': '#4141fc',    // Hover blue
+        'periwinkle-veil': '#8b8bfe', // Highlight / secondary border
+        'lime-beacon': '#7fd579',     // Success status
+        'orchid-whisper': '#d896ff',  // Alert / Accent
+        'midnight-void': '#0d0d0d',   // Canvas background
+        'carbon-panel': '#161616',    // Card / Form surface
+        'graphite-lift': '#252525',   // Surface borders & elevated badges
+        'charcoal': '#333333',        // Component borders
+        'steel-hover': '#3b3b3b',     // Hover / disabled surfaces
+        'graphite': '#4d4d4d',        // Low-emphasis icons / borders
+        'smoke': '#898989',           // Metadata / caption text
+        'pure-signal': '#ffffff',     // Primary text / button labels
+        'soft-mist': '#eaeaea',       // Secondary / body text
+        'warm-filament': '#b8ad97',   // Protocol terminal accents
       },
       borderRadius: {
         'sm': '2px',

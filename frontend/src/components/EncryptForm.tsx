@@ -88,20 +88,21 @@ export const EncryptForm: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-4">
+      {/* Form Container (Carbon Panel #161616, border 1px Graphite Lift #252525, 2px radius, max-width 600px centered) */}
+      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 max-w-[600px] mx-auto shadow-none">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-              Plaintext Content
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
+              // PLAINTEXT CONTENT
             </label>
             {(plaintext || password || result) && (
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs text-slate-500 hover:text-rose-600 flex items-center space-x-1"
+                className="text-xs font-mono text-soft-mist/60 hover:text-orchid-whisper flex items-center space-x-1 cursor-pointer transition min-h-[36px] px-2"
               >
-                <RotateCcw className="w-3 h-3" />
-                <span>Reset Form</span>
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>RESET</span>
               </button>
             )}
           </div>
@@ -109,31 +110,31 @@ export const EncryptForm: React.FC = () => {
             rows={4}
             value={plaintext}
             onChange={(e) => setPlaintext(e.target.value)}
-            placeholder="Type or paste the secret message here..."
-            className="w-full text-sm border border-slate-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="Type or paste the secret plaintext message here..."
+            className="input-protocol font-mono text-xs"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-              Passphrase {algorithm === 'hybrid' && <span className="text-slate-400 font-normal">(Auto RSA Session Key)</span>}
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider mb-2">
+              // PASSPHRASE {algorithm === 'hybrid' && <span className="text-smoke font-normal">(AUTO RSA)</span>}
             </label>
             <div className="relative">
-              <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+              <KeyRound className="w-4 h-4 text-smoke absolute left-3 top-3.5" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 disabled={algorithm === 'hybrid'}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder={algorithm === 'hybrid' ? 'Not required for Hybrid RSA-OAEP' : 'Enter strong encryption password'}
-                className="w-full pl-9 pr-10 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-slate-100 disabled:text-slate-400"
+                placeholder={algorithm === 'hybrid' ? 'Not required for Hybrid RSA' : 'Enter encryption password'}
+                className="input-protocol pl-9 pr-10 disabled:bg-midnight-void disabled:text-smoke disabled:border-graphite"
               />
               {algorithm !== 'hybrid' && (
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 transition"
+                  className="min-h-[44px] min-w-[44px] absolute right-1 top-0 text-smoke hover:text-pure-signal transition cursor-pointer flex items-center justify-center"
                   title={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -143,43 +144,45 @@ export const EncryptForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-              Encryption Mode
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider mb-2">
+              // ENCRYPTION MODE
             </label>
             <select
               value={algorithm}
               onChange={(e) => setAlgorithm(e.target.value as any)}
-              className="w-full text-sm border border-slate-300 rounded-lg p-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="input-protocol bg-carbon-panel text-pure-signal cursor-pointer"
             >
               <option value="aes-256-gcm">AES-256-GCM (Hardware Accelerated)</option>
-              <option value="chacha20-poly1305">ChaCha20-Poly1305 (Modern Stream Cipher)</option>
+              <option value="chacha20-poly1305">ChaCha20-Poly1305 (Modern Stream)</option>
               <option value="hybrid">Hybrid: AES-256-GCM + RSA-OAEP</option>
             </select>
           </div>
         </div>
 
         {algorithm === 'hybrid' && (
-          <div className="p-4 bg-indigo-50/80 border border-indigo-200 rounded-lg text-xs space-y-1">
-            <div className="font-bold text-indigo-900 tracking-wide">Mode: HYBRID</div>
-            <div className="text-indigo-800"><span className="font-semibold">Data Cipher:</span> AES-256-GCM</div>
-            <div className="text-indigo-800"><span className="font-semibold">Key Protection:</span> RSA-OAEP (SHA-256)</div>
+          <div className="p-3.5 bg-midnight-void border border-graphite-lift rounded-sm text-xs font-mono space-y-1">
+            <div className="font-bold text-pure-signal tracking-wide">// MODE: HYBRID ENCRYPTION</div>
+            <div className="text-soft-mist/80"><span className="text-warm-filament">Data Cipher:</span> AES-256-GCM (Session Key)</div>
+            <div className="text-soft-mist/80"><span className="text-warm-filament">Key Protection:</span> RSA-OAEP 2048-bit (SHA-256)</div>
           </div>
         )}
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs font-medium text-rose-700">
-            {error}
+          <div className="p-3.5 bg-orchid-whisper/10 border border-orchid-whisper text-orchid-whisper rounded-sm text-xs font-mono flex items-center space-x-2">
+            <span>{error}</span>
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition flex items-center justify-center space-x-2 disabled:opacity-50"
-        >
-          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
-          <span>{loading ? 'Encrypting with scrypt...' : 'Encrypt Text'}</span>
-        </button>
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn-primary w-full sm:w-auto"
+          >
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
+            <span>{loading ? 'EXECUTING ENCRYPTION...' : 'ENCRYPT MESSAGE'}</span>
+          </button>
+        </div>
       </form>
 
       {result && <ResultDisplay title="Encryption Output" result={result} />}
