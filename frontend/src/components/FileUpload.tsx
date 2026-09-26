@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, File, X } from 'lucide-react';
+import { UploadCloud, File, X, AlertTriangle } from 'lucide-react';
 
 interface FileUploadProps {
   onFileSelect: (file: File | null) => void;
@@ -68,31 +68,31 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={() => inputRef.current?.click()}
-          className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-colors ${
+          className={`bg-ash rounded-base p-10 text-center cursor-pointer transition-all duration-200 ease-out border ${
             isDragging
-              ? 'border-indigo-500 bg-indigo-50/50'
-              : 'border-slate-300 hover:border-indigo-400 bg-slate-50/60'
+              ? 'border-solid border-phosphor scale-[1.01]'
+              : 'border-dashed border-charcoal hover:border-solid hover:border-phosphor hover:scale-[1.01]'
           }`}
         >
-          <div className="mx-auto w-12 h-12 bg-white rounded-full flex items-center justify-center text-indigo-600 shadow-sm mb-3">
-            <UploadCloud className="w-6 h-6" />
+          <div className="mx-auto w-12 h-12 flex items-center justify-center text-phosphor mb-3">
+            <UploadCloud className="w-8 h-8 stroke-[1.5]" />
           </div>
-          <p className="text-sm font-medium text-slate-700 mb-1">
-            Click to upload or drag & drop file
+          <p className="text-sm font-normal text-silver mb-1">
+            Drag files here or click to browse
           </p>
-          <p className="text-xs text-slate-500">
-            Maximum file size: {maxSizeMB} MB
+          <p className="text-xs font-mono text-smoke">
+            MAX PAYLOAD: {maxSizeMB} MB // MEMORY-HARD EXECUTION
           </p>
         </div>
       ) : (
-        <div className="flex items-center justify-between p-4 bg-indigo-50/50 border border-indigo-200 rounded-xl">
-          <div className="flex items-center space-x-3 truncate">
-            <div className="p-2.5 bg-indigo-600 text-white rounded-lg">
-              <File className="w-5 h-5" />
+        <div className="flex items-center justify-between p-4 bg-ash border border-charcoal rounded-base transition-all duration-150 hover:border-graphite">
+          <div className="flex items-center space-x-3.5 truncate">
+            <div className="w-10 h-10 bg-charcoal text-phosphor rounded-sm flex items-center justify-center flex-shrink-0">
+              <File className="w-5 h-5 stroke-[1.75]" />
             </div>
             <div className="truncate">
-              <p className="text-sm font-medium text-slate-800 truncate">{selectedFile.name}</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm font-medium text-snow truncate">{selectedFile.name}</p>
+              <p className="text-xs font-mono text-smoke">
                 {(selectedFile.size / 1024).toFixed(1)} KB
               </p>
             </div>
@@ -103,15 +103,19 @@ export const FileUpload: React.FC<FileUploadProps> = ({
               onFileSelect(null);
               if (inputRef.current) inputRef.current.value = '';
             }}
-            className="p-1 text-slate-400 hover:text-rose-600 rounded-md transition"
+            className="p-1.5 text-smoke hover:text-snow rounded-full hover:bg-charcoal transition cursor-pointer"
+            title="Remove file"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
       )}
 
       {error && (
-        <p className="text-xs text-rose-600 mt-2 font-medium">{error}</p>
+        <div className="mt-3 p-3.5 bg-smoke/[0.08] border border-smoke/30 text-smoke rounded-sm text-xs font-mono flex items-center space-x-2 animate-fade-in-down">
+          <AlertTriangle className="w-4 h-4 text-smoke flex-shrink-0" />
+          <span>{error}</span>
+        </div>
       )}
     </div>
   );

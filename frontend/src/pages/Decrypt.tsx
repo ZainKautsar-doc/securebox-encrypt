@@ -4,52 +4,65 @@ import { Unlock, Layers } from 'lucide-react';
 
 export const Decrypt: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center space-x-3 pb-2 border-b border-slate-200">
-        <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-          <Unlock className="w-6 h-6" />
+    <div className="max-w-4xl mx-auto space-y-8">
+      {/* Page Header */}
+      <div className="flex items-center space-x-3.5 pb-4 border-b border-charcoal">
+        <div className="w-10 h-10 bg-ash border border-charcoal text-phosphor rounded-base flex items-center justify-center">
+          <Unlock className="w-5 h-5 stroke-[1.75]" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Decrypt Text</h1>
-          <p className="text-xs text-slate-500">
-            Verify authentication tag and decrypt ciphertext using your passphrase and parameters.
+          <h1 className="text-2xl font-normal tracking-tight text-snow">Decrypt Text</h1>
+          <p className="text-xs font-mono text-smoke mt-0.5">
+            AEAD tag verification & ciphertext recovery with reconstructed key
           </p>
         </div>
       </div>
 
-      {/* Step-by-Step Decryption Flow */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
-        <div className="flex items-center space-x-2 text-emerald-700 font-semibold text-xs uppercase tracking-wider">
-          <Layers className="w-4 h-4" />
-          <span>Alur Kerja Proses Dekripsi (Decryption Flow)</span>
+      {/* Step-by-Step Flow Indicator */}
+      <div className="bg-obsidian border border-charcoal rounded-base p-6 space-y-4 transition-all duration-150 hover:border-graphite">
+        <div className="flex items-center space-x-2 text-smoke font-mono text-xs uppercase tracking-terminal">
+          <Layers className="w-4 h-4 text-phosphor" />
+          <span>// Decryption & Verification Pipeline (4 Steps)</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-600 block">Langkah 1: Muat Data</span>
-            <p className="text-slate-600">
-              Input ciphertext bersama metadata (Salt, Nonce, Tag) atau unggah berkas metadata .json.
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="p-4 bg-ash/50 border border-charcoal rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">01. Load Data</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px]">Step 1</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              Paste ciphertext & metadata (Salt, Nonce, Tag) or load JSON file.
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-600 block">Langkah 2: Rekonstruksi Kunci</span>
-            <p className="text-slate-600">
-              Password dimasukkan. scrypt dijalankan ulang bersama Salt yang sama untuk merekonstruksi kunci 256-bit.
+          <div className="p-4 bg-ash/50 border border-charcoal rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">02. Key Recon</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px]">Step 2</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              scrypt re-derives the identical 256-bit key from passphrase + Salt.
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-600 block">Langkah 3: Verifikasi Tag</span>
-            <p className="text-slate-600">
-              Mesin AEAD memverifikasi Auth Tag 128-bit. Jika tag tidak cocok (password salah/data dirusak), proses ditolak.
+          <div className="p-4 bg-ash/50 border border-charcoal rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">03. Tag Check</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px]">Step 3</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              AEAD engine verifies 128-bit MAC tag. Rejects if tampered.
             </p>
           </div>
 
-          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg space-y-1">
-            <span className="font-bold text-emerald-700 block">Langkah 4: Hasil Asli</span>
-            <p className="text-slate-700">
-              Plaintext berhasil dipulihkan secara utuh tanpa risiko modifikasi bit dari pihak ketiga.
+          <div className="p-4 bg-ash/50 border border-forest rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">04. Plaintext</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px] !border-forest text-phosphor">Verified</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              Original message recovered bit-for-bit with cryptographic integrity.
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Lock, KeyRound, ShieldAlert, Download } from 'lucide-react';
+import { Copy, Check, Lock, KeyRound, ShieldCheck, Download } from 'lucide-react';
 import { EncryptResponse } from '../services/api';
 
 interface ResultDisplayProps {
@@ -8,7 +8,7 @@ interface ResultDisplayProps {
   plaintext?: string | null;
 }
 
-export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', result, plaintext }) => {
+export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Encryption Result', result, plaintext }) => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, key: string) => {
@@ -51,17 +51,23 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
   if (!result && !plaintext) return null;
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 mb-4 gap-2">
-        <h3 className="text-base font-semibold text-slate-800 flex items-center space-x-2">
-          <ShieldAlert className="w-5 h-5 text-indigo-600" />
-          <span>{title}</span>
-        </h3>
+    <div className="bg-ash border border-charcoal rounded-base p-6 space-y-6 animate-fade-in-up transition-all duration-150 hover:border-graphite">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-charcoal gap-4">
+        <div className="flex items-center space-x-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-phosphor animate-pulse-phosphor" />
+          <h3 className="text-lg font-medium text-snow tracking-tight">
+            {title}
+          </h3>
+          <span className="pill-status !py-0.5 !px-2 !text-xs !border-forest/50 text-phosphor">
+            Verified ✓
+          </span>
+        </div>
+
         {result && (
           <div className="flex items-center space-x-2">
             <button
               onClick={() => downloadJsonFile(result)}
-              className="text-xs flex items-center space-x-1 text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded-lg font-medium shadow-sm transition"
+              className="btn-pill-primary !text-xs !py-1.5 !px-3"
               title="Download metadata & ciphertext as JSON file"
             >
               <Download className="w-3.5 h-3.5" />
@@ -69,127 +75,132 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
             </button>
             <button
               onClick={() => copyToClipboard(JSON.stringify(result, null, 2), 'all')}
-              className="text-xs flex items-center space-x-1 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-2.5 py-1.5 rounded-lg font-medium transition"
+              className="btn-pill-ghost !text-xs !py-1.5 !px-3"
             >
-              {copiedKey === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copiedKey === 'all' ? 'Copied Full JSON' : 'Copy JSON'}</span>
+              {copiedKey === 'all' ? <Check className="w-3.5 h-3.5 text-phosphor" /> : <Copy className="w-3.5 h-3.5" />}
+              <span className={copiedKey === 'all' ? 'text-phosphor' : ''}>{copiedKey === 'all' ? 'Copied' : 'Copy JSON'}</span>
             </button>
           </div>
         )}
       </div>
 
+      {/* Decrypted Plaintext Result */}
       {plaintext !== undefined && plaintext !== null && (
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Decrypted Plaintext</label>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2 text-xs font-medium text-silver">
+              <ShieldCheck className="w-4 h-4 text-phosphor" />
+              <span>Decrypted Plaintext Output</span>
+            </div>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => downloadPlaintextFile(plaintext)}
-                className="text-xs text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-1 rounded flex items-center space-x-1"
+                className="btn-pill-ghost !py-1 !px-2.5 !text-xs"
                 title="Download plaintext as .txt file"
               >
-                <Download className="w-3 h-3" />
-                <span>Download TXT</span>
+                <Download className="w-3.5 h-3.5" />
+                <span>Save TXT</span>
               </button>
               <button
                 onClick={() => copyToClipboard(plaintext, 'plaintext')}
-                className="text-xs text-indigo-600 hover:underline flex items-center space-x-1"
+                className="btn-pill-primary !py-1 !px-2.5 !text-xs"
               >
-                {copiedKey === 'plaintext' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                <span>{copiedKey === 'plaintext' ? 'Copied!' : 'Copy'}</span>
+                {copiedKey === 'plaintext' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedKey === 'plaintext' ? 'Copied' : 'Copy'}</span>
               </button>
             </div>
           </div>
-          <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3.5 text-emerald-950 font-mono text-sm break-all whitespace-pre-wrap">
+          <div className="bg-obsidian border border-charcoal rounded-sm p-4 text-snow font-mono text-xs break-all whitespace-pre-wrap leading-relaxed">
             {plaintext}
           </div>
         </div>
       )}
 
+      {/* Ciphertext & Metadata Result */}
       {result && (
-        <div className="space-y-4">
+        <div className="space-y-4 font-mono text-xs">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span className="text-xs text-slate-500 font-medium">Algorithm</span>
-              <p className="text-sm font-semibold text-slate-800 uppercase">{result.algorithm}</p>
+            <div className="p-3 bg-obsidian border border-charcoal rounded-sm">
+              <span className="text-smoke block text-[11px] mb-0.5">// ALGORITHM</span>
+              <p className="text-sm font-medium text-snow uppercase">{result.algorithm}</p>
             </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span className="text-xs text-slate-500 font-medium">Key Derivation (KDF)</span>
-              <p className="text-sm font-semibold text-slate-800 uppercase">{result.kdf} (N=16384, r=8, p=1)</p>
+            <div className="p-3 bg-obsidian border border-charcoal rounded-sm">
+              <span className="text-smoke block text-[11px] mb-0.5">// KEY DERIVATION FUNCTION</span>
+              <p className="text-sm font-medium text-snow uppercase">{result.kdf} (N=16384, r=8, p=1)</p>
             </div>
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-medium text-slate-600 flex items-center space-x-1">
-                <Lock className="w-3 h-3" />
-                <span>Ciphertext (Base64)</span>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-silver flex items-center space-x-1.5">
+                <Lock className="w-3.5 h-3.5 text-smoke" />
+                <span>CIPHERTEXT (BASE64)</span>
               </span>
               <button
                 onClick={() => copyToClipboard(result.ciphertext, 'ciphertext')}
-                className="text-xs text-indigo-600 hover:underline flex items-center space-x-1"
+                className="text-silver hover:text-snow text-xs flex items-center space-x-1 cursor-pointer transition-colors"
               >
-                {copiedKey === 'ciphertext' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                <span>{copiedKey === 'ciphertext' ? 'Copied!' : 'Copy'}</span>
+                {copiedKey === 'ciphertext' ? <Check className="w-3 h-3 text-phosphor" /> : <Copy className="w-3 h-3 text-smoke" />}
+                <span className={copiedKey === 'ciphertext' ? 'text-phosphor' : ''}>{copiedKey === 'ciphertext' ? 'Copied' : 'Copy'}</span>
               </button>
             </div>
-            <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-xs break-all max-h-32 overflow-y-auto">
+            <div className="bg-obsidian border border-charcoal text-snow p-3.5 rounded-sm font-mono text-xs break-all max-h-36 overflow-y-auto leading-relaxed selection:bg-phosphor selection:text-obsidian">
               {result.ciphertext}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600 flex items-center space-x-1">
-                  <KeyRound className="w-3 h-3" />
-                  <span>Salt (16B Base64)</span>
+              <div className="flex items-center justify-between mb-1 text-xs">
+                <span className="text-smoke flex items-center space-x-1">
+                  <KeyRound className="w-3 h-3 text-smoke" />
+                  <span>SALT (16B)</span>
                 </span>
                 <button
                   onClick={() => copyToClipboard(result.salt, 'salt')}
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-silver hover:text-snow text-[11px] cursor-pointer"
                 >
-                  {copiedKey === 'salt' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'salt' ? <span className="text-phosphor">Copied</span> : 'Copy'}
                 </button>
               </div>
               <input
                 readOnly
                 value={result.salt}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                className="w-full text-xs font-mono bg-obsidian border border-charcoal rounded-sm px-2.5 py-1.5 text-snow select-all outline-none"
               />
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600">Nonce (12B Base64)</span>
+              <div className="flex items-center justify-between mb-1 text-xs">
+                <span className="text-smoke">NONCE (12B)</span>
                 <button
                   onClick={() => copyToClipboard(result.nonce, 'nonce')}
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-silver hover:text-snow text-[11px] cursor-pointer"
                 >
-                  {copiedKey === 'nonce' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'nonce' ? <span className="text-phosphor">Copied</span> : 'Copy'}
                 </button>
               </div>
               <input
                 readOnly
                 value={result.nonce}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                className="w-full text-xs font-mono bg-obsidian border border-charcoal rounded-sm px-2.5 py-1.5 text-snow select-all outline-none"
               />
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600">Tag (16B Base64)</span>
+              <div className="flex items-center justify-between mb-1 text-xs">
+                <span className="text-smoke">AUTH TAG (16B)</span>
                 <button
                   onClick={() => copyToClipboard(result.tag, 'tag')}
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-silver hover:text-snow text-[11px] cursor-pointer"
                 >
-                  {copiedKey === 'tag' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'tag' ? <span className="text-phosphor">Copied</span> : 'Copy'}
                 </button>
               </div>
               <input
                 readOnly
                 value={result.tag}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                className="w-full text-xs font-mono bg-obsidian border border-charcoal rounded-sm px-2.5 py-1.5 text-snow select-all outline-none"
               />
             </div>
           </div>

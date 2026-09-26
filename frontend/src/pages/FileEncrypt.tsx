@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { FileUpload } from '../components/FileUpload';
-import { FileText, Lock, Loader2, Download, Copy, Check, KeyRound, RotateCcw, FileJson, Layers, Eye, EyeOff } from 'lucide-react';
+import { FileText, Lock, Loader2, Download, Copy, Check, KeyRound, RotateCcw, FileJson, Layers, Eye, EyeOff, AlertTriangle } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';
 
 export const FileEncrypt: React.FC = () => {
@@ -31,11 +31,11 @@ export const FileEncrypt: React.FC = () => {
   const handleEncrypt = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!file) {
-      setError('Please select a file to encrypt.');
+      setError('Please select a target file to encrypt.');
       return;
     }
     if (!password) {
-      setError('Password is required.');
+      setError('Passphrase is required.');
       return;
     }
 
@@ -67,7 +67,7 @@ export const FileEncrypt: React.FC = () => {
         },
       });
     } catch (err: any) {
-      setError(err.message || 'File encryption failed.');
+      setError(err.message || 'File encryption pipeline failed.');
     } finally {
       setLoading(false);
     }
@@ -95,68 +95,82 @@ export const FileEncrypt: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center space-x-3 pb-2 border-b border-slate-200">
-        <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-          <FileText className="w-6 h-6" />
+    <div className="max-w-4xl mx-auto space-y-8">
+      {/* Header */}
+      <div className="flex items-center space-x-3.5 pb-4 border-b border-charcoal">
+        <div className="w-10 h-10 bg-ash border border-charcoal text-phosphor rounded-base flex items-center justify-center">
+          <FileText className="w-5 h-5 stroke-[1.75]" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Encrypt File</h1>
-          <p className="text-xs text-slate-500">
-            Upload any file up to 10 MB. Output will be downloaded as an encrypted binary with authentication metadata.
+          <h1 className="text-2xl font-normal tracking-tight text-snow">Encrypt File</h1>
+          <p className="text-xs font-mono text-smoke mt-0.5">
+            Authenticated binary encryption (up to 10 MB payload) with metadata packaging
           </p>
         </div>
       </div>
 
-      {/* Step-by-Step Encryption Flow */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
-        <div className="flex items-center space-x-2 text-indigo-700 font-semibold text-xs uppercase tracking-wider">
-          <Layers className="w-4 h-4" />
-          <span>Alur Kerja Proses Enkripsi Berkas (File Encryption Flow)</span>
+      {/* 4-Step Pipeline Indicator */}
+      <div className="bg-obsidian border border-charcoal rounded-base p-6 space-y-4 transition-all duration-150 hover:border-graphite">
+        <div className="flex items-center space-x-2 text-smoke font-mono text-xs uppercase tracking-terminal">
+          <Layers className="w-4 h-4 text-phosphor" />
+          <span>// File Encryption Pipeline (4 Steps)</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-indigo-600 block">Langkah 1: Pilih Berkas</span>
-            <p className="text-slate-600">
-              Pengguna memilih berkas (maks 10 MB), memasukkan password & memilih cipher.
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div className="p-4 bg-ash/50 border border-charcoal rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">01. Select File</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px]">Step 1</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              Upload file (&lt;10 MB), enter passphrase & pick AEAD cipher.
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-indigo-600 block">Langkah 2: Salt & KDF</span>
-            <p className="text-slate-600">
-              16-byte random salt dibuat. Algoritma <strong>scrypt</strong> menurunkan kunci 256-bit di memori.
+          <div className="p-4 bg-ash/50 border border-charcoal rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">02. scrypt KDF</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px]">Step 2</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              16B random salt generated. 256-bit key derived in memory.
             </p>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
-            <span className="font-bold text-indigo-600 block">Langkah 3: Nonce & AEAD</span>
-            <p className="text-slate-600">
-              12-byte nonce dibuat. Berkas dienkripsi dan menghasilkan Auth Tag 128-bit untuk verifikasi.
+          <div className="p-4 bg-ash/50 border border-charcoal rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">03. AEAD Stream</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px]">Step 3</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              12B nonce generated. File encrypted + 16B Auth Tag produced.
             </p>
           </div>
 
-          <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-lg space-y-1">
-            <span className="font-bold text-indigo-700 block">Langkah 4: Berkas & JSON</span>
-            <p className="text-slate-700">
-              Unduh berkas terenkripsi <code>.enc</code> beserta metadata JSON (Salt, Nonce, Tag).
+          <div className="p-4 bg-ash/50 border border-forest rounded-base space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-mono font-medium text-phosphor text-sm">04. Download</span>
+              <span className="pill-status !py-0 !px-1.5 !text-[10px] !border-forest text-phosphor">Ready</span>
+            </div>
+            <p className="text-silver text-xs leading-relaxed font-normal">
+              Download encrypted <code>.enc</code> file & metadata JSON.
             </p>
           </div>
         </div>
       </div>
 
-      <form onSubmit={handleEncrypt} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-5">
+      {/* Form Container */}
+      <form onSubmit={handleEncrypt} className="bg-obsidian border border-charcoal rounded-base p-6 sm:p-8 space-y-6 transition-all duration-150 hover:border-graphite">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-              Upload Target File (Max 10 MB)
+            <label className="block text-xs font-normal text-silver uppercase tracking-terminal">
+              Target File Payload (Max 10 MB)
             </label>
             {(file || password || downloadInfo) && (
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs text-slate-500 hover:text-rose-600 flex items-center space-x-1"
+                className="text-xs text-smoke hover:text-snow flex items-center space-x-1 cursor-pointer transition-colors"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span>Reset</span>
@@ -168,23 +182,23 @@ export const FileEncrypt: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+            <label className="block text-xs font-normal text-silver uppercase tracking-terminal mb-2">
               Passphrase
             </label>
             <div className="relative">
-              <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+              <KeyRound className="w-4 h-4 text-smoke absolute left-3 top-2.5" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter file encryption password"
-                className="w-full pl-9 pr-10 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter file encryption passphrase"
+                className="input-supabase pl-9 pr-10"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 transition"
-                title={showPassword ? 'Hide password' : 'Show password'}
+                className="absolute right-3 top-2.5 text-smoke hover:text-snow transition cursor-pointer"
+                title={showPassword ? 'Hide passphrase' : 'Show passphrase'}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -192,13 +206,13 @@ export const FileEncrypt: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-              Cipher Algorithm
+            <label className="block text-xs font-normal text-silver uppercase tracking-terminal mb-2">
+              AEAD Cipher
             </label>
             <select
               value={algorithm}
               onChange={(e) => setAlgorithm(e.target.value as any)}
-              className="w-full text-sm border border-slate-300 rounded-lg p-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="input-supabase bg-obsidian text-snow cursor-pointer"
             >
               <option value="aes-256-gcm">AES-256-GCM (Authenticated)</option>
               <option value="chacha20-poly1305">ChaCha20-Poly1305 (Authenticated)</option>
@@ -207,32 +221,38 @@ export const FileEncrypt: React.FC = () => {
         </div>
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs font-medium text-rose-700">
-            {error}
+          <div className="p-3.5 bg-smoke/[0.08] border border-smoke/30 text-smoke rounded-sm text-xs font-mono flex items-center space-x-2 animate-fade-in-down">
+            <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+            <span>{error}</span>
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={loading || !file}
-          className="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm transition flex items-center justify-center space-x-2 disabled:opacity-50"
-        >
-          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
-          <span>{loading ? 'Encrypting File...' : 'Encrypt & Download'}</span>
-        </button>
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={loading || !file}
+            className="btn-pill-primary"
+          >
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
+            <span>{loading ? 'Encrypting Payload...' : 'Encrypt & Generate .enc'}</span>
+          </button>
+        </div>
       </form>
 
+      {/* Result Display */}
       {downloadInfo && (
-        <div className="bg-white rounded-xl border border-emerald-200 p-6 shadow-sm space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-            <div>
-              <h3 className="text-base font-semibold text-emerald-800 flex items-center space-x-2">
-                <Check className="w-5 h-5 text-emerald-600" />
-                <span>File Encrypted Successfully</span>
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Download the encrypted file (.enc) and its metadata JSON file to decrypt later.
-              </p>
+        <div className="bg-ash border border-charcoal rounded-base p-6 space-y-6 animate-fade-in-up transition-all duration-150 hover:border-graphite">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-charcoal">
+            <div className="flex items-center space-x-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-phosphor animate-pulse-phosphor" />
+              <div>
+                <h3 className="text-lg font-medium text-snow tracking-tight">
+                  File Encrypted Successfully
+                </h3>
+                <p className="text-xs font-mono text-smoke mt-0.5">
+                  AUTHENTICATED CIPHERTEXT BINARY & METADATA READY
+                </p>
+              </div>
             </div>
             
             <div className="flex flex-wrap items-center gap-2">
@@ -240,18 +260,18 @@ export const FileEncrypt: React.FC = () => {
                 <a
                   href={downloadInfo.url}
                   download={downloadInfo.filename}
-                  className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm flex items-center space-x-1.5 transition"
+                  className="btn-pill-primary !text-xs !py-1.5 !px-3"
                 >
-                  <Download className="w-4 h-4" />
-                  <span>Download Encrypted File ({downloadInfo.filename})</span>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download {downloadInfo.filename}</span>
                 </a>
               )}
               <button
                 onClick={downloadMetadataJsonFile}
-                className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg shadow-sm flex items-center space-x-1.5 transition"
+                className="btn-pill-ghost !text-xs !py-1.5 !px-3"
                 title="Download metadata as a .json file for easy decryption"
               >
-                <FileJson className="w-4 h-4" />
+                <FileJson className="w-3.5 h-3.5" />
                 <span>Download Metadata JSON</span>
               </button>
             </div>
@@ -259,18 +279,18 @@ export const FileEncrypt: React.FC = () => {
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                Encryption Metadata (Required to Decrypt)
+              <span className="text-xs font-mono text-silver uppercase tracking-terminal">
+                Cryptographic Metadata (Required for Decryption)
               </span>
               <button
                 onClick={copyMetadataJson}
-                className="text-xs text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center space-x-1 font-medium px-2.5 py-1 rounded transition"
+                className="btn-pill-ghost !py-1 !px-2.5 !text-xs"
               >
-                {copiedKey === 'meta' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedKey === 'meta' ? 'Copied!' : 'Copy JSON'}</span>
+                {copiedKey === 'meta' ? <Check className="w-3.5 h-3.5 text-phosphor" /> : <Copy className="w-3.5 h-3.5 text-smoke" />}
+                <span className={copiedKey === 'meta' ? 'text-phosphor' : ''}>{copiedKey === 'meta' ? 'Copied' : 'Copy JSON'}</span>
               </button>
             </div>
-            <pre className="bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-xs overflow-x-auto">
+            <pre className="bg-obsidian border border-charcoal text-snow p-4 rounded-sm font-mono text-xs overflow-x-auto selection:bg-phosphor selection:text-obsidian">
               {JSON.stringify(downloadInfo.metadata, null, 2)}
             </pre>
           </div>
