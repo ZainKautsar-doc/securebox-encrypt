@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { api, BenchmarkResponse } from '../services/api';
+import { api } from '../services/api';
 import { BarChart3, Loader2, Play, Zap, ShieldCheck } from 'lucide-react';
+import { useSecureBox } from '../context/SecureBoxContext';
 
 export const Compare: React.FC = () => {
+  const { benchmarkResults, setBenchmarkResults, addHistoryItem } = useSecureBox();
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<BenchmarkResponse[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleRunBenchmark = async () => {
@@ -12,7 +13,16 @@ export const Compare: React.FC = () => {
     setError(null);
     try {
       const data = await api.runBenchmark();
-      setResults(data);
+      setBenchmarkResults(data);
+
+      addHistoryItem({
+        type: 'benchmark',
+        algorithm: 'AES-GCM vs ChaCha20',
+        title: 'Benchmark comparison across 1KB, 1MB, and 10MB',
+        details: {
+          benchmarkData: data,
+        },
+      });
     } catch (err: any) {
       setError(err.message || 'Failed to run benchmark suite.');
     } finally {
@@ -58,7 +68,7 @@ export const Compare: React.FC = () => {
           </div>
         )}
 
-        {results && (
+        {benchmarkResults && (
           <div className="mt-6 space-y-6">
             <div className="overflow-x-auto border border-slate-200 rounded-lg">
               <table className="w-full text-left text-xs">
@@ -73,7 +83,7 @@ export const Compare: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {results.map((row, idx) => {
+                  {benchmarkResults.map((row, idx) => {
                     const aesTotal = row.aes_encrypt_time + row.aes_decrypt_time;
                     const chachaTotal = row.chacha_encrypt_time + row.chacha_decrypt_time;
                     const fastest = aesTotal <= chachaTotal ? 'AES-256-GCM' : 'ChaCha20-Poly1305';
@@ -103,7 +113,7 @@ export const Compare: React.FC = () => {
 
             {/* Visual Bar Comparison */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {results.map((r, i) => (
+              {benchmarkResults.map((r, i) => (
                 <div key={i} className="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-sm text-slate-800">{r.file_size} Payload</span>

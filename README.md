@@ -10,6 +10,8 @@ SecureBox adalah aplikasi web modern untuk enkripsi dan dekripsi teks serta berk
 - **Enkripsi & Dekripsi File (Hingga 10 MB)**: Unggah file apa saja, unduh ciphertext biner terenkripsi (`.enc`) dan metadata (Salt, Nonce, Tag).
 - **Integritas & Autentikasi**: Memvalidasi tag otentikasi 128-bit untuk mencegah modifikasi (tampering).
 - **Benchmark Interaktif**: Membandingkan throughput dan waktu eksekusi AES-256-GCM vs ChaCha20-Poly1305 pada ukuran file 1KB, 1MB, dan 10MB.
+- **Persistent State & Navigation**: Status form dan halaman aktif tersimpan otomatis di browser (`localStorage` + URL Hash) sehingga tidak hilang saat berpindah tab atau refresh.
+- **Activity History (Riwayat Operasi)**: Menyimpan riwayat enkripsi/dekripsi lengkap dengan fitur "Decrypt This", "Copy Metadata", filter kategori, dan export JSON.
 - **Modern Clean UI**: Dibuat dengan React 18, TypeScript, Tailwind CSS, dan Lucide Icons.
 
 ---
@@ -38,7 +40,7 @@ securebox/
 │   │   │   └── schemas.py
 │   │   ├── routes/
 │   │   │   ├── crypto.py
-│   │   │   └── file.py
+│   │   └── file.py
 │   │   ├── database.py
 │   │   └── main.py
 │   ├── tests/
@@ -55,14 +57,19 @@ securebox/
 │   │   │   ├── FileUpload.tsx
 │   │   │   ├── Navigation.tsx
 │   │   │   └── ResultDisplay.tsx
+│   │   ├── context/
+│   │   │   └── SecureBoxContext.tsx
 │   │   ├── pages/
 │   │   │   ├── Compare.tsx
 │   │   │   ├── Decrypt.tsx
 │   │   │   ├── Encrypt.tsx
 │   │   │   ├── FileDecrypt.tsx
-│   │   │   └── FileEncrypt.tsx
+│   │   │   ├── FileEncrypt.tsx
+│   │   │   └── History.tsx
 │   │   ├── services/
 │   │   │   └── api.ts
+│   │   ├── types/
+│   │   │   └── history.ts
 │   │   ├── App.tsx
 │   │   ├── main.tsx
 │   │   └── index.css

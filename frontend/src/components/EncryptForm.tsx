@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
-import { api, EncryptResponse } from '../services/api';
-import { Lock, Loader2, KeyRound } from 'lucide-react';
+import { api } from '../services/api';
+import { Lock, Loader2, KeyRound, RotateCcw } from 'lucide-react';
 import { ResultDisplay } from './ResultDisplay';
+import { useSecureBox } from '../context/SecureBoxContext';
 
 export const EncryptForm: React.FC = () => {
-  const [plaintext, setPlaintext] = useState('');
-  const [password, setPassword] = useState('');
-  const [algorithm, setAlgorithm] = useState<'aes-256-gcm' | 'chacha20-poly1305'>('aes-256-gcm');
+  const { encryptTextState, setEncryptTextState, addHistoryItem } = useSecureBox();
+  const { plaintext, password, algorithm, result } = encryptTextState;
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<EncryptResponse | null>(null);
+
+  const setPlaintext = (val: string) => setEncryptTextState((prev) => ({ ...prev, plaintext: val }));
+  const setPassword = (val: string) => setEncryptTextState((prev) => ({ ...prev, password: val }));
+  const setAlgorithm = (val: 'aes-256-gcm' | 'chacha20-poly1305') => setEncryptTextState((prev) => ({ ...prev, algorithm: val }));
+  const setResult = (res: any) => setEncryptTextState((prev) => ({ ...prev, result: res }));
+
+  const handleReset = () => {
+    setEncryptTextState({
+      plaintext: '',
+      password: '',
+      algorithm: 'aes-256-gcm',
+      result: null,
+    });
+    setError(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +39,6 @@ export const EncryptForm: React.FC = () => {
 
     setError(null);
     setLoading(true);
-    setResult(null);
 
     try {
       const res = await api.encryptText({
@@ -33,6 +47,21 @@ export const EncryptForm: React.FC = () => {
         algorithm,
       });
       setResult(res);
+
+      // Log to persistent History
+      addHistoryItem({
+        type: 'text-encrypt',
+        algorithm: res.algorithm,
+        title: `Encrypted "${plaintext.length > 25 ? plaintext.slice(0, 25) + '...' : plaintext}"`,
+        details: {
+          plaintext,
+          ciphertext: res.ciphertext,
+          salt: res.salt,
+          nonce: res.nonce,
+          tag: res.tag,
+          kdf: res.kdf,
+        },
+      });
     } catch (err: any) {
       setError(err.message || 'Failed to encrypt');
     } finally {
@@ -44,9 +73,21 @@ export const EncryptForm: React.FC = () => {
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-4">
         <div>
-          <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-            Plaintext Content
-          </label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+              Plaintext Content
+            </label>
+            {(plaintext || password || result) && (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="text-xs text-slate-500 hover:text-rose-600 flex items-center space-x-1"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset Form</span>
+              </button>
+            )}
+          </div>
           <textarea
             rows={4}
             value={plaintext}

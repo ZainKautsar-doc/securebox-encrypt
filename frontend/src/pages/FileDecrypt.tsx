@@ -1,22 +1,39 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { FileUpload } from '../components/FileUpload';
-import { FileCheck, Unlock, Loader2, Download, UploadCloud } from 'lucide-react';
+import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw } from 'lucide-react';
+import { useSecureBox } from '../context/SecureBoxContext';
 
 export const FileDecrypt: React.FC = () => {
-  const [file, setFile] = useState<File | null>(null);
-  const [password, setPassword] = useState('');
-  const [algorithm, setAlgorithm] = useState<'aes-256-gcm' | 'chacha20-poly1305'>('aes-256-gcm');
-  const [salt, setSalt] = useState('');
-  const [nonce, setNonce] = useState('');
-  const [tag, setTag] = useState('');
+  const { fileDecryptState, setFileDecryptState, addHistoryItem } = useSecureBox();
+  const { password, algorithm, salt, nonce, tag } = fileDecryptState;
 
+  const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [downloadInfo, setDownloadInfo] = useState<{
     url: string;
     filename: string;
   } | null>(null);
+
+  const setPassword = (val: string) => setFileDecryptState((prev) => ({ ...prev, password: val }));
+  const setAlgorithm = (val: 'aes-256-gcm' | 'chacha20-poly1305') => setFileDecryptState((prev) => ({ ...prev, algorithm: val }));
+  const setSalt = (val: string) => setFileDecryptState((prev) => ({ ...prev, salt: val }));
+  const setNonce = (val: string) => setFileDecryptState((prev) => ({ ...prev, nonce: val }));
+  const setTag = (val: string) => setFileDecryptState((prev) => ({ ...prev, tag: val }));
+
+  const handleReset = () => {
+    setFile(null);
+    setFileDecryptState({
+      password: '',
+      algorithm: 'aes-256-gcm',
+      salt: '',
+      nonce: '',
+      tag: '',
+    });
+    setDownloadInfo(null);
+    setError(null);
+  };
 
   const handleJsonUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const jsonFile = e.target.files?.[0];
@@ -64,6 +81,20 @@ export const FileDecrypt: React.FC = () => {
         url,
         filename: res.filename,
       });
+
+      // Log to persistent History
+      addHistoryItem({
+        type: 'file-decrypt',
+        algorithm,
+        title: `Decrypted file "${res.filename}"`,
+        details: {
+          filename: res.filename,
+          salt: salt.trim(),
+          nonce: nonce.trim(),
+          tag: tag.trim(),
+          success: true,
+        },
+      });
     } catch (err: any) {
       setError(err.message || 'File decryption failed. Authentication or password mismatch.');
     } finally {
@@ -87,9 +118,21 @@ export const FileDecrypt: React.FC = () => {
 
       <form onSubmit={handleDecrypt} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-5">
         <div>
-          <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-            Upload Encrypted File (.enc)
-          </label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
+              Upload Encrypted File (.enc)
+            </label>
+            {(file || password || salt || downloadInfo) && (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="text-xs text-slate-500 hover:text-rose-600 flex items-center space-x-1"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset</span>
+              </button>
+            )}
+          </div>
           <FileUpload onFileSelect={setFile} selectedFile={file} maxSizeMB={10} />
         </div>
 
@@ -181,7 +224,7 @@ export const FileDecrypt: React.FC = () => {
       </form>
 
       {downloadInfo && (
-        <div className="bg-white rounded-xl border border-emerald-200 p-6 shadow-sm flex items-center justify-between">
+        <div className="bg-white rounded-xl border border-emerald-200 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-base font-semibold text-emerald-800">Decryption Successful!</h3>
             <p className="text-xs text-slate-600 mt-0.5">Integrity check passed (Auth Tag matched).</p>
@@ -189,7 +232,7 @@ export const FileDecrypt: React.FC = () => {
           <a
             href={downloadInfo.url}
             download={downloadInfo.filename}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm flex items-center space-x-1.5 transition"
+            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm flex items-center space-x-1.5 transition self-start sm:self-auto"
           >
             <Download className="w-4 h-4" />
             <span>Download {downloadInfo.filename}</span>

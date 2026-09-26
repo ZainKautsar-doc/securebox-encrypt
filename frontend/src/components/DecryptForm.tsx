@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
-import { Unlock, Loader2, KeyRound, UploadCloud } from 'lucide-react';
+import { Unlock, Loader2, KeyRound, UploadCloud, RotateCcw } from 'lucide-react';
 import { ResultDisplay } from './ResultDisplay';
+import { useSecureBox } from '../context/SecureBoxContext';
 
 export const DecryptForm: React.FC = () => {
-  const [ciphertext, setCiphertext] = useState('');
-  const [password, setPassword] = useState('');
-  const [algorithm, setAlgorithm] = useState<'aes-256-gcm' | 'chacha20-poly1305'>('aes-256-gcm');
-  const [salt, setSalt] = useState('');
-  const [nonce, setNonce] = useState('');
-  const [tag, setTag] = useState('');
+  const { decryptTextState, setDecryptTextState, addHistoryItem } = useSecureBox();
+  const { ciphertext, password, algorithm, salt, nonce, tag, plaintext } = decryptTextState;
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [plaintext, setPlaintext] = useState<string | null>(null);
+
+  const setCiphertext = (val: string) => setDecryptTextState((prev) => ({ ...prev, ciphertext: val }));
+  const setPassword = (val: string) => setDecryptTextState((prev) => ({ ...prev, password: val }));
+  const setAlgorithm = (val: 'aes-256-gcm' | 'chacha20-poly1305') => setDecryptTextState((prev) => ({ ...prev, algorithm: val }));
+  const setSalt = (val: string) => setDecryptTextState((prev) => ({ ...prev, salt: val }));
+  const setNonce = (val: string) => setDecryptTextState((prev) => ({ ...prev, nonce: val }));
+  const setTag = (val: string) => setDecryptTextState((prev) => ({ ...prev, tag: val }));
+  const setPlaintext = (val: string | null) => setDecryptTextState((prev) => ({ ...prev, plaintext: val }));
+
+  const handleReset = () => {
+    setDecryptTextState({
+      ciphertext: '',
+      password: '',
+      algorithm: 'aes-256-gcm',
+      salt: '',
+      nonce: '',
+      tag: '',
+      plaintext: null,
+    });
+    setError(null);
+  };
 
   // Auto-parse JSON if pasted or loaded
   const handleJsonUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +71,6 @@ export const DecryptForm: React.FC = () => {
 
     setError(null);
     setLoading(true);
-    setPlaintext(null);
 
     try {
       const res = await api.decryptText({
@@ -66,6 +82,21 @@ export const DecryptForm: React.FC = () => {
         tag: tag.trim(),
       });
       setPlaintext(res.plaintext);
+
+      // Log to persistent History
+      addHistoryItem({
+        type: 'text-decrypt',
+        algorithm,
+        title: `Decrypted message (${res.plaintext.length} chars)`,
+        details: {
+          plaintext: res.plaintext,
+          ciphertext: ciphertext.trim(),
+          salt: salt.trim(),
+          nonce: nonce.trim(),
+          tag: tag.trim(),
+          success: true,
+        },
+      });
     } catch (err: any) {
       setError(err.message || 'Decryption failed. Please check password and parameters.');
     } finally {
@@ -80,11 +111,23 @@ export const DecryptForm: React.FC = () => {
           <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
             Ciphertext (Base64)
           </label>
-          <label className="cursor-pointer text-xs font-medium text-indigo-600 hover:text-indigo-800 flex items-center space-x-1">
-            <UploadCloud className="w-3.5 h-3.5" />
-            <span>Load Metadata JSON</span>
-            <input type="file" accept=".json,application/json" onChange={handleJsonUpload} className="hidden" />
-          </label>
+          <div className="flex items-center space-x-3">
+            {(ciphertext || password || salt || plaintext) && (
+              <button
+                type="button"
+                onClick={handleReset}
+                className="text-xs text-slate-500 hover:text-rose-600 flex items-center space-x-1"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset Form</span>
+              </button>
+            )}
+            <label className="cursor-pointer text-xs font-medium text-indigo-600 hover:text-indigo-800 flex items-center space-x-1">
+              <UploadCloud className="w-3.5 h-3.5" />
+              <span>Load Metadata JSON</span>
+              <input type="file" accept=".json,application/json" onChange={handleJsonUpload} className="hidden" />
+            </label>
+          </div>
         </div>
 
         <textarea

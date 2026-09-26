@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Lock, KeyRound, ShieldAlert } from 'lucide-react';
+import { Copy, Check, Lock, KeyRound, ShieldAlert, Download } from 'lucide-react';
 import { EncryptResponse } from '../services/api';
 
 interface ResultDisplayProps {
@@ -17,23 +17,64 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
+  const downloadJsonFile = (data: EncryptResponse) => {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const filename = `securebox-${data.algorithm}-${timestamp}.json`;
+    const jsonStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadPlaintextFile = (text: string) => {
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const filename = `securebox-decrypted-${timestamp}.txt`;
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   if (!result && !plaintext) return null;
 
   return (
     <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-      <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 mb-4 gap-2">
         <h3 className="text-base font-semibold text-slate-800 flex items-center space-x-2">
           <ShieldAlert className="w-5 h-5 text-indigo-600" />
           <span>{title}</span>
         </h3>
         {result && (
-          <button
-            onClick={() => copyToClipboard(JSON.stringify(result, null, 2), 'all')}
-            className="text-xs flex items-center space-x-1 text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-2.5 py-1.5 rounded font-medium transition"
-          >
-            {copiedKey === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-            <span>{copiedKey === 'all' ? 'Copied Full JSON' : 'Copy JSON'}</span>
-          </button>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => downloadJsonFile(result)}
+              className="text-xs flex items-center space-x-1 text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded-lg font-medium shadow-sm transition"
+              title="Download metadata & ciphertext as JSON file"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download JSON</span>
+            </button>
+            <button
+              onClick={() => copyToClipboard(JSON.stringify(result, null, 2), 'all')}
+              className="text-xs flex items-center space-x-1 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-2.5 py-1.5 rounded-lg font-medium transition"
+            >
+              {copiedKey === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedKey === 'all' ? 'Copied Full JSON' : 'Copy JSON'}</span>
+            </button>
+          </div>
         )}
       </div>
 
@@ -41,13 +82,23 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
         <div>
           <div className="flex items-center justify-between mb-1.5">
             <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Decrypted Plaintext</label>
-            <button
-              onClick={() => copyToClipboard(plaintext, 'plaintext')}
-              className="text-xs text-indigo-600 hover:underline flex items-center space-x-1"
-            >
-              {copiedKey === 'plaintext' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-              <span>{copiedKey === 'plaintext' ? 'Copied!' : 'Copy'}</span>
-            </button>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => downloadPlaintextFile(plaintext)}
+                className="text-xs text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-1 rounded flex items-center space-x-1"
+                title="Download plaintext as .txt file"
+              >
+                <Download className="w-3 h-3" />
+                <span>Download TXT</span>
+              </button>
+              <button
+                onClick={() => copyToClipboard(plaintext, 'plaintext')}
+                className="text-xs text-indigo-600 hover:underline flex items-center space-x-1"
+              >
+                {copiedKey === 'plaintext' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                <span>{copiedKey === 'plaintext' ? 'Copied!' : 'Copy'}</span>
+              </button>
+            </div>
           </div>
           <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3.5 text-emerald-950 font-mono text-sm break-all whitespace-pre-wrap">
             {plaintext}

@@ -1,21 +1,23 @@
-import { useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { Encrypt } from './pages/Encrypt';
 import { Decrypt } from './pages/Decrypt';
 import { FileEncrypt } from './pages/FileEncrypt';
 import { FileDecrypt } from './pages/FileDecrypt';
 import { Compare } from './pages/Compare';
-import { Shield, Key, FileLock2, Cpu } from 'lucide-react';
+import { History } from './pages/History';
+import { HowItWorks } from './pages/HowItWorks';
+import { Shield, Key, FileLock2, Cpu, History as HistoryIcon, BookOpen } from 'lucide-react';
+import { SecureBoxProvider, useSecureBox } from './context/SecureBoxContext';
 
-export function App() {
-  const [activeTab, setActiveTab] = useState('encrypt');
+function MainContent() {
+  const { activeTab, setActiveTab } = useSecureBox();
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navigation />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Quick Hero Banner */}
+        {/* Hero Banner */}
         <div className="mb-8 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-2xl p-6 sm:p-8 text-white shadow-md relative overflow-hidden">
           <div className="relative z-10 max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -41,6 +43,18 @@ export function App() {
                 <Cpu className="w-3.5 h-3.5 text-cyan-400" />
                 <span>AES-NI & SIMD Benchmarks</span>
               </span>
+              <span className="flex items-center space-x-1 bg-white/10 px-3 py-1 rounded-full border border-white/10">
+                <HistoryIcon className="w-3.5 h-3.5 text-purple-400" />
+                <span>Persistent Activity History</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setActiveTab('how-it-works')}
+                className="flex items-center space-x-1 bg-indigo-500/30 hover:bg-indigo-500/50 text-indigo-200 px-3 py-1 rounded-full border border-indigo-400/40 transition cursor-pointer"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-indigo-300" />
+                <span>Pelajari Cara Kerja & Algoritma</span>
+              </button>
             </div>
           </div>
         </div>
@@ -51,14 +65,24 @@ export function App() {
         {activeTab === 'file-encrypt' && <FileEncrypt />}
         {activeTab === 'file-decrypt' && <FileDecrypt />}
         {activeTab === 'compare' && <Compare />}
+        {activeTab === 'history' && <History />}
+        {activeTab === 'how-it-works' && <HowItWorks />}
       </main>
 
       <footer className="bg-white border-t border-slate-200 py-6 mt-12">
         <div className="max-w-6xl mx-auto px-4 text-center text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} SecureBox. Zero plaintexts stored. Client-side authentication checks enabled.</p>
+          <p>© {new Date().getFullYear()} SecureBox. Zero plaintexts stored on server. Local persistent history enabled.</p>
         </div>
       </footer>
     </div>
+  );
+}
+
+export function App() {
+  return (
+    <SecureBoxProvider>
+      <MainContent />
+    </SecureBoxProvider>
   );
 }
 
