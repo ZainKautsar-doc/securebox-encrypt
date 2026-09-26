@@ -24,7 +24,7 @@ export const Compare: React.FC = () => {
         },
       });
     } catch (err: any) {
-      setError(err.message || 'Failed to run benchmark suite.');
+      setError(err.message || 'Failed to execute cryptographic benchmark.');
     } finally {
       setLoading(false);
     }
@@ -32,74 +32,82 @@ export const Compare: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center space-x-3 pb-2 border-b border-slate-200">
-        <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-          <BarChart3 className="w-6 h-6" />
+      {/* Header */}
+      <div className="flex items-center space-x-3 pb-3 border-b border-graphite-lift">
+        <div className="w-9 h-9 bg-electric-indigo text-pure-signal rounded-sm flex items-center justify-center">
+          <BarChart3 className="w-5 h-5" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-slate-900">Performance Comparison Benchmark</h1>
-          <p className="text-xs text-slate-500">
-            Compare throughput & execution time of AES-256-GCM vs ChaCha20-Poly1305 on 1KB, 1MB, and 10MB payloads.
+          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Performance Benchmark</h1>
+          <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
+            MEASURING AEAD THROUGHPUT & ENCRYPTION/DECRYPTION LATENCY ACROSS 1KB, 1MB, AND 10MB
           </p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-4">
+      {/* Runner Card */}
+      <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-6 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-sm font-semibold text-slate-800">Benchmark Suite Runner</h2>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Executes key derivation and authenticated encryption/decryption cycles.
+            <div className="flex items-center space-x-2 mb-1">
+              <span className="w-2 h-2 bg-electric-indigo rounded-full"></span>
+              <h2 className="text-sm font-bold font-mono text-pure-signal uppercase tracking-wider">
+                // BENCHMARK SUITE RUNNER
+              </h2>
+            </div>
+            <p className="text-xs text-soft-mist/70">
+              Executes real-time key derivation (scrypt) + authenticated cipher cycles on backend.
             </p>
           </div>
           <button
             onClick={handleRunBenchmark}
             disabled={loading}
-            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs rounded-lg shadow-sm transition flex items-center space-x-2 disabled:opacity-50"
+            className="btn-primary"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
-            <span>{loading ? 'Executing Benchmarks...' : 'Run Benchmark'}</span>
+            <span>{loading ? 'RUNNING BENCHMARKS...' : 'EXECUTE BENCHMARK'}</span>
           </button>
         </div>
 
         {error && (
-          <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs font-medium text-rose-700">
+          <div className="p-3.5 bg-orchid-whisper/10 border border-orchid-whisper text-orchid-whisper rounded-sm text-xs font-mono">
             {error}
           </div>
         )}
 
         {benchmarkResults && (
-          <div className="mt-6 space-y-6">
-            <div className="overflow-x-auto border border-slate-200 rounded-lg">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+          <div className="space-y-6">
+            {/* Benchmark Table (Alternating rows, Graphite Lift Header, Lime Beacon metrics) */}
+            <div className="overflow-x-auto border border-graphite-lift rounded-sm">
+              <table className="w-full text-left text-xs font-mono">
+                <thead className="bg-graphite-lift text-pure-signal font-sans font-bold text-xs uppercase tracking-wider border-b border-graphite-lift">
                   <tr>
-                    <th className="p-3">File Size</th>
-                    <th className="p-3">AES-256-GCM Encrypt</th>
-                    <th className="p-3">AES-256-GCM Decrypt</th>
-                    <th className="p-3">ChaCha20 Encrypt</th>
-                    <th className="p-3">ChaCha20 Decrypt</th>
-                    <th className="p-3">Fastest Overall</th>
+                    <th className="p-3.5">PAYLOAD SIZE</th>
+                    <th className="p-3.5">AES-256-GCM ENC</th>
+                    <th className="p-3.5">AES-256-GCM DEC</th>
+                    <th className="p-3.5">CHACHA20 ENC</th>
+                    <th className="p-3.5">CHACHA20 DEC</th>
+                    <th className="p-3.5">OPTIMAL CIPHER</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-graphite-lift">
                   {benchmarkResults.map((row, idx) => {
                     const aesTotal = row.aes_encrypt_time + row.aes_decrypt_time;
                     const chachaTotal = row.chacha_encrypt_time + row.chacha_decrypt_time;
                     const fastest = aesTotal <= chachaTotal ? 'AES-256-GCM' : 'ChaCha20-Poly1305';
 
                     return (
-                      <tr key={idx} className="hover:bg-slate-50/70">
-                        <td className="p-3 font-semibold text-slate-800">{row.file_size}</td>
-                        <td className="p-3 font-mono text-slate-700">{row.aes_encrypt_time} ms</td>
-                        <td className="p-3 font-mono text-slate-700">{row.aes_decrypt_time} ms</td>
-                        <td className="p-3 font-mono text-slate-700">{row.chacha_encrypt_time} ms</td>
-                        <td className="p-3 font-mono text-slate-700">{row.chacha_decrypt_time} ms</td>
-                        <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded text-[11px] font-semibold ${
+                      <tr key={idx} className={idx % 2 === 0 ? 'bg-midnight-void' : 'bg-carbon-panel'}>
+                        <td className="p-3.5 font-bold text-pure-signal">{row.file_size}</td>
+                        <td className="p-3.5 text-soft-mist">{row.aes_encrypt_time} ms</td>
+                        <td className="p-3.5 text-soft-mist">{row.aes_decrypt_time} ms</td>
+                        <td className="p-3.5 text-soft-mist">{row.chacha_encrypt_time} ms</td>
+                        <td className="p-3.5 text-soft-mist">{row.chacha_decrypt_time} ms</td>
+                        <td className="p-3.5">
+                          <span className={`px-2 py-0.5 rounded-sm text-[11px] font-mono font-bold ${
                             fastest === 'AES-256-GCM' 
-                              ? 'bg-blue-50 text-blue-700 border border-blue-200' 
-                              : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              ? 'bg-electric-indigo/20 text-periwinkle-veil border border-electric-indigo' 
+                              : 'bg-lime-beacon/20 text-lime-beacon border border-lime-beacon'
                           }`}>
                             {fastest}
                           </span>
@@ -111,40 +119,40 @@ export const Compare: React.FC = () => {
               </table>
             </div>
 
-            {/* Visual Bar Comparison */}
+            {/* Visual Bar Comparison (Sharp 2px radius, no shadows) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {benchmarkResults.map((r, i) => (
-                <div key={i} className="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-3">
+                <div key={i} className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-3 font-mono">
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-sm text-slate-800">{r.file_size} Payload</span>
-                    <Zap className="w-4 h-4 text-amber-500" />
+                    <span className="font-bold text-xs text-pure-signal uppercase">{r.file_size} PAYLOAD</span>
+                    <Zap className="w-3.5 h-3.5 text-warm-filament" />
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-xs text-slate-600 mb-1">
+                    <div className="flex justify-between text-[11px] text-soft-mist/70 mb-1">
                       <span>AES-256-GCM Total</span>
-                      <span className="font-semibold font-mono">{(r.aes_encrypt_time + r.aes_decrypt_time).toFixed(2)} ms</span>
+                      <span className="text-pure-signal font-bold">{(r.aes_encrypt_time + r.aes_decrypt_time).toFixed(2)} ms</span>
                     </div>
-                    <div className="w-full bg-slate-200 rounded-full h-2">
+                    <div className="w-full bg-midnight-void rounded-sm h-2 border border-graphite-lift">
                       <div
-                        className="bg-blue-600 h-2 rounded-full"
+                        className="bg-electric-indigo h-full rounded-sm"
                         style={{
-                          width: `${Math.min(100, Math.max(10, ((r.aes_encrypt_time + r.aes_decrypt_time) / (r.aes_encrypt_time + r.aes_decrypt_time + r.chacha_encrypt_time + r.chacha_decrypt_time)) * 100))}%`
+                          width: `${Math.min(100, Math.max(8, ((r.aes_encrypt_time + r.aes_decrypt_time) / (r.aes_encrypt_time + r.aes_decrypt_time + r.chacha_encrypt_time + r.chacha_decrypt_time)) * 100))}%`
                         }}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-xs text-slate-600 mb-1">
-                      <span>ChaCha20-Poly1305 Total</span>
-                      <span className="font-semibold font-mono">{(r.chacha_encrypt_time + r.chacha_decrypt_time).toFixed(2)} ms</span>
+                    <div className="flex justify-between text-[11px] text-soft-mist/70 mb-1">
+                      <span>ChaCha20 Total</span>
+                      <span className="text-pure-signal font-bold">{(r.chacha_encrypt_time + r.chacha_decrypt_time).toFixed(2)} ms</span>
                     </div>
-                    <div className="w-full bg-slate-200 rounded-full h-2">
+                    <div className="w-full bg-midnight-void rounded-sm h-2 border border-graphite-lift">
                       <div
-                        className="bg-emerald-600 h-2 rounded-full"
+                        className="bg-lime-beacon h-full rounded-sm"
                         style={{
-                          width: `${Math.min(100, Math.max(10, ((r.chacha_encrypt_time + r.chacha_decrypt_time) / (r.aes_encrypt_time + r.aes_decrypt_time + r.chacha_encrypt_time + r.chacha_decrypt_time)) * 100))}%`
+                          width: `${Math.min(100, Math.max(8, ((r.chacha_encrypt_time + r.chacha_decrypt_time) / (r.aes_encrypt_time + r.aes_decrypt_time + r.chacha_encrypt_time + r.chacha_decrypt_time)) * 100))}%`
                         }}
                       />
                     </div>
@@ -153,12 +161,13 @@ export const Compare: React.FC = () => {
               ))}
             </div>
 
-            <div className="p-4 bg-indigo-50/50 border border-indigo-100 rounded-lg flex items-start space-x-3">
-              <ShieldCheck className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />
-              <div className="text-xs text-slate-600 space-y-1">
-                <p className="font-medium text-slate-800">Insights & Architecture Note:</p>
+            {/* Architecture Insights Callout */}
+            <div className="p-4 bg-carbon-panel border border-graphite-lift rounded-sm flex items-start space-x-3">
+              <ShieldCheck className="w-5 h-5 text-electric-indigo mt-0.5 flex-shrink-0" />
+              <div className="text-xs text-soft-mist space-y-1 leading-relaxed">
+                <p className="font-bold text-pure-signal uppercase font-mono">// ARCHITECTURE NOTES & HARDWARE DISPATCH</p>
                 <p>
-                  AES-256-GCM benefits from hardware acceleration (AES-NI instructions on x86_64 CPUs). ChaCha20-Poly1305 is optimized for software execution without dedicated AES instructions (ideal for mobile and ARM architectures).
+                  <strong>AES-256-GCM</strong> leverages dedicated CPU instructions (AES-NI) on modern x86_64 architectures. <strong>ChaCha20-Poly1305</strong> runs constant-time ARX operations in software with zero cache-timing vulnerability on ARM, mobile, and non-AES-NI systems.
                 </p>
               </div>
             </div>
@@ -166,61 +175,42 @@ export const Compare: React.FC = () => {
         )}
       </div>
 
-      {/* Detailed Benchmark Explanation */}
-      <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-5">
-        <h2 className="text-base font-bold text-slate-900 flex items-center space-x-2">
-          <BarChart3 className="w-5 h-5 text-indigo-600" />
-          <span>Penjelasan & Metodologi Benchmark</span>
+      {/* Methodology Section */}
+      <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-6 sm:p-8 space-y-6">
+        <h2 className="text-base font-bold text-pure-signal flex items-center space-x-2 font-mono uppercase">
+          <BarChart3 className="w-4 h-4 text-electric-indigo" />
+          <span>// BENCHMARK METHODOLOGY & ARCHITECTURE</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-            <h3 className="font-bold text-indigo-700 text-sm flex items-center space-x-1.5">
-              <span>1. AES-256-GCM (Hardware Acceleration)</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-2">
+            <h3 className="font-bold text-pure-signal text-sm font-mono flex items-center space-x-1.5">
+              <span className="text-electric-indigo">•</span>
+              <span>AES-256-GCM (Hardware Accelerated)</span>
             </h3>
-            <p className="text-slate-600 leading-relaxed">
-              <strong>Advanced Encryption Standard (AES)</strong> dalam mode Galois/Counter Mode (GCM) memanfaatkan instruksi khusus prosesor seperti <strong>AES-NI</strong> pada CPU Intel/AMD.
+            <p className="text-soft-mist leading-relaxed">
+              Advanced Encryption Standard in Galois/Counter Mode utilizes native silicon CPU instructions (AES-NI).
             </p>
-            <ul className="list-disc list-inside text-slate-500 space-y-1 pt-1">
-              <li>Sangat cepat pada komputer desktop, laptop, dan server x86_64.</li>
-              <li>Menghasilkan otentikasi data terintegrasi (Auth Tag 16-byte).</li>
-              <li>Throughput tinggi pada payload besar (1MB - 10MB).</li>
+            <ul className="list-disc list-inside text-soft-mist/70 space-y-1 font-mono text-[11px] pt-1">
+              <li>Optimized for x86_64 servers & workstations.</li>
+              <li>High throughput on medium & large payloads.</li>
+              <li>128-bit hardware Galois MAC authentication.</li>
             </ul>
           </div>
 
-          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-            <h3 className="font-bold text-emerald-700 text-sm flex items-center space-x-1.5">
-              <span>2. ChaCha20-Poly1305 (Software Optimization)</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-2">
+            <h3 className="font-bold text-pure-signal text-sm font-mono flex items-center space-x-1.5">
+              <span className="text-lime-beacon">•</span>
+              <span>ChaCha20-Poly1305 (Software Constant-Time)</span>
             </h3>
-            <p className="text-slate-600 leading-relaxed">
-              <strong>ChaCha20-Poly1305</strong> adalah stream cipher modern berkecepatan tinggi yang berjalan murni di software menggunakan operasi sederhana ADD-ROTATE-XOR (ARX).
+            <p className="text-soft-mist leading-relaxed">
+              20-round stream cipher with Poly1305 authenticator designed by Daniel J. Bernstein.
             </p>
-            <ul className="list-disc list-inside text-slate-500 space-y-1 pt-1">
-              <li>Performa konsisten di arsitektur ARM, perangkat mobile, dan tablet.</li>
-              <li>Waktu eksekusi konstan (kebal terhadap serangan <em>side-channel timing attacks</em>).</li>
-              <li>Tidak membutuhkan instruksi hardware AES-NI khusus.</li>
+            <ul className="list-disc list-inside text-soft-mist/70 space-y-1 font-mono text-[11px] pt-1">
+              <li>Consistent execution on ARM / mobile devices.</li>
+              <li>Immune to cache-timing side-channel attacks.</li>
+              <li>No dedicated AES hardware instructions required.</li>
             </ul>
-          </div>
-        </div>
-
-        <div className="p-4 bg-slate-900 text-slate-200 rounded-xl space-y-2 text-xs">
-          <span className="font-bold text-amber-400 block text-sm">Metodologi Pengujian Benchmark:</span>
-          <p className="text-slate-300 leading-relaxed">
-            Pengujian diukur secara riil pada server backend untuk payload ukuran <strong>1 KB</strong> (pesan teks), <strong>1 MB</strong> (dokumen sedang), dan <strong>10 MB</strong> (berkas besar).
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 text-[11px] font-mono text-slate-400">
-            <div className="p-2 bg-slate-800 rounded border border-slate-700">
-              <span className="text-indigo-400 block font-bold">1 KB Payload</span>
-              Waktu eksekusi didominasi oleh scrypt KDF.
-            </div>
-            <div className="p-2 bg-slate-800 rounded border border-slate-700">
-              <span className="text-indigo-400 block font-bold">1 MB Payload</span>
-              Mengukur efisiensi cipher pada memori menengah.
-            </div>
-            <div className="p-2 bg-slate-800 rounded border border-slate-700">
-              <span className="text-indigo-400 block font-bold">10 MB Payload</span>
-              Menampilkan batas kecepatan maksimal (throughput MB/s).
-            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { UploadCloud, File, X } from 'lucide-react';
+import { UploadCloud, File, X, AlertTriangle } from 'lucide-react';
 
 interface FileUploadProps {
   onFileSelect: (file: File | null) => void;
@@ -31,7 +31,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const validateAndSetFile = (file: File) => {
     setError(null);
     if (file.size > maxSizeMB * 1024 * 1024) {
-      setError(`File size exceeds limit of ${maxSizeMB} MB (${(file.size / (1024 * 1024)).toFixed(2)} MB)`);
+      setError(`File size exceeds protocol limit of ${maxSizeMB} MB (${(file.size / (1024 * 1024)).toFixed(2)} MB)`);
       onFileSelect(null);
       return;
     }
@@ -68,31 +68,31 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={() => inputRef.current?.click()}
-          className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-colors ${
+          className={`bg-graphite-lift rounded-sm p-8 text-center cursor-pointer transition-colors duration-150 ${
             isDragging
-              ? 'border-indigo-500 bg-indigo-50/50'
-              : 'border-slate-300 hover:border-indigo-400 bg-slate-50/60'
+              ? 'border-2 border-solid border-electric-indigo bg-graphite-lift/90'
+              : 'border-2 border-dashed border-periwinkle-veil hover:border-solid hover:border-electric-indigo'
           }`}
         >
-          <div className="mx-auto w-12 h-12 bg-white rounded-full flex items-center justify-center text-indigo-600 shadow-sm mb-3">
-            <UploadCloud className="w-6 h-6" />
+          <div className="mx-auto w-12 h-12 flex items-center justify-center text-electric-indigo mb-3">
+            <UploadCloud className="w-8 h-8" />
           </div>
-          <p className="text-sm font-medium text-slate-700 mb-1">
-            Click to upload or drag & drop file
+          <p className="text-sm font-sans text-soft-mist mb-1">
+            Drag files here or click to browse
           </p>
-          <p className="text-xs text-slate-500">
-            Maximum file size: {maxSizeMB} MB
+          <p className="text-xs font-mono text-soft-mist/60">
+            MAX PAYLOAD: {maxSizeMB} MB // PROTOCOL IN-MEMORY
           </p>
         </div>
       ) : (
-        <div className="flex items-center justify-between p-4 bg-indigo-50/50 border border-indigo-200 rounded-xl">
+        <div className="flex items-center justify-between p-4 bg-carbon-panel border border-graphite-lift rounded-sm">
           <div className="flex items-center space-x-3 truncate">
-            <div className="p-2.5 bg-indigo-600 text-white rounded-lg">
-              <File className="w-5 h-5" />
+            <div className="w-9 h-9 bg-electric-indigo text-pure-signal rounded-sm flex items-center justify-center flex-shrink-0">
+              <File className="w-4 h-4" />
             </div>
             <div className="truncate">
-              <p className="text-sm font-medium text-slate-800 truncate">{selectedFile.name}</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm font-sans font-medium text-pure-signal truncate">{selectedFile.name}</p>
+              <p className="text-xs font-mono text-soft-mist/60">
                 {(selectedFile.size / 1024).toFixed(1)} KB
               </p>
             </div>
@@ -103,15 +103,19 @@ export const FileUpload: React.FC<FileUploadProps> = ({
               onFileSelect(null);
               if (inputRef.current) inputRef.current.value = '';
             }}
-            className="p-1 text-slate-400 hover:text-rose-600 rounded-md transition"
+            className="p-1.5 text-soft-mist/60 hover:text-orchid-whisper rounded-sm transition cursor-pointer"
+            title="Remove file"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
       )}
 
       {error && (
-        <p className="text-xs text-rose-600 mt-2 font-medium">{error}</p>
+        <div className="mt-2.5 p-3 bg-orchid-whisper/10 border border-orchid-whisper text-orchid-whisper rounded-sm text-xs font-mono flex items-center space-x-2">
+          <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
+          <span>{error}</span>
+        </div>
       )}
     </div>
   );
