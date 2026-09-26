@@ -8,8 +8,10 @@ from dotenv import load_dotenv
 
 from app.routes.crypto import router as crypto_router
 from app.routes.file import router as file_router
+from app.routes.hybrid import router as hybrid_router
 
 load_dotenv()
+
 
 app = FastAPI(
     title="SecureBox Cryptographic API",
@@ -78,3 +80,5 @@ async def root():
 # Include Routers
 app.include_router(crypto_router)
 app.include_router(file_router)
+app.include_router(hybrid_router)
+

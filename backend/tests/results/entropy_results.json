@@ -1,0 +1,28 @@
+[
+  {
+    "data_size": "1 KB",
+    "bytes_length": 1024,
+    "plaintext_entropy": 4.525716,
+    "aes_256_gcm": {
+      "algorithm": "AES-256-GCM",
+      "ciphertext_entropy": 7.831391
+    },
+    "chacha20_poly1305": {
+      "algorithm": "ChaCha20-Poly1305",
+      "ciphertext_entropy": 7.789816
+    }
+  },
+  {
+    "data_size": "1 MB",
+    "bytes_length": 1048576,
+    "plaintext_entropy": 4.524174,
+    "aes_256_gcm": {
+      "algorithm": "AES-256-GCM",
+      "ciphertext_entropy": 7.999839
+    },
+    "chacha20_poly1305": {
+      "algorithm": "ChaCha20-Poly1305",
+      "ciphertext_entropy": 7.999793
+    }
+  }
+]

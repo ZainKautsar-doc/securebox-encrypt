@@ -1,0 +1,1538 @@
+[
+  {
+    "byte_value": 0,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 382,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 1,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 372,
+    "chacha20_ciphertext_frequency": 388
+  },
+  {
+    "byte_value": 2,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 409,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 3,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 415,
+    "chacha20_ciphertext_frequency": 393
+  },
+  {
+    "byte_value": 4,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 400,
+    "chacha20_ciphertext_frequency": 351
+  },
+  {
+    "byte_value": 5,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 6,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 389,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 7,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 388,
+    "chacha20_ciphertext_frequency": 369
+  },
+  {
+    "byte_value": 8,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 358,
+    "chacha20_ciphertext_frequency": 432
+  },
+  {
+    "byte_value": 9,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 413,
+    "chacha20_ciphertext_frequency": 386
+  },
+  {
+    "byte_value": 10,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 389,
+    "chacha20_ciphertext_frequency": 410
+  },
+  {
+    "byte_value": 11,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 410,
+    "chacha20_ciphertext_frequency": 380
+  },
+  {
+    "byte_value": 12,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 388
+  },
+  {
+    "byte_value": 13,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 408,
+    "chacha20_ciphertext_frequency": 379
+  },
+  {
+    "byte_value": 14,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 381,
+    "chacha20_ciphertext_frequency": 430
+  },
+  {
+    "byte_value": 15,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 396
+  },
+  {
+    "byte_value": 16,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 427,
+    "chacha20_ciphertext_frequency": 380
+  },
+  {
+    "byte_value": 17,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 425,
+    "chacha20_ciphertext_frequency": 360
+  },
+  {
+    "byte_value": 18,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 417,
+    "chacha20_ciphertext_frequency": 434
+  },
+  {
+    "byte_value": 19,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 397,
+    "chacha20_ciphertext_frequency": 392
+  },
+  {
+    "byte_value": 20,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 386,
+    "chacha20_ciphertext_frequency": 385
+  },
+  {
+    "byte_value": 21,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 409
+  },
+  {
+    "byte_value": 22,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 392,
+    "chacha20_ciphertext_frequency": 360
+  },
+  {
+    "byte_value": 23,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 374,
+    "chacha20_ciphertext_frequency": 362
+  },
+  {
+    "byte_value": 24,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 403,
+    "chacha20_ciphertext_frequency": 386
+  },
+  {
+    "byte_value": 25,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 370,
+    "chacha20_ciphertext_frequency": 394
+  },
+  {
+    "byte_value": 26,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 394,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 27,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 426,
+    "chacha20_ciphertext_frequency": 438
+  },
+  {
+    "byte_value": 28,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 408,
+    "chacha20_ciphertext_frequency": 354
+  },
+  {
+    "byte_value": 29,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 343
+  },
+  {
+    "byte_value": 30,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 346,
+    "chacha20_ciphertext_frequency": 399
+  },
+  {
+    "byte_value": 31,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 379,
+    "chacha20_ciphertext_frequency": 379
+  },
+  {
+    "byte_value": 32,
+    "plaintext_frequency": 9433,
+    "aes_ciphertext_frequency": 359,
+    "chacha20_ciphertext_frequency": 406
+  },
+  {
+    "byte_value": 33,
+    "plaintext_frequency": 1886,
+    "aes_ciphertext_frequency": 375,
+    "chacha20_ciphertext_frequency": 383
+  },
+  {
+    "byte_value": 34,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 372,
+    "chacha20_ciphertext_frequency": 387
+  },
+  {
+    "byte_value": 35,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 411
+  },
+  {
+    "byte_value": 36,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 371,
+    "chacha20_ciphertext_frequency": 376
+  },
+  {
+    "byte_value": 37,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 412,
+    "chacha20_ciphertext_frequency": 371
+  },
+  {
+    "byte_value": 38,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 397,
+    "chacha20_ciphertext_frequency": 409
+  },
+  {
+    "byte_value": 39,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 372,
+    "chacha20_ciphertext_frequency": 404
+  },
+  {
+    "byte_value": 40,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 383,
+    "chacha20_ciphertext_frequency": 335
+  },
+  {
+    "byte_value": 41,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 377,
+    "chacha20_ciphertext_frequency": 375
+  },
+  {
+    "byte_value": 42,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 371,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 43,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 354,
+    "chacha20_ciphertext_frequency": 362
+  },
+  {
+    "byte_value": 44,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 377
+  },
+  {
+    "byte_value": 45,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 373
+  },
+  {
+    "byte_value": 46,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 400,
+    "chacha20_ciphertext_frequency": 387
+  },
+  {
+    "byte_value": 47,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 367,
+    "chacha20_ciphertext_frequency": 381
+  },
+  {
+    "byte_value": 48,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 416,
+    "chacha20_ciphertext_frequency": 357
+  },
+  {
+    "byte_value": 49,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 386
+  },
+  {
+    "byte_value": 50,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 407,
+    "chacha20_ciphertext_frequency": 359
+  },
+  {
+    "byte_value": 51,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 417,
+    "chacha20_ciphertext_frequency": 449
+  },
+  {
+    "byte_value": 52,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 384
+  },
+  {
+    "byte_value": 53,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 401,
+    "chacha20_ciphertext_frequency": 422
+  },
+  {
+    "byte_value": 54,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 418,
+    "chacha20_ciphertext_frequency": 380
+  },
+  {
+    "byte_value": 55,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 394,
+    "chacha20_ciphertext_frequency": 414
+  },
+  {
+    "byte_value": 56,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 386,
+    "chacha20_ciphertext_frequency": 397
+  },
+  {
+    "byte_value": 57,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 381,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 58,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 395,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 59,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 435,
+    "chacha20_ciphertext_frequency": 374
+  },
+  {
+    "byte_value": 60,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 376,
+    "chacha20_ciphertext_frequency": 403
+  },
+  {
+    "byte_value": 61,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 383,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 62,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 409,
+    "chacha20_ciphertext_frequency": 368
+  },
+  {
+    "byte_value": 63,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 417
+  },
+  {
+    "byte_value": 64,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 367
+  },
+  {
+    "byte_value": 65,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 346,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 66,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 387,
+    "chacha20_ciphertext_frequency": 416
+  },
+  {
+    "byte_value": 67,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 408,
+    "chacha20_ciphertext_frequency": 357
+  },
+  {
+    "byte_value": 68,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 398,
+    "chacha20_ciphertext_frequency": 411
+  },
+  {
+    "byte_value": 69,
+    "plaintext_frequency": 3774,
+    "aes_ciphertext_frequency": 383,
+    "chacha20_ciphertext_frequency": 438
+  },
+  {
+    "byte_value": 70,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 416,
+    "chacha20_ciphertext_frequency": 384
+  },
+  {
+    "byte_value": 71,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 399,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 72,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 415,
+    "chacha20_ciphertext_frequency": 381
+  },
+  {
+    "byte_value": 73,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 74,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 361,
+    "chacha20_ciphertext_frequency": 396
+  },
+  {
+    "byte_value": 75,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 376
+  },
+  {
+    "byte_value": 76,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 383,
+    "chacha20_ciphertext_frequency": 398
+  },
+  {
+    "byte_value": 77,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 382,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 78,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 407,
+    "chacha20_ciphertext_frequency": 371
+  },
+  {
+    "byte_value": 79,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 376,
+    "chacha20_ciphertext_frequency": 424
+  },
+  {
+    "byte_value": 80,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 391,
+    "chacha20_ciphertext_frequency": 412
+  },
+  {
+    "byte_value": 81,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 387,
+    "chacha20_ciphertext_frequency": 383
+  },
+  {
+    "byte_value": 82,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 368,
+    "chacha20_ciphertext_frequency": 413
+  },
+  {
+    "byte_value": 83,
+    "plaintext_frequency": 3773,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 382
+  },
+  {
+    "byte_value": 84,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 365,
+    "chacha20_ciphertext_frequency": 398
+  },
+  {
+    "byte_value": 85,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 377,
+    "chacha20_ciphertext_frequency": 417
+  },
+  {
+    "byte_value": 86,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 382,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 87,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 433,
+    "chacha20_ciphertext_frequency": 389
+  },
+  {
+    "byte_value": 88,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 89,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 403
+  },
+  {
+    "byte_value": 90,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 376
+  },
+  {
+    "byte_value": 91,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 412,
+    "chacha20_ciphertext_frequency": 397
+  },
+  {
+    "byte_value": 92,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 374,
+    "chacha20_ciphertext_frequency": 408
+  },
+  {
+    "byte_value": 93,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 406
+  },
+  {
+    "byte_value": 94,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 357,
+    "chacha20_ciphertext_frequency": 362
+  },
+  {
+    "byte_value": 95,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 412
+  },
+  {
+    "byte_value": 96,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 361,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 97,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 403
+  },
+  {
+    "byte_value": 98,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 403,
+    "chacha20_ciphertext_frequency": 375
+  },
+  {
+    "byte_value": 99,
+    "plaintext_frequency": 5661,
+    "aes_ciphertext_frequency": 408,
+    "chacha20_ciphertext_frequency": 398
+  },
+  {
+    "byte_value": 100,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 415,
+    "chacha20_ciphertext_frequency": 399
+  },
+  {
+    "byte_value": 101,
+    "plaintext_frequency": 13208,
+    "aes_ciphertext_frequency": 353,
+    "chacha20_ciphertext_frequency": 456
+  },
+  {
+    "byte_value": 102,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 409,
+    "chacha20_ciphertext_frequency": 427
+  },
+  {
+    "byte_value": 103,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 370
+  },
+  {
+    "byte_value": 104,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 402
+  },
+  {
+    "byte_value": 105,
+    "plaintext_frequency": 7546,
+    "aes_ciphertext_frequency": 403,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 106,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 380
+  },
+  {
+    "byte_value": 107,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 391,
+    "chacha20_ciphertext_frequency": 416
+  },
+  {
+    "byte_value": 108,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 405,
+    "chacha20_ciphertext_frequency": 371
+  },
+  {
+    "byte_value": 109,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 351,
+    "chacha20_ciphertext_frequency": 379
+  },
+  {
+    "byte_value": 110,
+    "plaintext_frequency": 7547,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 367
+  },
+  {
+    "byte_value": 111,
+    "plaintext_frequency": 3773,
+    "aes_ciphertext_frequency": 428,
+    "chacha20_ciphertext_frequency": 404
+  },
+  {
+    "byte_value": 112,
+    "plaintext_frequency": 3774,
+    "aes_ciphertext_frequency": 432,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 113,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 389,
+    "chacha20_ciphertext_frequency": 384
+  },
+  {
+    "byte_value": 114,
+    "plaintext_frequency": 7548,
+    "aes_ciphertext_frequency": 394,
+    "chacha20_ciphertext_frequency": 354
+  },
+  {
+    "byte_value": 115,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 399,
+    "chacha20_ciphertext_frequency": 416
+  },
+  {
+    "byte_value": 116,
+    "plaintext_frequency": 11321,
+    "aes_ciphertext_frequency": 427,
+    "chacha20_ciphertext_frequency": 392
+  },
+  {
+    "byte_value": 117,
+    "plaintext_frequency": 5660,
+    "aes_ciphertext_frequency": 388,
+    "chacha20_ciphertext_frequency": 379
+  },
+  {
+    "byte_value": 118,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 372,
+    "chacha20_ciphertext_frequency": 394
+  },
+  {
+    "byte_value": 119,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 378
+  },
+  {
+    "byte_value": 120,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 395,
+    "chacha20_ciphertext_frequency": 372
+  },
+  {
+    "byte_value": 121,
+    "plaintext_frequency": 1887,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 377
+  },
+  {
+    "byte_value": 122,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 439
+  },
+  {
+    "byte_value": 123,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 124,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 420,
+    "chacha20_ciphertext_frequency": 373
+  },
+  {
+    "byte_value": 125,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 407,
+    "chacha20_ciphertext_frequency": 355
+  },
+  {
+    "byte_value": 126,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 367,
+    "chacha20_ciphertext_frequency": 374
+  },
+  {
+    "byte_value": 127,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 431,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 128,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 368,
+    "chacha20_ciphertext_frequency": 419
+  },
+  {
+    "byte_value": 129,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 419,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 130,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 413,
+    "chacha20_ciphertext_frequency": 365
+  },
+  {
+    "byte_value": 131,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 358,
+    "chacha20_ciphertext_frequency": 399
+  },
+  {
+    "byte_value": 132,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 362
+  },
+  {
+    "byte_value": 133,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 374,
+    "chacha20_ciphertext_frequency": 355
+  },
+  {
+    "byte_value": 134,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 360
+  },
+  {
+    "byte_value": 135,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 364
+  },
+  {
+    "byte_value": 136,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 405
+  },
+  {
+    "byte_value": 137,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 383
+  },
+  {
+    "byte_value": 138,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 437,
+    "chacha20_ciphertext_frequency": 374
+  },
+  {
+    "byte_value": 139,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 362,
+    "chacha20_ciphertext_frequency": 398
+  },
+  {
+    "byte_value": 140,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 406
+  },
+  {
+    "byte_value": 141,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 421,
+    "chacha20_ciphertext_frequency": 387
+  },
+  {
+    "byte_value": 142,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 401,
+    "chacha20_ciphertext_frequency": 378
+  },
+  {
+    "byte_value": 143,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 369,
+    "chacha20_ciphertext_frequency": 417
+  },
+  {
+    "byte_value": 144,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 408,
+    "chacha20_ciphertext_frequency": 371
+  },
+  {
+    "byte_value": 145,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 356,
+    "chacha20_ciphertext_frequency": 406
+  },
+  {
+    "byte_value": 146,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 381,
+    "chacha20_ciphertext_frequency": 433
+  },
+  {
+    "byte_value": 147,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 358,
+    "chacha20_ciphertext_frequency": 403
+  },
+  {
+    "byte_value": 148,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 442
+  },
+  {
+    "byte_value": 149,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 375,
+    "chacha20_ciphertext_frequency": 384
+  },
+  {
+    "byte_value": 150,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 397
+  },
+  {
+    "byte_value": 151,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 389
+  },
+  {
+    "byte_value": 152,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 409,
+    "chacha20_ciphertext_frequency": 384
+  },
+  {
+    "byte_value": 153,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 395,
+    "chacha20_ciphertext_frequency": 397
+  },
+  {
+    "byte_value": 154,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 450,
+    "chacha20_ciphertext_frequency": 392
+  },
+  {
+    "byte_value": 155,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 376,
+    "chacha20_ciphertext_frequency": 362
+  },
+  {
+    "byte_value": 156,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 407,
+    "chacha20_ciphertext_frequency": 431
+  },
+  {
+    "byte_value": 157,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 374,
+    "chacha20_ciphertext_frequency": 423
+  },
+  {
+    "byte_value": 158,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 397,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 159,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 364
+  },
+  {
+    "byte_value": 160,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 364,
+    "chacha20_ciphertext_frequency": 406
+  },
+  {
+    "byte_value": 161,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 430,
+    "chacha20_ciphertext_frequency": 381
+  },
+  {
+    "byte_value": 162,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 163,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 392,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 164,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 388,
+    "chacha20_ciphertext_frequency": 451
+  },
+  {
+    "byte_value": 165,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 358
+  },
+  {
+    "byte_value": 166,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 399,
+    "chacha20_ciphertext_frequency": 434
+  },
+  {
+    "byte_value": 167,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 388,
+    "chacha20_ciphertext_frequency": 386
+  },
+  {
+    "byte_value": 168,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 398,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 169,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 348,
+    "chacha20_ciphertext_frequency": 375
+  },
+  {
+    "byte_value": 170,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 381,
+    "chacha20_ciphertext_frequency": 387
+  },
+  {
+    "byte_value": 171,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 388,
+    "chacha20_ciphertext_frequency": 411
+  },
+  {
+    "byte_value": 172,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 436,
+    "chacha20_ciphertext_frequency": 343
+  },
+  {
+    "byte_value": 173,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 174,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 394,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 175,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 413,
+    "chacha20_ciphertext_frequency": 407
+  },
+  {
+    "byte_value": 176,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 392,
+    "chacha20_ciphertext_frequency": 368
+  },
+  {
+    "byte_value": 177,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 375,
+    "chacha20_ciphertext_frequency": 360
+  },
+  {
+    "byte_value": 178,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 369,
+    "chacha20_ciphertext_frequency": 363
+  },
+  {
+    "byte_value": 179,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 398,
+    "chacha20_ciphertext_frequency": 387
+  },
+  {
+    "byte_value": 180,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 421,
+    "chacha20_ciphertext_frequency": 371
+  },
+  {
+    "byte_value": 181,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 358,
+    "chacha20_ciphertext_frequency": 388
+  },
+  {
+    "byte_value": 182,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 409,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 183,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 431
+  },
+  {
+    "byte_value": 184,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 382,
+    "chacha20_ciphertext_frequency": 383
+  },
+  {
+    "byte_value": 185,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 398,
+    "chacha20_ciphertext_frequency": 409
+  },
+  {
+    "byte_value": 186,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 187,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 412,
+    "chacha20_ciphertext_frequency": 360
+  },
+  {
+    "byte_value": 188,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 415,
+    "chacha20_ciphertext_frequency": 412
+  },
+  {
+    "byte_value": 189,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 399,
+    "chacha20_ciphertext_frequency": 392
+  },
+  {
+    "byte_value": 190,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 391,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 191,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 391,
+    "chacha20_ciphertext_frequency": 400
+  },
+  {
+    "byte_value": 192,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 378,
+    "chacha20_ciphertext_frequency": 360
+  },
+  {
+    "byte_value": 193,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 380,
+    "chacha20_ciphertext_frequency": 383
+  },
+  {
+    "byte_value": 194,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 394,
+    "chacha20_ciphertext_frequency": 411
+  },
+  {
+    "byte_value": 195,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 341,
+    "chacha20_ciphertext_frequency": 378
+  },
+  {
+    "byte_value": 196,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 398,
+    "chacha20_ciphertext_frequency": 370
+  },
+  {
+    "byte_value": 197,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 401,
+    "chacha20_ciphertext_frequency": 414
+  },
+  {
+    "byte_value": 198,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 371,
+    "chacha20_ciphertext_frequency": 377
+  },
+  {
+    "byte_value": 199,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 391,
+    "chacha20_ciphertext_frequency": 396
+  },
+  {
+    "byte_value": 200,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 406,
+    "chacha20_ciphertext_frequency": 374
+  },
+  {
+    "byte_value": 201,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 393
+  },
+  {
+    "byte_value": 202,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 203,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 376,
+    "chacha20_ciphertext_frequency": 381
+  },
+  {
+    "byte_value": 204,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 360,
+    "chacha20_ciphertext_frequency": 387
+  },
+  {
+    "byte_value": 205,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 426,
+    "chacha20_ciphertext_frequency": 368
+  },
+  {
+    "byte_value": 206,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 367,
+    "chacha20_ciphertext_frequency": 394
+  },
+  {
+    "byte_value": 207,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 385
+  },
+  {
+    "byte_value": 208,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 396,
+    "chacha20_ciphertext_frequency": 351
+  },
+  {
+    "byte_value": 209,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 381,
+    "chacha20_ciphertext_frequency": 347
+  },
+  {
+    "byte_value": 210,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 383,
+    "chacha20_ciphertext_frequency": 394
+  },
+  {
+    "byte_value": 211,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 410,
+    "chacha20_ciphertext_frequency": 380
+  },
+  {
+    "byte_value": 212,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 352,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 213,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 410,
+    "chacha20_ciphertext_frequency": 367
+  },
+  {
+    "byte_value": 214,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 364,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 215,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 412,
+    "chacha20_ciphertext_frequency": 409
+  },
+  {
+    "byte_value": 216,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 371,
+    "chacha20_ciphertext_frequency": 424
+  },
+  {
+    "byte_value": 217,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 218,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 375,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 219,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 348,
+    "chacha20_ciphertext_frequency": 376
+  },
+  {
+    "byte_value": 220,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 375,
+    "chacha20_ciphertext_frequency": 383
+  },
+  {
+    "byte_value": 221,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 385,
+    "chacha20_ciphertext_frequency": 384
+  },
+  {
+    "byte_value": 222,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 375,
+    "chacha20_ciphertext_frequency": 421
+  },
+  {
+    "byte_value": 223,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 402,
+    "chacha20_ciphertext_frequency": 368
+  },
+  {
+    "byte_value": 224,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 361,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 225,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 364,
+    "chacha20_ciphertext_frequency": 369
+  },
+  {
+    "byte_value": 226,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 403,
+    "chacha20_ciphertext_frequency": 403
+  },
+  {
+    "byte_value": 227,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 369,
+    "chacha20_ciphertext_frequency": 392
+  },
+  {
+    "byte_value": 228,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 411,
+    "chacha20_ciphertext_frequency": 431
+  },
+  {
+    "byte_value": 229,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 370,
+    "chacha20_ciphertext_frequency": 402
+  },
+  {
+    "byte_value": 230,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 387,
+    "chacha20_ciphertext_frequency": 397
+  },
+  {
+    "byte_value": 231,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 363,
+    "chacha20_ciphertext_frequency": 370
+  },
+  {
+    "byte_value": 232,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 367
+  },
+  {
+    "byte_value": 233,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 384,
+    "chacha20_ciphertext_frequency": 391
+  },
+  {
+    "byte_value": 234,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 382,
+    "chacha20_ciphertext_frequency": 365
+  },
+  {
+    "byte_value": 235,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 395,
+    "chacha20_ciphertext_frequency": 377
+  },
+  {
+    "byte_value": 236,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 397,
+    "chacha20_ciphertext_frequency": 381
+  },
+  {
+    "byte_value": 237,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 390,
+    "chacha20_ciphertext_frequency": 396
+  },
+  {
+    "byte_value": 238,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 373,
+    "chacha20_ciphertext_frequency": 368
+  },
+  {
+    "byte_value": 239,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 417,
+    "chacha20_ciphertext_frequency": 408
+  },
+  {
+    "byte_value": 240,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 372,
+    "chacha20_ciphertext_frequency": 396
+  },
+  {
+    "byte_value": 241,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 404,
+    "chacha20_ciphertext_frequency": 365
+  },
+  {
+    "byte_value": 242,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 408,
+    "chacha20_ciphertext_frequency": 388
+  },
+  {
+    "byte_value": 243,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 358,
+    "chacha20_ciphertext_frequency": 401
+  },
+  {
+    "byte_value": 244,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 382,
+    "chacha20_ciphertext_frequency": 395
+  },
+  {
+    "byte_value": 245,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 398,
+    "chacha20_ciphertext_frequency": 381
+  },
+  {
+    "byte_value": 246,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 424,
+    "chacha20_ciphertext_frequency": 390
+  },
+  {
+    "byte_value": 247,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 423,
+    "chacha20_ciphertext_frequency": 421
+  },
+  {
+    "byte_value": 248,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 377,
+    "chacha20_ciphertext_frequency": 379
+  },
+  {
+    "byte_value": 249,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 400,
+    "chacha20_ciphertext_frequency": 413
+  },
+  {
+    "byte_value": 250,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 387,
+    "chacha20_ciphertext_frequency": 408
+  },
+  {
+    "byte_value": 251,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 397,
+    "chacha20_ciphertext_frequency": 427
+  },
+  {
+    "byte_value": 252,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 392,
+    "chacha20_ciphertext_frequency": 403
+  },
+  {
+    "byte_value": 253,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 351,
+    "chacha20_ciphertext_frequency": 414
+  },
+  {
+    "byte_value": 254,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 391,
+    "chacha20_ciphertext_frequency": 397
+  },
+  {
+    "byte_value": 255,
+    "plaintext_frequency": 0,
+    "aes_ciphertext_frequency": 422,
+    "chacha20_ciphertext_frequency": 391
+  }
+]

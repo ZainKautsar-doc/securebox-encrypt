@@ -110,12 +110,14 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span className="text-xs text-slate-500 font-medium">Algorithm</span>
+              <span className="text-xs text-slate-500 font-medium font-mono uppercase">Algorithm</span>
               <p className="text-sm font-semibold text-slate-800 uppercase">{result.algorithm}</p>
             </div>
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span className="text-xs text-slate-500 font-medium">Key Derivation (KDF)</span>
-              <p className="text-sm font-semibold text-slate-800 uppercase">{result.kdf} (N=16384, r=8, p=1)</p>
+              <span className="text-xs text-slate-500 font-medium">Key Protection / KDF</span>
+              <p className="text-sm font-semibold text-slate-800 uppercase">
+                {result.key_algorithm ? result.key_algorithm : `${result.kdf} (N=16384, r=8, p=1)`}
+              </p>
             </div>
           </div>
 
@@ -138,28 +140,50 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {result.encrypted_session_key && (
             <div>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-slate-600 flex items-center space-x-1">
                   <KeyRound className="w-3 h-3" />
-                  <span>Salt (16B Base64)</span>
+                  <span>Encrypted Session Key (RSA-OAEP 2048-bit Base64)</span>
                 </span>
                 <button
-                  onClick={() => copyToClipboard(result.salt, 'salt')}
+                  onClick={() => copyToClipboard(result.encrypted_session_key!, 'enc_session_key')}
                   className="text-xs text-indigo-600 hover:underline"
                 >
-                  {copiedKey === 'salt' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'enc_session_key' ? 'Copied!' : 'Copy'}
                 </button>
               </div>
-              <input
-                readOnly
-                value={result.salt}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
-              />
+              <div className="bg-slate-900 text-indigo-300 p-3 rounded-lg font-mono text-xs break-all max-h-24 overflow-y-auto">
+                {result.encrypted_session_key}
+              </div>
             </div>
+          )}
 
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {result.salt && (
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs font-medium text-slate-600 flex items-center space-x-1">
+                    <KeyRound className="w-3 h-3" />
+                    <span>Salt (16B Base64)</span>
+                  </span>
+                  <button
+                    onClick={() => copyToClipboard(result.salt!, 'salt')}
+                    className="text-xs text-indigo-600 hover:underline"
+                  >
+                    {copiedKey === 'salt' ? 'Copied!' : 'Copy'}
+                  </button>
+                </div>
+                <input
+                  readOnly
+                  value={result.salt}
+                  className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                />
+              </div>
+            )}
+
+            <div className={result.salt ? '' : 'md:col-span-1'}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-medium text-slate-600">Nonce (12B Base64)</span>
                 <button
@@ -176,9 +200,9 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
               />
             </div>
 
-            <div>
+            <div className={result.salt ? '' : 'md:col-span-2'}>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600">Tag (16B Base64)</span>
+                <span className="text-xs font-medium text-slate-600">Auth Tag (16B Base64)</span>
                 <button
                   onClick={() => copyToClipboard(result.tag, 'tag')}
                   className="text-xs text-indigo-600 hover:underline"

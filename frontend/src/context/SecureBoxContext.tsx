@@ -5,15 +5,16 @@ import { EncryptResponse, BenchmarkResponse } from '../services/api';
 interface EncryptTextState {
   plaintext: string;
   password: string;
-  algorithm: 'aes-256-gcm' | 'chacha20-poly1305';
+  algorithm: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
   result: EncryptResponse | null;
 }
 
 interface DecryptTextState {
   ciphertext: string;
   password: string;
-  algorithm: 'aes-256-gcm' | 'chacha20-poly1305';
+  algorithm: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
   salt: string;
+  encrypted_session_key: string;
   nonce: string;
   tag: string;
   plaintext: string | null;
@@ -21,7 +22,7 @@ interface DecryptTextState {
 
 interface FileEncryptState {
   password: string;
-  algorithm: 'aes-256-gcm' | 'chacha20-poly1305';
+  algorithm: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
   downloadInfo: {
     url?: string;
     filename: string;
@@ -31,8 +32,9 @@ interface FileEncryptState {
 
 interface FileDecryptState {
   password: string;
-  algorithm: 'aes-256-gcm' | 'chacha20-poly1305';
+  algorithm: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
   salt: string;
+  encrypted_session_key: string;
   nonce: string;
   tag: string;
 }
@@ -130,6 +132,7 @@ export const SecureBoxProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     password: '',
     algorithm: 'aes-256-gcm',
     salt: '',
+    encrypted_session_key: '',
     nonce: '',
     tag: '',
     plaintext: null,
@@ -145,6 +148,7 @@ export const SecureBoxProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     password: '',
     algorithm: 'aes-256-gcm',
     salt: '',
+    encrypted_session_key: '',
     nonce: '',
     tag: '',
   });
@@ -154,14 +158,16 @@ export const SecureBoxProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const loadIntoDecryptText = (data: {
     ciphertext?: string;
     salt?: string;
+    encrypted_session_key?: string;
     nonce?: string;
     tag?: string;
-    algorithm?: 'aes-256-gcm' | 'chacha20-poly1305';
+    algorithm?: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
   }) => {
     setDecryptTextState((prev) => ({
       ...prev,
       ciphertext: data.ciphertext ?? prev.ciphertext,
       salt: data.salt ?? prev.salt,
+      encrypted_session_key: data.encrypted_session_key ?? prev.encrypted_session_key,
       nonce: data.nonce ?? prev.nonce,
       tag: data.tag ?? prev.tag,
       algorithm: data.algorithm ?? prev.algorithm,

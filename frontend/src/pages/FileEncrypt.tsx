@@ -15,7 +15,7 @@ export const FileEncrypt: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const setPassword = (val: string) => setFileEncryptState((prev) => ({ ...prev, password: val }));
-  const setAlgorithm = (val: 'aes-256-gcm' | 'chacha20-poly1305') => setFileEncryptState((prev) => ({ ...prev, algorithm: val }));
+  const setAlgorithm = (val: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid') => setFileEncryptState((prev) => ({ ...prev, algorithm: val }));
   const setDownloadInfo = (info: any) => setFileEncryptState((prev) => ({ ...prev, downloadInfo: info }));
 
   const handleReset = () => {
@@ -34,7 +34,7 @@ export const FileEncrypt: React.FC = () => {
       setError('Please select a file to encrypt.');
       return;
     }
-    if (!password) {
+    if (algorithm !== 'hybrid' && !password) {
       setError('Password is required.');
       return;
     }
@@ -169,31 +169,34 @@ export const FileEncrypt: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-              Passphrase
+              Passphrase {algorithm === 'hybrid' && <span className="text-slate-400 font-normal">(Auto RSA Session Key)</span>}
             </label>
             <div className="relative">
               <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
+                disabled={algorithm === 'hybrid'}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter file encryption password"
-                className="w-full pl-9 pr-10 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder={algorithm === 'hybrid' ? 'Not required for Hybrid RSA-OAEP' : 'Enter file encryption password'}
+                className="w-full pl-9 pr-10 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-slate-100 disabled:text-slate-400"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 transition"
-                title={showPassword ? 'Hide password' : 'Show password'}
-              >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              </button>
+              {algorithm !== 'hybrid' && (
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 transition"
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              )}
             </div>
           </div>
 
           <div>
             <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-              Cipher Algorithm
+              Encryption Mode
             </label>
             <select
               value={algorithm}
@@ -202,9 +205,18 @@ export const FileEncrypt: React.FC = () => {
             >
               <option value="aes-256-gcm">AES-256-GCM (Authenticated)</option>
               <option value="chacha20-poly1305">ChaCha20-Poly1305 (Authenticated)</option>
+              <option value="hybrid">Hybrid: AES-256-GCM + RSA-OAEP</option>
             </select>
           </div>
         </div>
+
+        {algorithm === 'hybrid' && (
+          <div className="p-4 bg-indigo-50/80 border border-indigo-200 rounded-lg text-xs space-y-1">
+            <div className="font-bold text-indigo-900 tracking-wide">Mode: HYBRID</div>
+            <div className="text-indigo-800"><span className="font-semibold">Data Cipher:</span> AES-256-GCM</div>
+            <div className="text-indigo-800"><span className="font-semibold">Key Protection:</span> RSA-OAEP (SHA-256)</div>
+          </div>
+        )}
 
         {error && (
           <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg text-xs font-medium text-rose-700">
