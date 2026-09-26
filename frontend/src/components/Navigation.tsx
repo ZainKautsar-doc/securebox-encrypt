@@ -126,36 +126,37 @@ export const Navigation: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-soft-mist hover:text-pure-signal bg-carbon-panel border border-graphite-lift rounded-sm transition cursor-pointer"
+              className="min-h-[44px] min-w-[44px] p-2.5 text-soft-mist hover:text-pure-signal bg-carbon-panel border border-graphite-lift rounded-sm transition cursor-pointer flex items-center justify-center active:bg-graphite-lift"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown Menu (Stacked full-width items, 44px min-height tap targets) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-graphite-lift bg-midnight-void px-6 pt-3 pb-6 space-y-4 shadow-xl">
+        <div className="lg:hidden border-t border-graphite-lift bg-midnight-void px-4 sm:px-6 pt-3 pb-6 space-y-4 shadow-xl animate-fade-in-down">
           <div>
             <span className="font-mono text-[10px] text-warm-filament uppercase tracking-wider block px-1 mb-2">
               // CRYPTOGRAPHIC PROTOCOLS
             </span>
-            <div className="grid grid-cols-1 gap-1.5">
+            <div className="grid grid-cols-1 gap-2">
               {navItems.map((item) => {
                 const isActive = activeTab === item.id;
                 return (
                   <button
                     key={item.id}
                     onClick={() => handleSelectTab(item.id)}
-                    className={`w-full text-left px-3 py-2.5 rounded-sm font-mono text-xs tracking-wider uppercase transition cursor-pointer ${
+                    className={`w-full text-left min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs tracking-wider uppercase transition cursor-pointer flex items-center justify-between border ${
                       isActive
-                        ? 'bg-electric-indigo text-pure-signal font-semibold'
-                        : 'text-soft-mist hover:bg-carbon-panel hover:text-pure-signal'
+                        ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold shadow-sm'
+                        : 'bg-carbon-panel border-graphite-lift text-soft-mist hover:bg-graphite-lift hover:text-pure-signal'
                     }`}
                   >
-                    {item.label}
+                    <span>{item.label}</span>
+                    {isActive && <span className="w-2 h-2 rounded-full bg-pure-signal" />}
                   </button>
                 );
               })}
@@ -166,21 +167,21 @@ export const Navigation: React.FC = () => {
             <span className="font-mono text-[10px] text-warm-filament uppercase tracking-wider block px-1 mb-2">
               // UTILITIES
             </span>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
                 onClick={() => handleSelectTab('history')}
-                className={`flex items-center justify-between px-3 py-2 rounded-sm font-mono text-xs uppercase transition border ${
+                className={`flex items-center justify-between min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs uppercase transition border ${
                   activeTab === 'history'
-                    ? 'bg-electric-indigo text-pure-signal border-electric-indigo'
-                    : 'bg-carbon-panel text-soft-mist border-graphite-lift'
+                    ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold'
+                    : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift'
                 }`}
               >
-                <div className="flex items-center space-x-1.5">
-                  <History className="w-3.5 h-3.5" />
+                <div className="flex items-center space-x-2">
+                  <History className="w-4 h-4" />
                   <span>• HISTORY</span>
                 </div>
                 {history.length > 0 && (
-                  <span className="text-[10px] px-1 py-0.5 rounded-sm bg-midnight-void text-pure-signal font-bold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-sm bg-midnight-void text-pure-signal font-bold">
                     {history.length}
                   </span>
                 )}
@@ -188,13 +189,13 @@ export const Navigation: React.FC = () => {
 
               <button
                 onClick={() => handleSelectTab('how-it-works')}
-                className={`flex items-center justify-center space-x-1.5 px-3 py-2 rounded-sm font-mono text-xs uppercase transition border ${
+                className={`flex items-center justify-center space-x-2 min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs uppercase transition border ${
                   activeTab === 'how-it-works'
-                    ? 'bg-electric-indigo text-pure-signal border-electric-indigo'
-                    : 'bg-carbon-panel text-soft-mist border-graphite-lift'
+                    ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold'
+                    : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift'
                 }`}
               >
-                <BookOpen className="w-3.5 h-3.5" />
+                <BookOpen className="w-4 h-4" />
                 <span>• SPEC</span>
               </button>
             </div>

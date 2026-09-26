@@ -60,35 +60,35 @@
 @layer components {
   /* Primary CTA Button (Filled) */
   .btn-primary {
-    @apply bg-electric-indigo hover:bg-cobalt-pulse active:bg-electric-indigo text-pure-signal font-sans font-bold text-xs uppercase tracking-wider py-[11px] px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer border border-transparent disabled:bg-steel-hover disabled:text-soft-mist/50 disabled:cursor-not-allowed;
+    @apply bg-electric-indigo hover:bg-cobalt-pulse active:bg-electric-indigo text-pure-signal font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer border border-transparent disabled:bg-steel-hover disabled:text-soft-mist/50 disabled:cursor-not-allowed;
   }
 
   /* Secondary Button (Outlined Ghost) */
   .btn-secondary {
-    @apply bg-transparent border border-periwinkle-veil hover:border-cobalt-pulse text-pure-signal font-sans font-bold text-xs uppercase tracking-wider py-[11px] px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer disabled:border-steel-hover disabled:text-soft-mist/40 disabled:cursor-not-allowed;
+    @apply bg-transparent border border-periwinkle-veil hover:border-cobalt-pulse text-pure-signal font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer disabled:border-steel-hover disabled:text-soft-mist/40 disabled:cursor-not-allowed;
   }
 
   /* Chromatic Lime Button */
   .btn-chromatic-lime {
-    @apply bg-transparent border border-lime-beacon hover:bg-lime-beacon/10 text-lime-beacon font-sans font-bold text-xs uppercase tracking-wider py-[11px] px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer;
+    @apply bg-transparent border border-lime-beacon hover:bg-lime-beacon/10 text-lime-beacon font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer;
   }
 
   /* Chromatic Orchid Button */
   .btn-chromatic-orchid {
-    @apply bg-transparent border border-orchid-whisper hover:bg-orchid-whisper/10 text-orchid-whisper font-sans font-bold text-xs uppercase tracking-wider py-[11px] px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer;
+    @apply bg-transparent border border-orchid-whisper hover:bg-orchid-whisper/10 text-orchid-whisper font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer;
   }
 
-  /* Form Input Standard */
+  /* Form Input Standard (text-base on mobile prevents iOS zoom, text-sm on sm+) */
   .input-protocol {
-    @apply w-full bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/40 text-sm font-sans rounded-sm p-3 outline-none transition duration-150;
+    @apply w-full bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/40 text-base sm:text-sm font-sans rounded-sm min-h-[44px] sm:min-h-[40px] p-3 outline-none transition duration-150;
   }
 
   .input-protocol-mono {
-    @apply w-full bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/40 text-xs font-mono rounded-sm p-3 outline-none transition duration-150;
+    @apply w-full bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/40 text-sm sm:text-xs font-mono rounded-sm min-h-[44px] sm:min-h-[40px] p-3 outline-none transition duration-150;
   }
 
   /* Card Standard */
   .card-protocol {
-    @apply bg-carbon-panel border border-graphite-lift rounded-sm p-6;
+    @apply bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 lg:p-8;
   }
 }

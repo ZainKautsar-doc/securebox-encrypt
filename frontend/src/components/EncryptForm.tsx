@@ -72,10 +72,10 @@ export const EncryptForm: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Form Container (Carbon Panel, 32px padding, 2px radius, 1px border) */}
-      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-6 sm:p-8 space-y-6">
-        <div>
-          <div className="flex items-center justify-between mb-2">
+      {/* Form Container (Carbon Panel, 20px mobile / 24px tablet / 32px desktop padding, 2px radius, 1px border) */}
+      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 lg:p-8 space-y-6">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
             <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
               // PLAINTEXT SECRET MESSAGE
             </label>
@@ -83,9 +83,9 @@ export const EncryptForm: React.FC = () => {
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs font-mono text-soft-mist/60 hover:text-orchid-whisper flex items-center space-x-1 cursor-pointer transition"
+                className="text-xs font-mono text-soft-mist/60 hover:text-orchid-whisper flex items-center space-x-1 cursor-pointer transition min-h-[36px] px-2"
               >
-                <RotateCcw className="w-3 h-3" />
+                <RotateCcw className="w-3.5 h-3.5" />
                 <span>RESET</span>
               </button>
             )}
@@ -100,8 +100,8 @@ export const EncryptForm: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider mb-2">
+          <div className="space-y-2">
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
               // PASSPHRASE (SCRYPT KDF)
             </label>
             <div className="relative">
@@ -116,7 +116,7 @@ export const EncryptForm: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-soft-mist/50 hover:text-pure-signal transition cursor-pointer"
+                className="min-h-[44px] min-w-[44px] absolute right-1 top-0 text-soft-mist/50 hover:text-pure-signal transition cursor-pointer flex items-center justify-center"
                 title={showPassword ? 'Hide passphrase' : 'Show passphrase'}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -124,8 +124,8 @@ export const EncryptForm: React.FC = () => {
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider mb-2">
+          <div className="space-y-2">
+            <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
               // AEAD CIPHER
             </label>
             <select
@@ -146,11 +146,11 @@ export const EncryptForm: React.FC = () => {
           </div>
         )}
 
-        <div className="pt-2 flex flex-wrap items-center gap-3">
+        <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary"
+            className="btn-primary w-full sm:w-auto"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
             <span>{loading ? 'EXECUTING SCRYPT...' : 'ENCRYPT MESSAGE'}</span>
