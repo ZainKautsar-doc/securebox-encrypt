@@ -6,7 +6,8 @@ import { FileDecrypt } from './pages/FileDecrypt';
 import { Compare } from './pages/Compare';
 import { History } from './pages/History';
 import { HowItWorks } from './pages/HowItWorks';
-import { Shield, Key, FileLock2, Cpu, BookOpen } from 'lucide-react';
+import { Team } from './pages/Team';
+import { Shield, Key, FileLock2, Cpu, BookOpen, Users } from 'lucide-react';
 import { SecureBoxProvider, useSecureBox } from './context/SecureBoxContext';
 
 function MainContent() {
@@ -54,6 +55,14 @@ function MainContent() {
               </span>
               <button
                 type="button"
+                onClick={() => setActiveTab('team')}
+                className="flex items-center space-x-1.5 bg-transparent border border-electric-indigo/60 hover:border-electric-indigo text-pure-signal px-3 py-1.5 rounded-sm transition cursor-pointer min-h-[36px]"
+              >
+                <Users className="w-3.5 h-3.5 text-electric-indigo" />
+                <span>Meet Team</span>
+              </button>
+              <button
+                type="button"
                 onClick={() => setActiveTab('how-it-works')}
                 className="flex items-center space-x-1.5 bg-transparent border border-periwinkle-veil hover:border-cobalt-pulse text-pure-signal px-3 py-1.5 rounded-sm transition cursor-pointer min-h-[36px]"
               >
@@ -70,6 +79,7 @@ function MainContent() {
         {activeTab === 'file-encrypt' && <FileEncrypt />}
         {activeTab === 'file-decrypt' && <FileDecrypt />}
         {activeTab === 'compare' && <Compare />}
+        {activeTab === 'team' && <Team />}
         {activeTab === 'history' && <History />}
         {activeTab === 'how-it-works' && <HowItWorks />}
       </main>

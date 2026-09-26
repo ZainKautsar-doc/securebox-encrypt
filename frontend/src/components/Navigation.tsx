@@ -18,6 +18,7 @@ export const Navigation: React.FC = () => {
     { id: 'file-encrypt', label: '• FILE ENCRYPT' },
     { id: 'file-decrypt', label: '• FILE DECRYPT' },
     { id: 'compare', label: '• BENCHMARK' },
+    { id: 'team', label: '• TEAM' },
   ];
 
   const handleSelectTab = (id: string) => {
@@ -32,6 +33,7 @@ export const Navigation: React.FC = () => {
       case 'file-encrypt': return '• FILE ENCRYPT';
       case 'file-decrypt': return '• FILE DECRYPT';
       case 'compare': return '• BENCHMARK';
+      case 'team': return '• TEAM';
       case 'history': return '• HISTORY';
       case 'how-it-works': return '• SPEC';
       default: return 'SECUREBOX';
