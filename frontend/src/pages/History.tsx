@@ -60,46 +60,47 @@ export const History: React.FC = () => {
   const getIcon = (type: OperationType) => {
     switch (type) {
       case 'text-encrypt':
-        return <Lock className="w-4 h-4 text-indigo-600" />;
+        return <Lock className="w-4 h-4 text-electric-indigo" />;
       case 'text-decrypt':
-        return <Unlock className="w-4 h-4 text-emerald-600" />;
+        return <Unlock className="w-4 h-4 text-lime-beacon" />;
       case 'file-encrypt':
-        return <FileText className="w-4 h-4 text-blue-600" />;
+        return <FileText className="w-4 h-4 text-periwinkle-veil" />;
       case 'file-decrypt':
-        return <FileCheck className="w-4 h-4 text-teal-600" />;
+        return <FileCheck className="w-4 h-4 text-lime-beacon" />;
       case 'benchmark':
-        return <BarChart3 className="w-4 h-4 text-purple-600" />;
+        return <BarChart3 className="w-4 h-4 text-orchid-whisper" />;
       default:
-        return <HistoryIcon className="w-4 h-4 text-slate-600" />;
+        return <HistoryIcon className="w-4 h-4 text-soft-mist" />;
     }
   };
 
   const getTypeBadge = (type: OperationType) => {
     switch (type) {
       case 'text-encrypt':
-        return <span className="px-2 py-0.5 text-[11px] font-semibold bg-indigo-50 text-indigo-700 rounded border border-indigo-200">Text Encrypt</span>;
+        return <span className="px-2 py-0.5 text-[11px] font-mono font-bold bg-electric-indigo/20 text-pure-signal rounded-sm border border-electric-indigo">TEXT ENCRYPT</span>;
       case 'text-decrypt':
-        return <span className="px-2 py-0.5 text-[11px] font-semibold bg-emerald-50 text-emerald-700 rounded border border-emerald-200">Text Decrypt</span>;
+        return <span className="px-2 py-0.5 text-[11px] font-mono font-bold bg-lime-beacon/20 text-lime-beacon rounded-sm border border-lime-beacon">TEXT DECRYPT</span>;
       case 'file-encrypt':
-        return <span className="px-2 py-0.5 text-[11px] font-semibold bg-blue-50 text-blue-700 rounded border border-blue-200">File Encrypt</span>;
+        return <span className="px-2 py-0.5 text-[11px] font-mono font-bold bg-periwinkle-veil/20 text-periwinkle-veil rounded-sm border border-periwinkle-veil">FILE ENCRYPT</span>;
       case 'file-decrypt':
-        return <span className="px-2 py-0.5 text-[11px] font-semibold bg-teal-50 text-teal-700 rounded border border-teal-200">File Decrypt</span>;
+        return <span className="px-2 py-0.5 text-[11px] font-mono font-bold bg-lime-beacon/20 text-lime-beacon rounded-sm border border-lime-beacon">FILE DECRYPT</span>;
       case 'benchmark':
-        return <span className="px-2 py-0.5 text-[11px] font-semibold bg-purple-50 text-purple-700 rounded border border-purple-200">Benchmark</span>;
+        return <span className="px-2 py-0.5 text-[11px] font-mono font-bold bg-orchid-whisper/20 text-orchid-whisper rounded-sm border border-orchid-whisper">BENCHMARK</span>;
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-graphite-lift">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-            <HistoryIcon className="w-6 h-6" />
+          <div className="w-9 h-9 bg-electric-indigo text-pure-signal rounded-sm flex items-center justify-center">
+            <HistoryIcon className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-900">Activity History</h1>
-            <p className="text-xs text-slate-500">
-              Persistent record of your encryption, decryption, and benchmark operations.
+            <h1 className="text-xl font-bold tracking-tight text-pure-signal">Activity History</h1>
+            <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
+              LOCAL PERSISTENT PROTOCOL LOGS // ZERO PLAINTEXT SAVED ON REMOTE SERVER
             </p>
           </div>
         </div>
@@ -108,21 +109,21 @@ export const History: React.FC = () => {
           <div className="flex items-center space-x-2">
             <button
               onClick={exportHistoryJson}
-              className="px-3 py-1.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium rounded-lg shadow-sm transition flex items-center space-x-1.5"
+              className="btn-secondary !py-1.5 !px-3"
             >
-              <Download className="w-3.5 h-3.5 text-slate-500" />
-              <span>Export All JSON</span>
+              <Download className="w-3.5 h-3.5" />
+              <span>EXPORT ALL JSON</span>
             </button>
             <button
               onClick={() => {
-                if (window.confirm('Are you sure you want to clear all history?')) {
+                if (window.confirm('Clear all local cryptographic history records?')) {
                   clearHistory();
                 }
               }}
-              className="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-xs font-medium rounded-lg shadow-sm transition flex items-center space-x-1.5"
+              className="bg-transparent border border-orchid-whisper text-orchid-whisper hover:bg-orchid-whisper/10 font-mono text-xs font-bold uppercase py-1.5 px-3 rounded-sm transition cursor-pointer flex items-center space-x-1.5"
             >
-              <Trash2 className="w-3.5 h-3.5 text-rose-600" />
-              <span>Clear History</span>
+              <Trash2 className="w-3.5 h-3.5" />
+              <span>CLEAR LOGS</span>
             </button>
           </div>
         )}
@@ -130,25 +131,25 @@ export const History: React.FC = () => {
 
       {/* Filter Tabs */}
       <div className="flex flex-wrap items-center gap-2">
-        <div className="flex items-center text-slate-400 mr-1 text-xs">
-          <Filter className="w-4 h-4 mr-1" />
-          <span>Filter:</span>
+        <div className="flex items-center text-soft-mist/60 mr-1 text-xs font-mono uppercase">
+          <Filter className="w-3.5 h-3.5 mr-1 text-electric-indigo" />
+          <span>FILTER:</span>
         </div>
         {[
-          { id: 'all', label: 'All Operations' },
-          { id: 'text-encrypt', label: 'Text Encrypt' },
-          { id: 'text-decrypt', label: 'Text Decrypt' },
-          { id: 'file-encrypt', label: 'File Encrypt' },
-          { id: 'file-decrypt', label: 'File Decrypt' },
-          { id: 'benchmark', label: 'Benchmark' },
+          { id: 'all', label: 'ALL LOGS' },
+          { id: 'text-encrypt', label: 'TEXT ENCRYPT' },
+          { id: 'text-decrypt', label: 'TEXT DECRYPT' },
+          { id: 'file-encrypt', label: 'FILE ENCRYPT' },
+          { id: 'file-decrypt', label: 'FILE DECRYPT' },
+          { id: 'benchmark', label: 'BENCHMARK' },
         ].map((tab) => (
           <button
             key={tab.id}
             onClick={() => setFilterType(tab.id)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider transition-colors uppercase cursor-pointer border ${
               filterType === tab.id
-                ? 'bg-indigo-600 text-white shadow-sm'
-                : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-bold'
+                : 'bg-carbon-panel border-graphite-lift text-soft-mist hover:text-pure-signal hover:bg-graphite-lift'
             }`}
           >
             {tab.label} {tab.id === 'all' ? `(${history.length})` : `(${history.filter(h => h.type === tab.id).length})`}
@@ -156,43 +157,46 @@ export const History: React.FC = () => {
         ))}
       </div>
 
-      {/* History Items List */}
+      {/* History Items List (Carbon Panel, Hover Graphite Lift, 2px radius, Mono metadata) */}
       {filteredHistory.length === 0 ? (
-        <div className="bg-white rounded-xl border border-slate-200 p-12 text-center shadow-sm">
-          <div className="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3">
+        <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-12 text-center">
+          <div className="w-12 h-12 bg-graphite-lift text-soft-mist/40 rounded-sm flex items-center justify-center mx-auto mb-3">
             <HistoryIcon className="w-6 h-6" />
           </div>
-          <h3 className="text-sm font-semibold text-slate-800">No History Records Found</h3>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+          <h3 className="text-sm font-mono font-bold text-pure-signal uppercase tracking-wider">NO HISTORY LOGS RECORDED</h3>
+          <p className="text-xs text-soft-mist/60 mt-1 max-w-sm mx-auto font-mono">
             {filterType === 'all'
-              ? 'Perform an encryption, decryption, or benchmark operation to see your activity logged here.'
-              : `No activities found for category "${filterType}".`}
+              ? 'Execute encryption, decryption, or benchmark routines to view recorded outputs.'
+              : `No activity found matching filter "${filterType}".`}
           </p>
         </div>
       ) : (
         <div className="space-y-4">
           {filteredHistory.map((item) => (
-            <div key={item.id} className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
-              <div className="flex items-start justify-between">
+            <div 
+              key={item.id} 
+              className="bg-carbon-panel hover:bg-graphite-lift/70 border border-graphite-lift rounded-sm p-5 space-y-3 transition duration-150"
+            >
+              <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start space-x-3">
-                  <div className="p-2 bg-slate-50 border border-slate-100 rounded-lg mt-0.5">
+                  <div className="p-2 bg-graphite-lift border border-graphite-lift rounded-sm mt-0.5">
                     {getIcon(item.type)}
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-semibold text-sm text-slate-900">{item.title}</span>
+                      <span className="font-sans font-bold text-sm text-pure-signal">{item.title}</span>
                       {getTypeBadge(item.type)}
-                      <span className="px-2 py-0.5 text-[11px] font-mono bg-slate-100 text-slate-600 rounded">
+                      <span className="px-2 py-0.5 text-[11px] font-mono bg-graphite-lift text-soft-mist rounded-sm border border-graphite-lift">
                         {item.algorithm.toUpperCase()}
                       </span>
                     </div>
-                    <span className="text-xs text-slate-400">
+                    <span className="text-[11px] font-mono text-soft-mist/50 block mt-1">
                       {new Date(item.timestamp).toLocaleString()}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-1.5">
+                <div className="flex items-center space-x-2">
                   {item.type === 'text-encrypt' && item.details.ciphertext && (
                     <button
                       onClick={() => loadIntoDecryptText({
@@ -202,16 +206,16 @@ export const History: React.FC = () => {
                         tag: item.details.tag,
                         algorithm: item.algorithm as any,
                       })}
-                      className="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-medium rounded-md transition flex items-center space-x-1"
-                      title="Load this encrypted payload into Decrypt form"
+                      className="btn-primary !py-1 !px-2.5 !text-[11px]"
+                      title="Load into Decryption Form"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      <span>Decrypt This</span>
+                      <ExternalLink className="w-3 h-3" />
+                      <span>DECRYPT</span>
                     </button>
                   )}
                   <button
                     onClick={() => deleteHistoryItem(item.id)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition"
+                    className="p-1.5 text-soft-mist/60 hover:text-orchid-whisper rounded-sm transition cursor-pointer"
                     title="Delete record"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -221,83 +225,83 @@ export const History: React.FC = () => {
 
               {/* Details Snippet */}
               {item.type === 'text-encrypt' && (
-                <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-2 text-xs font-mono">
-                  <div className="flex items-center justify-between text-slate-700">
-                    <span className="font-semibold">Ciphertext:</span>
-                    <div className="flex items-center space-x-2">
+                <div className="bg-midnight-void border border-graphite-lift rounded-sm p-3.5 space-y-2.5 font-mono text-xs">
+                  <div className="flex items-center justify-between text-soft-mist">
+                    <span className="font-bold text-[11px] text-warm-filament">// CIPHERTEXT</span>
+                    <div className="flex items-center space-x-3 text-xs">
                       <button
                         onClick={() => downloadHistoryItemJson(item)}
-                        className="text-indigo-600 hover:underline flex items-center space-x-1 font-sans"
+                        className="text-periwinkle-veil hover:text-pure-signal flex items-center space-x-1 cursor-pointer"
                         title="Download JSON"
                       >
                         <Download className="w-3 h-3" />
-                        <span>Download JSON</span>
+                        <span>JSON</span>
                       </button>
                       <button
                         onClick={() => copyToClipboard(item.details.ciphertext || '', `${item.id}-cipher`)}
-                        className="text-indigo-600 hover:underline flex items-center space-x-1 font-sans"
+                        className="text-periwinkle-veil hover:text-pure-signal flex items-center space-x-1 cursor-pointer"
                       >
-                        {copiedId === `${item.id}-cipher` ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                        <span>{copiedId === `${item.id}-cipher` ? 'Copied' : 'Copy'}</span>
+                        {copiedId === `${item.id}-cipher` ? <Check className="w-3 h-3 text-lime-beacon" /> : <Copy className="w-3 h-3" />}
+                        <span>{copiedId === `${item.id}-cipher` ? 'COPIED' : 'COPY'}</span>
                       </button>
                     </div>
                   </div>
-                  <div className="bg-slate-900 text-emerald-400 p-2 rounded text-[11px] truncate">
+                  <div className="bg-carbon-panel border border-graphite-lift text-pure-signal p-2.5 rounded-sm text-[11px] truncate">
                     {item.details.ciphertext}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 font-sans text-slate-600 text-[11px]">
-                    <div><span className="font-semibold">Salt:</span> <span className="font-mono">{item.details.salt?.slice(0, 10)}...</span></div>
-                    <div><span className="font-semibold">Nonce:</span> <span className="font-mono">{item.details.nonce?.slice(0, 10)}...</span></div>
-                    <div><span className="font-semibold">Tag:</span> <span className="font-mono">{item.details.tag?.slice(0, 10)}...</span></div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-soft-mist/60 text-[11px] pt-1 border-t border-graphite-lift">
+                    <div><span>SALT:</span> <span className="text-pure-signal font-mono">{item.details.salt?.slice(0, 12)}...</span></div>
+                    <div><span>NONCE:</span> <span className="text-pure-signal font-mono">{item.details.nonce?.slice(0, 12)}...</span></div>
+                    <div><span>TAG:</span> <span className="text-pure-signal font-mono">{item.details.tag?.slice(0, 12)}...</span></div>
                   </div>
                 </div>
               )}
 
               {item.type === 'text-decrypt' && (
-                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-1.5">
-                  <div className="flex items-center justify-between text-emerald-900 text-xs">
-                    <span className="font-semibold">Decrypted Plaintext:</span>
+                <div className="bg-midnight-void border border-lime-beacon/40 rounded-sm p-3.5 space-y-2 font-mono">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-lime-beacon">// DECRYPTED PLAINTEXT</span>
                     <button
                       onClick={() => copyToClipboard(item.details.plaintext || '', `${item.id}-plain`)}
-                      className="text-emerald-700 hover:underline flex items-center space-x-1 font-sans"
+                      className="text-periwinkle-veil hover:text-pure-signal flex items-center space-x-1 cursor-pointer"
                     >
-                      {copiedId === `${item.id}-plain` ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                      <span>{copiedId === `${item.id}-plain` ? 'Copied' : 'Copy'}</span>
+                      {copiedId === `${item.id}-plain` ? <Check className="w-3 h-3 text-lime-beacon" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedId === `${item.id}-plain` ? 'COPIED' : 'COPY'}</span>
                     </button>
                   </div>
-                  <p className="text-xs font-mono text-emerald-950 whitespace-pre-wrap break-all">
+                  <p className="text-xs text-pure-signal whitespace-pre-wrap break-all leading-relaxed">
                     {item.details.plaintext}
                   </p>
                 </div>
               )}
 
               {(item.type === 'file-encrypt' || item.type === 'file-decrypt') && (
-                <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span><strong>File:</strong> {item.details.filename}</span>
+                <div className="bg-midnight-void border border-graphite-lift rounded-sm p-3.5 text-xs font-mono space-y-2">
+                  <div className="flex items-center justify-between text-soft-mist">
+                    <span><strong>FILE:</strong> <span className="text-pure-signal">{item.details.filename}</span></span>
                     {item.details.fileSize && (
-                      <span className="text-slate-500">{(item.details.fileSize / 1024).toFixed(1)} KB</span>
+                      <span className="text-soft-mist/60">{(item.details.fileSize / 1024).toFixed(1)} KB</span>
                     )}
                   </div>
                   {item.details.salt && (
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono pt-1">
-                      <span>Tag: {item.details.tag?.slice(0, 16)}...</span>
-                      <div className="flex items-center space-x-2">
+                    <div className="flex items-center justify-between text-[11px] text-soft-mist/60 pt-1 border-t border-graphite-lift">
+                      <span>TAG: {item.details.tag?.slice(0, 16)}...</span>
+                      <div className="flex items-center space-x-3">
                         <button
                           onClick={() => downloadHistoryItemJson(item)}
-                          className="text-indigo-600 hover:underline flex items-center space-x-1 font-sans"
+                          className="text-periwinkle-veil hover:text-pure-signal flex items-center space-x-1 cursor-pointer"
                           title="Download metadata JSON"
                         >
                           <Download className="w-3 h-3" />
-                          <span>Download JSON</span>
+                          <span>DOWNLOAD JSON</span>
                         </button>
                         <button
                           onClick={() => copyToClipboard(JSON.stringify(item.details, null, 2), `${item.id}-meta`)}
-                          className="text-indigo-600 hover:underline flex items-center space-x-1 font-sans"
+                          className="text-periwinkle-veil hover:text-pure-signal flex items-center space-x-1 cursor-pointer"
                         >
-                          {copiedId === `${item.id}-meta` ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                          <span>{copiedId === `${item.id}-meta` ? 'Copied' : 'Copy Metadata'}</span>
+                          {copiedId === `${item.id}-meta` ? <Check className="w-3 h-3 text-lime-beacon" /> : <Copy className="w-3 h-3" />}
+                          <span>{copiedId === `${item.id}-meta` ? 'COPIED' : 'COPY'}</span>
                         </button>
                       </div>
                     </div>
@@ -306,8 +310,8 @@ export const History: React.FC = () => {
               )}
 
               {item.type === 'benchmark' && item.details.benchmarkData && (
-                <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700">
-                  <span className="font-semibold">Benchmark Completed across 1KB, 1MB, and 10MB payloads.</span>
+                <div className="bg-midnight-void border border-graphite-lift rounded-sm p-3 text-xs font-mono text-soft-mist">
+                  <span>BENCHMARK COMPLETED ACROSS 1KB, 1MB, AND 10MB ENCRYPT/DECRYPT CYCLES.</span>
                 </div>
               )}
             </div>
