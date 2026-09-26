@@ -253,22 +253,13 @@ export const FileEncrypt: React.FC = () => {
               <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
                 Encryption Metadata (Required to Decrypt)
               </span>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={downloadMetadataJsonFile}
-                  className="text-xs text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 flex items-center space-x-1 font-medium px-2.5 py-1 rounded transition"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Download JSON</span>
-                </button>
-                <button
-                  onClick={copyMetadataJson}
-                  className="text-xs text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center space-x-1 font-medium px-2.5 py-1 rounded transition"
-                >
-                  {copiedKey === 'meta' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedKey === 'meta' ? 'Copied!' : 'Copy JSON'}</span>
-                </button>
-              </div>
+              <button
+                onClick={copyMetadataJson}
+                className="text-xs text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 border border-slate-300 flex items-center space-x-1 font-medium px-2.5 py-1 rounded transition"
+              >
+                {copiedKey === 'meta' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedKey === 'meta' ? 'Copied!' : 'Copy JSON'}</span>
+              </button>
             </div>
             <pre className="bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-xs overflow-x-auto">
               {JSON.stringify(downloadInfo.metadata, null, 2)}
