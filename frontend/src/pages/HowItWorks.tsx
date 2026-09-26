@@ -4,13 +4,10 @@ import {
   Shield, 
   Key, 
   Cpu, 
-  Lock, 
-  Unlock, 
   CheckCircle2, 
   FileText, 
   ArrowRight, 
   Sparkles,
-  Layers,
   Fingerprint,
   HelpCircle,
   ChevronDown,
@@ -112,89 +109,7 @@ export const HowItWorks: React.FC = () => {
         </div>
       </div>
 
-      {/* Step by Step Flow */}
-      <div className="space-y-6">
-        <div className="flex items-center space-x-2">
-          <Layers className="w-5 h-5 text-indigo-600" />
-          <h2 className="text-lg font-bold text-slate-900">Alur Kerja (Step-by-Step Flow)</h2>
-        </div>
 
-        {/* Encryption Flow */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-          <div className="flex items-center space-x-2 text-indigo-700 font-semibold text-sm">
-            <Lock className="w-4 h-4" />
-            <span>Alur Proses Enkripsi (Encryption Flow)</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-indigo-600 block">Langkah 1: Input</span>
-              <p className="text-slate-600">
-                Pengguna memasukkan teks/berkas dan passphrase rahasia serta memilih algoritma.
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-indigo-600 block">Langkah 2: Salt & KDF</span>
-              <p className="text-slate-600">
-                Backend menghasilkan 16-byte random salt. Algoritma <strong>scrypt</strong> menurunkan kunci simetris 256-bit (32 bytes).
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-indigo-600 block">Langkah 3: Nonce & AEAD</span>
-              <p className="text-slate-600">
-                12-byte random nonce dibuat. Cipher mengenkripsi plaintext dan menghasilkan ciphertext serta 16-byte Auth Tag.
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-indigo-50 border border-indigo-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-indigo-700 block">Langkah 4: Output</span>
-              <p className="text-slate-700">
-                Ciphertext dikirim bersama metadata (Salt, Nonce, Tag) dalam format Base64 / file JSON / berkas .enc.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Decryption Flow */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-          <div className="flex items-center space-x-2 text-emerald-700 font-semibold text-sm">
-            <Unlock className="w-4 h-4" />
-            <span>Alur Proses Dekripsi (Decryption Flow)</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-emerald-600 block">Langkah 1: Muat Data</span>
-              <p className="text-slate-600">
-                Input ciphertext bersama metadata (Salt, Nonce, Tag) atau unggah berkas metadata .json.
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-emerald-600 block">Langkah 2: Regenerasi Kunci</span>
-              <p className="text-slate-600">
-                Password dimasukkan. scrypt dijalankan ulang bersama Salt yang sama untuk merekonstruksi kunci 256-bit.
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-emerald-600 block">Langkah 3: Verifikasi Tag</span>
-              <p className="text-slate-600">
-                Mesin AEAD memverifikasi Auth Tag 128-bit. Jika tag tidak cocok (karena password salah/data rusak), proses langsung ditolak.
-              </p>
-            </div>
-
-            <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1.5">
-              <span className="font-bold text-emerald-700 block">Langkah 4: Hasil Asli</span>
-              <p className="text-slate-700">
-                Plaintext berhasil dipulihkan secara utuh tanpa risiko modifikasi bit dari pihak ketiga.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Deep-dive Algorithms */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">

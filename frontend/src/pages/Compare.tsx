@@ -165,6 +165,65 @@ export const Compare: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Detailed Benchmark Explanation */}
+      <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm space-y-5">
+        <h2 className="text-base font-bold text-slate-900 flex items-center space-x-2">
+          <BarChart3 className="w-5 h-5 text-indigo-600" />
+          <span>Penjelasan & Metodologi Benchmark</span>
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <h3 className="font-bold text-indigo-700 text-sm flex items-center space-x-1.5">
+              <span>1. AES-256-GCM (Hardware Acceleration)</span>
+            </h3>
+            <p className="text-slate-600 leading-relaxed">
+              <strong>Advanced Encryption Standard (AES)</strong> dalam mode Galois/Counter Mode (GCM) memanfaatkan instruksi khusus prosesor seperti <strong>AES-NI</strong> pada CPU Intel/AMD.
+            </p>
+            <ul className="list-disc list-inside text-slate-500 space-y-1 pt-1">
+              <li>Sangat cepat pada komputer desktop, laptop, dan server x86_64.</li>
+              <li>Menghasilkan otentikasi data terintegrasi (Auth Tag 16-byte).</li>
+              <li>Throughput tinggi pada payload besar (1MB - 10MB).</li>
+            </ul>
+          </div>
+
+          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <h3 className="font-bold text-emerald-700 text-sm flex items-center space-x-1.5">
+              <span>2. ChaCha20-Poly1305 (Software Optimization)</span>
+            </h3>
+            <p className="text-slate-600 leading-relaxed">
+              <strong>ChaCha20-Poly1305</strong> adalah stream cipher modern berkecepatan tinggi yang berjalan murni di software menggunakan operasi sederhana ADD-ROTATE-XOR (ARX).
+            </p>
+            <ul className="list-disc list-inside text-slate-500 space-y-1 pt-1">
+              <li>Performa konsisten di arsitektur ARM, perangkat mobile, dan tablet.</li>
+              <li>Waktu eksekusi konstan (kebal terhadap serangan <em>side-channel timing attacks</em>).</li>
+              <li>Tidak membutuhkan instruksi hardware AES-NI khusus.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="p-4 bg-slate-900 text-slate-200 rounded-xl space-y-2 text-xs">
+          <span className="font-bold text-amber-400 block text-sm">Metodologi Pengujian Benchmark:</span>
+          <p className="text-slate-300 leading-relaxed">
+            Pengujian diukur secara riil pada server backend untuk payload ukuran <strong>1 KB</strong> (pesan teks), <strong>1 MB</strong> (dokumen sedang), dan <strong>10 MB</strong> (berkas besar).
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 text-[11px] font-mono text-slate-400">
+            <div className="p-2 bg-slate-800 rounded border border-slate-700">
+              <span className="text-indigo-400 block font-bold">1 KB Payload</span>
+              Waktu eksekusi didominasi oleh scrypt KDF.
+            </div>
+            <div className="p-2 bg-slate-800 rounded border border-slate-700">
+              <span className="text-indigo-400 block font-bold">1 MB Payload</span>
+              Mengukur efisiensi cipher pada memori menengah.
+            </div>
+            <div className="p-2 bg-slate-800 rounded border border-slate-700">
+              <span className="text-indigo-400 block font-bold">10 MB Payload</span>
+              Menampilkan batas kecepatan maksimal (throughput MB/s).
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

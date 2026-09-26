@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { FileUpload } from '../components/FileUpload';
-import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw } from 'lucide-react';
+import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw, Layers } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';
 
 export const FileDecrypt: React.FC = () => {
@@ -113,6 +113,44 @@ export const FileDecrypt: React.FC = () => {
           <p className="text-xs text-slate-500">
             Upload the encrypted binary (.enc) and supply the correct passphrase and cryptographic metadata.
           </p>
+        </div>
+      </div>
+
+      {/* Step-by-Step Decryption Flow */}
+      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+        <div className="flex items-center space-x-2 text-emerald-700 font-semibold text-xs uppercase tracking-wider">
+          <Layers className="w-4 h-4" />
+          <span>Alur Kerja Proses Dekripsi Berkas (File Decryption Flow)</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
+            <span className="font-bold text-emerald-600 block">Langkah 1: Muat Berkas & JSON</span>
+            <p className="text-slate-600">
+              Unggah berkas <code>.enc</code> & isi metadata (Salt, Nonce, Tag) manual atau dari JSON.
+            </p>
+          </div>
+
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
+            <span className="font-bold text-emerald-600 block">Langkah 2: Rekonstruksi Kunci</span>
+            <p className="text-slate-600">
+              Password dimasukkan. Algoritma <strong>scrypt</strong> merekonstruksi kunci 256-bit menggunakan Salt.
+            </p>
+          </div>
+
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
+            <span className="font-bold text-emerald-600 block">Langkah 3: Verifikasi Tag</span>
+            <p className="text-slate-600">
+              AEAD memverifikasi Auth Tag 128-bit. Jika password salah/berkas dirusak, dekripsi ditolak.
+            </p>
+          </div>
+
+          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg space-y-1">
+            <span className="font-bold text-emerald-700 block">Langkah 4: Unduh Berkas Asli</span>
+            <p className="text-slate-700">
+              Berkas asli berhasil dipulihkan secara utuh dan siap diunduh kembali.
+            </p>
+          </div>
         </div>
       </div>
 

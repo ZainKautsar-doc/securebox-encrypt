@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { FileUpload } from '../components/FileUpload';
-import { FileText, Lock, Loader2, Download, Copy, Check, KeyRound, RotateCcw, FileJson } from 'lucide-react';
+import { FileText, Lock, Loader2, Download, Copy, Check, KeyRound, RotateCcw, FileJson, Layers } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';
 
 export const FileEncrypt: React.FC = () => {
@@ -104,6 +104,44 @@ export const FileEncrypt: React.FC = () => {
           <p className="text-xs text-slate-500">
             Upload any file up to 10 MB. Output will be downloaded as an encrypted binary with authentication metadata.
           </p>
+        </div>
+      </div>
+
+      {/* Step-by-Step Encryption Flow */}
+      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-3">
+        <div className="flex items-center space-x-2 text-indigo-700 font-semibold text-xs uppercase tracking-wider">
+          <Layers className="w-4 h-4" />
+          <span>Alur Kerja Proses Enkripsi Berkas (File Encryption Flow)</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
+            <span className="font-bold text-indigo-600 block">Langkah 1: Pilih Berkas</span>
+            <p className="text-slate-600">
+              Pengguna memilih berkas (maks 10 MB), memasukkan password & memilih cipher.
+            </p>
+          </div>
+
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
+            <span className="font-bold text-indigo-600 block">Langkah 2: Salt & KDF</span>
+            <p className="text-slate-600">
+              16-byte random salt dibuat. Algoritma <strong>scrypt</strong> menurunkan kunci 256-bit di memori.
+            </p>
+          </div>
+
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-1">
+            <span className="font-bold text-indigo-600 block">Langkah 3: Nonce & AEAD</span>
+            <p className="text-slate-600">
+              12-byte nonce dibuat. Berkas dienkripsi dan menghasilkan Auth Tag 128-bit untuk verifikasi.
+            </p>
+          </div>
+
+          <div className="p-3 bg-indigo-50 border border-indigo-200 rounded-lg space-y-1">
+            <span className="font-bold text-indigo-700 block">Langkah 4: Berkas & JSON</span>
+            <p className="text-slate-700">
+              Unduh berkas terenkripsi <code>.enc</code> beserta metadata JSON (Salt, Nonce, Tag).
+            </p>
+          </div>
         </div>
       </div>
 
