@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
-import { Lock, Loader2, KeyRound, RotateCcw } from 'lucide-react';
+import { Lock, Loader2, KeyRound, RotateCcw, Eye, EyeOff } from 'lucide-react';
 import { ResultDisplay } from './ResultDisplay';
 import { useSecureBox } from '../context/SecureBoxContext';
 
@@ -10,6 +10,7 @@ export const EncryptForm: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const setPlaintext = (val: string) => setEncryptTextState((prev) => ({ ...prev, plaintext: val }));
   const setPassword = (val: string) => setEncryptTextState((prev) => ({ ...prev, password: val }));
@@ -105,12 +106,20 @@ export const EncryptForm: React.FC = () => {
             <div className="relative">
               <KeyRound className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter strong encryption password"
-                className="w-full pl-9 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-9 pr-10 text-sm border border-slate-300 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2.5 p-0.5 text-slate-400 hover:text-slate-600 transition"
+                title={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
             </div>
           </div>
 
