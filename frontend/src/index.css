@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-electric-indigo: #0000ff;
-  --color-cobalt-pulse: #4141fc;
-  --color-periwinkle-veil: #8b8bfe;
+  --color-electric-indigo: #4f46e5;
+  --color-cobalt-pulse: #6366f1;
+  --color-periwinkle-veil: #818cf8;
   --color-lime-beacon: #7fd579;
   --color-orchid-whisper: #d896ff;
   --color-midnight-void: #0d0d0d;

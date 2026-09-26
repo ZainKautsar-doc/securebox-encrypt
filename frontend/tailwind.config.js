@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'electric-indigo': '#0000ff',
-        'cobalt-pulse': '#4141fc',
-        'periwinkle-veil': '#8b8bfe',
+        'electric-indigo': '#415fe6ff', // Soft, modern indigo primary accent
+        'cobalt-pulse': '#5374f0',    // Soft hover blue
+        'periwinkle-veil': '#8193f8ff', // Soft border / highlight veil
         'lime-beacon': '#7fd579',
         'orchid-whisper': '#d896ff',
         'midnight-void': '#0d0d0d',
