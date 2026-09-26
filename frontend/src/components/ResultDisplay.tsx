@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Lock, KeyRound, ShieldAlert, Download } from 'lucide-react';
+import { Copy, Check, Lock, KeyRound, ShieldCheck, Download } from 'lucide-react';
 import { EncryptResponse } from '../services/api';
 
 interface ResultDisplayProps {
@@ -8,7 +8,7 @@ interface ResultDisplayProps {
   plaintext?: string | null;
 }
 
-export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', result, plaintext }) => {
+export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Encryption Output', result, plaintext }) => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const copyToClipboard = (text: string, key: string) => {
@@ -51,145 +51,158 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ title = 'Result', 
   if (!result && !plaintext) return null;
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 mb-4 gap-2">
-        <h3 className="text-base font-semibold text-slate-800 flex items-center space-x-2">
-          <ShieldAlert className="w-5 h-5 text-indigo-600" />
-          <span>{title}</span>
-        </h3>
+    <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-6 space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-graphite-lift gap-4">
+        <div className="flex items-center space-x-2.5">
+          <div className="w-2.5 h-2.5 bg-lime-beacon rounded-full"></div>
+          <h3 className="text-base font-bold text-pure-signal tracking-tight">
+            {title}
+          </h3>
+          <span className="font-mono text-[11px] text-lime-beacon px-2 py-0.5 border border-lime-beacon/30 rounded-sm">
+            AUTH VERIFIED
+          </span>
+        </div>
+
         {result && (
           <div className="flex items-center space-x-2">
             <button
               onClick={() => downloadJsonFile(result)}
-              className="text-xs flex items-center space-x-1 text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded-lg font-medium shadow-sm transition"
+              className="btn-primary"
               title="Download metadata & ciphertext as JSON file"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download JSON</span>
+              <span>DOWNLOAD JSON</span>
             </button>
             <button
               onClick={() => copyToClipboard(JSON.stringify(result, null, 2), 'all')}
-              className="text-xs flex items-center space-x-1 text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-2.5 py-1.5 rounded-lg font-medium transition"
+              className="btn-secondary"
             >
-              {copiedKey === 'all' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copiedKey === 'all' ? 'Copied Full JSON' : 'Copy JSON'}</span>
+              {copiedKey === 'all' ? <Check className="w-3.5 h-3.5 text-lime-beacon" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedKey === 'all' ? 'COPIED JSON' : 'COPY JSON'}</span>
             </button>
           </div>
         )}
       </div>
 
+      {/* Plaintext Result (Decryption) */}
       {plaintext !== undefined && plaintext !== null && (
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Decrypted Plaintext</label>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <ShieldCheck className="w-4 h-4 text-lime-beacon" />
+              <span className="text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
+                DECRYPTED PLAINTEXT OUTPUT
+              </span>
+            </div>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => downloadPlaintextFile(plaintext)}
-                className="text-xs text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 px-2 py-1 rounded flex items-center space-x-1"
+                className="btn-secondary !py-1.5 !px-3"
                 title="Download plaintext as .txt file"
               >
-                <Download className="w-3 h-3" />
-                <span>Download TXT</span>
+                <Download className="w-3.5 h-3.5" />
+                <span>SAVE TXT</span>
               </button>
               <button
                 onClick={() => copyToClipboard(plaintext, 'plaintext')}
-                className="text-xs text-indigo-600 hover:underline flex items-center space-x-1"
+                className="btn-primary !py-1.5 !px-3"
               >
-                {copiedKey === 'plaintext' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                <span>{copiedKey === 'plaintext' ? 'Copied!' : 'Copy'}</span>
+                {copiedKey === 'plaintext' ? <Check className="w-3.5 h-3.5 text-lime-beacon" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedKey === 'plaintext' ? 'COPIED' : 'COPY'}</span>
               </button>
             </div>
           </div>
-          <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3.5 text-emerald-950 font-mono text-sm break-all whitespace-pre-wrap">
+          <div className="bg-midnight-void border border-lime-beacon/40 rounded-sm p-4 text-pure-signal font-mono text-sm break-all whitespace-pre-wrap leading-relaxed">
             {plaintext}
           </div>
         </div>
       )}
 
+      {/* Ciphertext & Metadata Result (Encryption) */}
       {result && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span className="text-xs text-slate-500 font-medium">Algorithm</span>
-              <p className="text-sm font-semibold text-slate-800 uppercase">{result.algorithm}</p>
+        <div className="space-y-4 font-mono">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-3 bg-graphite-lift border border-graphite-lift rounded-sm">
+              <span className="text-[11px] text-soft-mist/60 block mb-0.5 uppercase">// ALGORITHM</span>
+              <p className="text-sm font-bold text-pure-signal uppercase">{result.algorithm}</p>
             </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span className="text-xs text-slate-500 font-medium">Key Derivation (KDF)</span>
-              <p className="text-sm font-semibold text-slate-800 uppercase">{result.kdf} (N=16384, r=8, p=1)</p>
+            <div className="p-3 bg-graphite-lift border border-graphite-lift rounded-sm">
+              <span className="text-[11px] text-soft-mist/60 block mb-0.5 uppercase">// KEY DERIVATION FUNCTION</span>
+              <p className="text-sm font-bold text-pure-signal uppercase">{result.kdf} (N=16384, r=8, p=1)</p>
             </div>
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-medium text-slate-600 flex items-center space-x-1">
-                <Lock className="w-3 h-3" />
-                <span>Ciphertext (Base64)</span>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-xs font-mono text-soft-mist flex items-center space-x-1.5">
+                <Lock className="w-3.5 h-3.5 text-electric-indigo" />
+                <span>CIPHERTEXT (BASE64)</span>
               </span>
               <button
                 onClick={() => copyToClipboard(result.ciphertext, 'ciphertext')}
-                className="text-xs text-indigo-600 hover:underline flex items-center space-x-1"
+                className="text-xs text-periwinkle-veil hover:text-pure-signal flex items-center space-x-1 cursor-pointer"
               >
-                {copiedKey === 'ciphertext' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
-                <span>{copiedKey === 'ciphertext' ? 'Copied!' : 'Copy'}</span>
+                {copiedKey === 'ciphertext' ? <Check className="w-3 h-3 text-lime-beacon" /> : <Copy className="w-3 h-3" />}
+                <span>{copiedKey === 'ciphertext' ? 'COPIED' : 'COPY'}</span>
               </button>
             </div>
-            <div className="bg-slate-900 text-emerald-400 p-3 rounded-lg font-mono text-xs break-all max-h-32 overflow-y-auto">
+            <div className="bg-midnight-void border border-graphite-lift text-pure-signal p-3.5 rounded-sm font-mono text-xs break-all max-h-36 overflow-y-auto leading-relaxed selection:bg-electric-indigo">
               {result.ciphertext}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600 flex items-center space-x-1">
-                  <KeyRound className="w-3 h-3" />
-                  <span>Salt (16B Base64)</span>
+              <div className="flex items-center justify-between mb-1 text-xs">
+                <span className="text-soft-mist/70 flex items-center space-x-1">
+                  <KeyRound className="w-3 h-3 text-electric-indigo" />
+                  <span>SALT (16B)</span>
                 </span>
                 <button
                   onClick={() => copyToClipboard(result.salt, 'salt')}
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-periwinkle-veil hover:text-pure-signal text-[11px] cursor-pointer"
                 >
-                  {copiedKey === 'salt' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'salt' ? 'COPIED' : 'COPY'}
                 </button>
               </div>
               <input
                 readOnly
                 value={result.salt}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                className="w-full text-xs font-mono bg-midnight-void border border-graphite-lift rounded-sm px-2.5 py-2 text-pure-signal select-all outline-none"
               />
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600">Nonce (12B Base64)</span>
+              <div className="flex items-center justify-between mb-1 text-xs">
+                <span className="text-soft-mist/70">NONCE (12B)</span>
                 <button
                   onClick={() => copyToClipboard(result.nonce, 'nonce')}
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-periwinkle-veil hover:text-pure-signal text-[11px] cursor-pointer"
                 >
-                  {copiedKey === 'nonce' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'nonce' ? 'COPIED' : 'COPY'}
                 </button>
               </div>
               <input
                 readOnly
                 value={result.nonce}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                className="w-full text-xs font-mono bg-midnight-void border border-graphite-lift rounded-sm px-2.5 py-2 text-pure-signal select-all outline-none"
               />
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-600">Tag (16B Base64)</span>
+              <div className="flex items-center justify-between mb-1 text-xs">
+                <span className="text-soft-mist/70">AUTH TAG (16B)</span>
                 <button
                   onClick={() => copyToClipboard(result.tag, 'tag')}
-                  className="text-xs text-indigo-600 hover:underline"
+                  className="text-periwinkle-veil hover:text-pure-signal text-[11px] cursor-pointer"
                 >
-                  {copiedKey === 'tag' ? 'Copied!' : 'Copy'}
+                  {copiedKey === 'tag' ? 'COPIED' : 'COPY'}
                 </button>
               </div>
               <input
                 readOnly
                 value={result.tag}
-                className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700"
+                className="w-full text-xs font-mono bg-midnight-void border border-graphite-lift rounded-sm px-2.5 py-2 text-pure-signal select-all outline-none"
               />
             </div>
           </div>
