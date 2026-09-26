@@ -1,0 +1,259 @@
+{
+  "timestamp": "2026-09-27T04:21:29.967143",
+  "summary": {
+    "AES-256-GCM": {
+      "average_avalanche_percentage": 49.7333,
+      "trials_count": 10
+    },
+    "ChaCha20-Poly1305": {
+      "average_avalanche_percentage": 50.0833,
+      "trials_count": 10
+    }
+  },
+  "trials": {
+    "AES-256-GCM": [
+      {
+        "trial": 1,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 0,
+        "flipped_bit_index": 0,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 287,
+        "total_bits": 600,
+        "avalanche_percentage": 47.8333
+      },
+      {
+        "trial": 2,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 1,
+        "flipped_bit_index": 1,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 322,
+        "total_bits": 600,
+        "avalanche_percentage": 53.6667
+      },
+      {
+        "trial": 3,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 2,
+        "flipped_bit_index": 2,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 307,
+        "total_bits": 600,
+        "avalanche_percentage": 51.1667
+      },
+      {
+        "trial": 4,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 3,
+        "flipped_bit_index": 3,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 299,
+        "total_bits": 600,
+        "avalanche_percentage": 49.8333
+      },
+      {
+        "trial": 5,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 4,
+        "flipped_bit_index": 4,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 315,
+        "total_bits": 600,
+        "avalanche_percentage": 52.5
+      },
+      {
+        "trial": 6,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 5,
+        "flipped_bit_index": 5,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 301,
+        "total_bits": 600,
+        "avalanche_percentage": 50.1667
+      },
+      {
+        "trial": 7,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 6,
+        "flipped_bit_index": 6,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 273,
+        "total_bits": 600,
+        "avalanche_percentage": 45.5
+      },
+      {
+        "trial": 8,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 7,
+        "flipped_bit_index": 7,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 291,
+        "total_bits": 600,
+        "avalanche_percentage": 48.5
+      },
+      {
+        "trial": 9,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 8,
+        "flipped_bit_index": 0,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 296,
+        "total_bits": 600,
+        "avalanche_percentage": 49.3333
+      },
+      {
+        "trial": 10,
+        "algorithm": "AES-256-GCM",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 9,
+        "flipped_bit_index": 1,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 293,
+        "total_bits": 600,
+        "avalanche_percentage": 48.8333
+      }
+    ],
+    "ChaCha20-Poly1305": [
+      {
+        "trial": 1,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 0,
+        "flipped_bit_index": 0,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 306,
+        "total_bits": 600,
+        "avalanche_percentage": 51.0
+      },
+      {
+        "trial": 2,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 1,
+        "flipped_bit_index": 1,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 314,
+        "total_bits": 600,
+        "avalanche_percentage": 52.3333
+      },
+      {
+        "trial": 3,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 2,
+        "flipped_bit_index": 2,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 283,
+        "total_bits": 600,
+        "avalanche_percentage": 47.1667
+      },
+      {
+        "trial": 4,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 3,
+        "flipped_bit_index": 3,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 281,
+        "total_bits": 600,
+        "avalanche_percentage": 46.8333
+      },
+      {
+        "trial": 5,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 4,
+        "flipped_bit_index": 4,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 279,
+        "total_bits": 600,
+        "avalanche_percentage": 46.5
+      },
+      {
+        "trial": 6,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 5,
+        "flipped_bit_index": 5,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 325,
+        "total_bits": 600,
+        "avalanche_percentage": 54.1667
+      },
+      {
+        "trial": 7,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 6,
+        "flipped_bit_index": 6,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 302,
+        "total_bits": 600,
+        "avalanche_percentage": 50.3333
+      },
+      {
+        "trial": 8,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 7,
+        "flipped_bit_index": 7,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 300,
+        "total_bits": 600,
+        "avalanche_percentage": 50.0
+      },
+      {
+        "trial": 9,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 8,
+        "flipped_bit_index": 0,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 295,
+        "total_bits": 600,
+        "avalanche_percentage": 49.1667
+      },
+      {
+        "trial": 10,
+        "algorithm": "ChaCha20-Poly1305",
+        "test_type": "key_1bit_flip",
+        "flipped_byte_index": 9,
+        "flipped_bit_index": 1,
+        "plaintext_size": 59,
+        "ciphertext_size": 75,
+        "changed_bits": 320,
+        "total_bits": 600,
+        "avalanche_percentage": 53.3333
+      }
+    ]
+  }
+}

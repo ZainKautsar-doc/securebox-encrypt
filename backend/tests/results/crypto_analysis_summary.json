@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-09-27T04:21:32.334722",
+  "avalanche_effect": {
+    "trials_per_algorithm": 10,
+    "aes_256_gcm_avg_percentage": 49.7333,
+    "chacha20_poly1305_avg_percentage": 50.0833
+  },
+  "shannon_entropy": {
+    "max_theoretical_entropy": 8.0,
+    "results": [
+      {
+        "data_size": "1 KB",
+        "bytes_length": 1024,
+        "plaintext_entropy": 4.525716,
+        "aes_256_gcm": {
+          "algorithm": "AES-256-GCM",
+          "ciphertext_entropy": 7.831391
+        },
+        "chacha20_poly1305": {
+          "algorithm": "ChaCha20-Poly1305",
+          "ciphertext_entropy": 7.789816
+        }
+      },
+      {
+        "data_size": "1 MB",
+        "bytes_length": 1048576,
+        "plaintext_entropy": 4.524174,
+        "aes_256_gcm": {
+          "algorithm": "AES-256-GCM",
+          "ciphertext_entropy": 7.999839
+        },
+        "chacha20_poly1305": {
+          "algorithm": "ChaCha20-Poly1305",
+          "ciphertext_entropy": 7.999793
+        }
+      }
+    ]
+  },
+  "test_info": {
+    "total_pytest_cases": 8,
+    "results_directory": "backend/tests/results/",
+    "reproducible": true
+  }
+}

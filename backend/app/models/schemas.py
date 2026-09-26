@@ -48,3 +48,30 @@ class BenchmarkResponse(BaseModel):
     aes_decrypt_time: float
     chacha_encrypt_time: float
     chacha_decrypt_time: float
+
+
+class HybridEncryptRequest(BaseModel):
+    plaintext: str = Field(..., min_length=1, description="Text to encrypt using hybrid encryption")
+
+
+class HybridEncryptResponse(BaseModel):
+    algorithm: str = "aes-256-gcm"
+    key_algorithm: str = "rsa-oaep-sha256"
+    encrypted_session_key: str  # base64
+    nonce: str  # base64
+    auth_tag: str  # base64
+    ciphertext: str  # base64
+
+
+class HybridDecryptRequest(BaseModel):
+    encrypted_session_key: str = Field(..., min_length=1, description="Base64 encoded encrypted session key")
+    nonce: str = Field(..., min_length=1, description="Base64 encoded nonce")
+    auth_tag: str = Field(..., min_length=1, description="Base64 encoded authentication tag")
+    ciphertext: str = Field(..., min_length=1, description="Base64 encoded ciphertext")
+
+
+class HybridDecryptResponse(BaseModel):
+    plaintext: str
+    success: bool
+    message: str
+
