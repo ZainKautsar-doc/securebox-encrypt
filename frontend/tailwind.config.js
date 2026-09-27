@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'electric-indigo': '#0000ff', // Pure Vana Electric Indigo
+        'electric-indigo': '#324ce0dc', // Pure Vana Electric Indigo
         'cobalt-pulse': '#4141fc',    // Hover blue
-        'periwinkle-veil': '#8b8bfe', // Highlight / secondary border
+        'periwinkle-veil': '#789ef1ff', // Highlight / secondary border
         'lime-beacon': '#7fd579',     // Success status
         'orchid-whisper': '#d896ff',  // Alert / Accent
         'midnight-void': '#0d0d0d',   // Canvas background

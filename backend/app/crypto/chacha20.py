@@ -3,7 +3,7 @@ from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
 from app.crypto.kdf import derive_key
 
 
-def encrypt_chacha20(plaintext: bytes, password: str, nonce: bytes = None, salt: bytes = None) -> tuple[bytes, bytes, bytes, bytes]:
+def encrypt_chacha20(plaintext: bytes, password: str, nonce: bytes | None = None, salt: bytes | None = None) -> tuple[bytes, bytes, bytes, bytes]:
     """
     Encrypts plaintext using ChaCha20-Poly1305.
     Returns: (ciphertext, nonce, tag, salt)

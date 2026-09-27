@@ -3,7 +3,7 @@ from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 from cryptography.hazmat.backends import default_backend
 
 
-def derive_key(password: str, salt: bytes = None) -> tuple[bytes, bytes]:
+def derive_key(password: str, salt: bytes | None = None) -> tuple[bytes, bytes]:
     """
     Derives a 256-bit (32-byte) key from a password using scrypt KDF.
     Returns: (key_bytes, salt_bytes)
