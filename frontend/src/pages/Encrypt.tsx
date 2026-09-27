@@ -56,7 +56,7 @@ export const Encrypt: React.FC = () => {
                 <span className="font-mono font-bold text-electric-indigo text-xs">
                   01. INPUT
                 </span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">
                   TAHAP 1
                 </span>
               </div>
@@ -79,7 +79,7 @@ export const Encrypt: React.FC = () => {
                 <span className="font-mono font-bold text-electric-indigo text-xs">
                   02. SCRYPT KDF
                 </span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">
                   TAHAP 2
                 </span>
               </div>
@@ -102,7 +102,7 @@ export const Encrypt: React.FC = () => {
                 <span className="font-mono font-bold text-electric-indigo text-xs">
                   03. AEAD CIPHER
                 </span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">
                   TAHAP 3
                 </span>
               </div>

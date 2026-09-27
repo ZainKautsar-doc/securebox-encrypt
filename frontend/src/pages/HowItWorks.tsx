@@ -150,7 +150,7 @@ export const HowItWorks: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-electric-indigo text-xs">LANGKAH 01</span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">INPUT</span>
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">INPUT</span>
               </div>
               <h4 className="font-bold text-pure-signal font-sans">Persiapan Data & Password</h4>
               <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
@@ -167,7 +167,7 @@ export const HowItWorks: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-electric-indigo text-xs">LANGKAH 02</span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">KDF</span>
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">KDF</span>
               </div>
               <h4 className="font-bold text-pure-signal font-sans">Penurunan Kunci (scrypt)</h4>
               <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
@@ -184,7 +184,7 @@ export const HowItWorks: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-electric-indigo text-xs">LANGKAH 03</span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">AEAD CIPHER</span>
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">AEAD CIPHER</span>
               </div>
               <h4 className="font-bold text-pure-signal font-sans">Penyandian & Otentikasi</h4>
               <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">

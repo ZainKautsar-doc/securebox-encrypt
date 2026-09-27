@@ -164,7 +164,7 @@ export const FileDecrypt: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-electric-indigo text-xs">01. UNGGAH .ENC</span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 1</span>
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">TAHAP 1</span>
               </div>
               <h4 className="font-bold text-pure-signal font-sans">Berkas & Metadata</h4>
               <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
@@ -178,7 +178,7 @@ export const FileDecrypt: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-electric-indigo text-xs">02. REKONSTRUKSI</span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 2</span>
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">TAHAP 2</span>
               </div>
               <h4 className="font-bold text-pure-signal font-sans">Penurunan Kunci</h4>
               <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
@@ -192,7 +192,7 @@ export const FileDecrypt: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-mono font-bold text-electric-indigo text-xs">03. VERIFIKASI TAG</span>
-                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 3</span>
+                <span className="text-[10px] font-mono text-pure-signal bg-midnight-void px-1.5 py-0.5 rounded-sm border border-graphite-lift/50">TAHAP 3</span>
               </div>
               <h4 className="font-bold text-pure-signal font-sans">Validasi Integritas</h4>
               <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
