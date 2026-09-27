@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
-import { 
-  Shield, 
-  History, 
-  BookOpen, 
-  Menu, 
-  X
-} from 'lucide-react';
-import { useSecureBox } from '../context/SecureBoxContext';
-import { ThemeToggle } from './ThemeToggle';
+import React, { useState } from "react";
+import { Shield, History, BookOpen, Menu, X } from "lucide-react";
+import { useSecureBox } from "../context/SecureBoxContext";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Navigation: React.FC = () => {
   const { activeTab, setActiveTab, history } = useSecureBox();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'encrypt', label: '• ENCRYPT' },
-    { id: 'decrypt', label: '• DECRYPT' },
-    { id: 'file-encrypt', label: '• FILE ENCRYPT' },
-    { id: 'file-decrypt', label: '• FILE DECRYPT' },
-    { id: 'compare', label: '• BENCHMARK' },
-    { id: 'team', label: '• TEAM' },
+    { id: "encrypt", label: "• ENCRYPT" },
+    { id: "decrypt", label: "• DECRYPT" },
+    { id: "file-encrypt", label: "• FILE ENCRYPT" },
+    { id: "file-decrypt", label: "• FILE DECRYPT" },
+    { id: "compare", label: "• BENCHMARK" },
+    { id: "team", label: "• TEAM" },
   ];
 
   const handleSelectTab = (id: string) => {
@@ -29,15 +23,24 @@ export const Navigation: React.FC = () => {
 
   const getActiveTabTitle = () => {
     switch (activeTab) {
-      case 'encrypt': return '• ENCRYPT';
-      case 'decrypt': return '• DECRYPT';
-      case 'file-encrypt': return '• FILE ENCRYPT';
-      case 'file-decrypt': return '• FILE DECRYPT';
-      case 'compare': return '• BENCHMARK';
-      case 'team': return '• TEAM';
-      case 'history': return '• HISTORY';
-      case 'how-it-works': return '• SPEC';
-      default: return 'SECUREBOX';
+      case "encrypt":
+        return "• ENCRYPT";
+      case "decrypt":
+        return "• DECRYPT";
+      case "file-encrypt":
+        return "• FILE ENCRYPT";
+      case "file-decrypt":
+        return "• FILE DECRYPT";
+      case "compare":
+        return "• BENCHMARK";
+      case "team":
+        return "• TEAM";
+      case "history":
+        return "• HISTORY";
+      case "how-it-works":
+        return "• SPEC";
+      default:
+        return "SECUREBOX";
     }
   };
 
@@ -46,9 +49,9 @@ export const Navigation: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Brand Logo (Header Hierarchy Level 1) */}
-          <div 
-            className="flex items-center space-x-3 cursor-pointer select-none flex-shrink-0 group"
-            onClick={() => handleSelectTab('encrypt')}
+          <div
+            className="flex flex-1 justify-start items-center space-x-3 cursor-pointer select-none flex-shrink-0 group"
+            onClick={() => handleSelectTab("encrypt")}
           >
             <div className="w-8 h-8 bg-electric-indigo/20 border border-electric-indigo/50 text-electric-indigo flex items-center justify-center rounded-sm transition-transform duration-200 group-hover:scale-105">
               <Shield className="w-4 h-4 text-electric-indigo" />
@@ -64,7 +67,7 @@ export const Navigation: React.FC = () => {
           </div>
 
           {/* Desktop Navigation Items (Header Hierarchy Level 2 - Strict Single Line) */}
-          <nav className="hidden lg:flex items-center space-x-1 lg:space-x-1.5 flex-shrink-0">
+          <nav className="hidden xl:flex flex-none items-center justify-center space-x-1 xl:space-x-1.5 flex-shrink-0">
             {navItems.map((item) => {
               const isActive = activeTab === item.id;
               return (
@@ -73,8 +76,8 @@ export const Navigation: React.FC = () => {
                   onClick={() => handleSelectTab(item.id)}
                   className={`px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider uppercase whitespace-nowrap flex-shrink-0 transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-electric-indigo text-white font-semibold shadow-sm'
-                      : 'text-soft-mist hover:text-pure-signal hover:bg-carbon-panel'
+                      ? "bg-electric-indigo text-white font-semibold shadow-sm"
+                      : "text-soft-mist hover:text-pure-signal hover:bg-carbon-panel"
                   }`}
                 >
                   {item.label}
@@ -84,26 +87,30 @@ export const Navigation: React.FC = () => {
           </nav>
 
           {/* Right Action Utilities (Theme Toggle, History & Spec) with 12px / space-x-3 gap */}
-          <div className="hidden sm:flex items-center space-x-3 flex-shrink-0">
+          <div className="hidden xl:flex flex-1 items-center justify-end space-x-3 flex-shrink-0">
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
             {/* History Button */}
             <button
-              onClick={() => handleSelectTab('history')}
+              onClick={() => handleSelectTab("history")}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider uppercase whitespace-nowrap flex-shrink-0 transition cursor-pointer border ${
-                activeTab === 'history'
-                  ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
-                  : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:border-electric-indigo hover:text-pure-signal'
+                activeTab === "history"
+                  ? "bg-electric-indigo text-white border-electric-indigo font-semibold"
+                  : "bg-carbon-panel text-soft-mist border-graphite-lift hover:border-electric-indigo hover:text-pure-signal"
               }`}
               title="Activity History"
             >
               <History className="w-3.5 h-3.5" />
               <span>• HISTORY</span>
               {history.length > 0 && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-sm font-mono font-bold ${
-                  activeTab === 'history' ? 'bg-midnight-void text-electric-indigo' : 'bg-graphite-lift text-pure-signal'
-                }`}>
+                <span
+                  className={`text-[10px] px-1.5 py-0.5 rounded-sm font-mono font-bold ${
+                    activeTab === "history"
+                      ? "bg-midnight-void text-electric-indigo"
+                      : "bg-graphite-lift text-pure-signal"
+                  }`}
+                >
                   {history.length}
                 </span>
               )}
@@ -111,11 +118,11 @@ export const Navigation: React.FC = () => {
 
             {/* Protocol Spec / Cara Kerja */}
             <button
-              onClick={() => handleSelectTab('how-it-works')}
+              onClick={() => handleSelectTab("how-it-works")}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider uppercase whitespace-nowrap flex-shrink-0 transition cursor-pointer border ${
-                activeTab === 'how-it-works'
-                  ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
-                  : 'bg-transparent border-graphite-lift text-soft-mist hover:border-electric-indigo hover:text-pure-signal hover:bg-carbon-panel/40'
+                activeTab === "how-it-works"
+                  ? "bg-electric-indigo text-white border-electric-indigo font-semibold"
+                  : "bg-transparent border-graphite-lift text-soft-mist hover:border-electric-indigo hover:text-pure-signal hover:bg-carbon-panel/40"
               }`}
               title="Protocol Specification & Architecture"
             >
@@ -125,7 +132,7 @@ export const Navigation: React.FC = () => {
           </div>
 
           {/* Mobile Right Bar */}
-          <div className="flex lg:hidden items-center space-x-2">
+          <div className="flex xl:hidden flex-1 justify-end items-center space-x-2">
             <ThemeToggle />
             <span className="hidden xs:inline-block font-mono text-xs px-2.5 py-1 bg-carbon-panel text-soft-mist rounded-sm border border-graphite-lift truncate max-w-[120px]">
               {getActiveTabTitle()}
@@ -136,7 +143,11 @@ export const Navigation: React.FC = () => {
               className="min-h-[44px] min-w-[44px] p-2.5 text-soft-mist hover:text-pure-signal bg-carbon-panel border border-graphite-lift rounded-sm transition cursor-pointer flex items-center justify-center active:bg-graphite-lift"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -144,7 +155,7 @@ export const Navigation: React.FC = () => {
 
       {/* Mobile Dropdown Menu (Stacked full-width items, 44px min-height tap targets) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-graphite-lift bg-midnight-void px-4 sm:px-6 pt-3 pb-6 space-y-4 shadow-xl animate-fade-in-down transition-colors duration-200">
+        <div className="xl:hidden border-t border-graphite-lift bg-midnight-void px-4 sm:px-6 pt-3 pb-6 space-y-4 shadow-xl animate-fade-in-down transition-colors duration-200">
           <div>
             <span className="font-mono text-[10px] text-warm-filament uppercase tracking-wider block px-1 mb-2">
               // CRYPTOGRAPHIC PROTOCOLS
@@ -158,12 +169,14 @@ export const Navigation: React.FC = () => {
                     onClick={() => handleSelectTab(item.id)}
                     className={`w-full text-left min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs tracking-wider uppercase transition cursor-pointer flex items-center justify-between border ${
                       isActive
-                        ? 'bg-electric-indigo text-white border-electric-indigo font-semibold shadow-sm'
-                        : 'bg-carbon-panel border-graphite-lift text-soft-mist hover:bg-graphite-lift hover:text-pure-signal'
+                        ? "bg-electric-indigo text-white border-electric-indigo font-semibold shadow-sm"
+                        : "bg-carbon-panel border-graphite-lift text-soft-mist hover:bg-graphite-lift hover:text-pure-signal"
                     }`}
                   >
                     <span>{item.label}</span>
-                    {isActive && <span className="w-2 h-2 rounded-full bg-white" />}
+                    {isActive && (
+                      <span className="w-2 h-2 rounded-full bg-white" />
+                    )}
                   </button>
                 );
               })}
@@ -176,11 +189,11 @@ export const Navigation: React.FC = () => {
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
-                onClick={() => handleSelectTab('history')}
+                onClick={() => handleSelectTab("history")}
                 className={`flex items-center justify-between min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs uppercase transition border ${
-                  activeTab === 'history'
-                    ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
-                    : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift'
+                  activeTab === "history"
+                    ? "bg-electric-indigo text-white border-electric-indigo font-semibold"
+                    : "bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift"
                 }`}
               >
                 <div className="flex items-center space-x-2">
@@ -188,20 +201,24 @@ export const Navigation: React.FC = () => {
                   <span>• HISTORY</span>
                 </div>
                 {history.length > 0 && (
-                  <span className={`text-[10px] px-2 py-0.5 rounded-sm font-bold ${
-                    activeTab === 'history' ? 'bg-midnight-void text-electric-indigo' : 'bg-midnight-void text-pure-signal'
-                  }`}>
+                  <span
+                    className={`text-[10px] px-2 py-0.5 rounded-sm font-bold ${
+                      activeTab === "history"
+                        ? "bg-midnight-void text-electric-indigo"
+                        : "bg-midnight-void text-pure-signal"
+                    }`}
+                  >
                     {history.length}
                   </span>
                 )}
               </button>
 
               <button
-                onClick={() => handleSelectTab('how-it-works')}
+                onClick={() => handleSelectTab("how-it-works")}
                 className={`flex items-center justify-center space-x-2 min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs uppercase transition border ${
-                  activeTab === 'how-it-works'
-                    ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
-                    : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift'
+                  activeTab === "how-it-works"
+                    ? "bg-electric-indigo text-white border-electric-indigo font-semibold"
+                    : "bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift"
                 }`}
               >
                 <BookOpen className="w-4 h-4" />
