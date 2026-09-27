@@ -102,7 +102,7 @@ export const Navigation: React.FC = () => {
               <span>• HISTORY</span>
               {history.length > 0 && (
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-sm font-mono font-bold ${
-                  activeTab === 'history' ? 'bg-midnight-void text-white' : 'bg-graphite-lift text-pure-signal'
+                  activeTab === 'history' ? 'bg-midnight-void text-electric-indigo' : 'bg-graphite-lift text-pure-signal'
                 }`}>
                   {history.length}
                 </span>
@@ -188,7 +188,9 @@ export const Navigation: React.FC = () => {
                   <span>• HISTORY</span>
                 </div>
                 {history.length > 0 && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-sm bg-midnight-void text-pure-signal font-bold">
+                  <span className={`text-[10px] px-2 py-0.5 rounded-sm font-bold ${
+                    activeTab === 'history' ? 'bg-midnight-void text-electric-indigo' : 'bg-midnight-void text-pure-signal'
+                  }`}>
                     {history.length}
                   </span>
                 )}
