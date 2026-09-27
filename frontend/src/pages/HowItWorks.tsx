@@ -11,11 +11,8 @@ import {
   HelpCircle, 
   ChevronDown, 
   ChevronUp,
-  Lock,
   Layers,
-  Sparkles,
   Zap,
-  RefreshCw,
   SlidersHorizontal
 } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';

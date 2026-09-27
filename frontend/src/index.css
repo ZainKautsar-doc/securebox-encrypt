@@ -2,22 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light Theme Variables (Default / :root) */
 :root {
-  --color-electric-indigo: #0000ff;
-  --color-cobalt-pulse: #4141fc;
-  --color-periwinkle-veil: #8b8bfe;
-  --color-lime-beacon: #7fd579;
-  --color-orchid-whisper: #d896ff;
-  --color-midnight-void: #0d0d0d;
-  --color-carbon-panel: #161616;
-  --color-graphite-lift: #252525;
-  --color-charcoal: #333333;
-  --color-steel-hover: #3b3b3b;
-  --color-graphite: #4d4d4d;
-  --color-smoke: #898989;
-  --color-pure-signal: #ffffff;
-  --color-soft-mist: #eaeaea;
-  --color-warm-filament: #b8ad97;
+  --color-electric-indigo: 0 0 255;      /* #0000ff - Pure Vana Electric Indigo */
+  --color-cobalt-pulse: 65 65 252;       /* #4141fc - Hover Blue */
+  --color-periwinkle-veil: 0 0 255;      /* #0000ff - High-contrast Light Accent */
+  --color-lime-beacon: 21 128 61;        /* #15803d - High-contrast Status Green */
+  --color-orchid-whisper: 147 51 234;    /* #9333ea - High-contrast Purple */
+  --color-midnight-void: 255 255 255;    /* #ffffff - Page Background / Canvas */
+  --color-carbon-panel: 245 245 245;     /* #f5f5f5 - Elevated Surface L1 */
+  --color-graphite-lift: 212 212 212;    /* #d4d4d4 - Border hairline & Surface L2 */
+  --color-charcoal: 212 212 212;         /* #d4d4d4 - Input / secondary borders */
+  --color-steel-hover: 224 224 224;      /* #e0e0e0 - Elevated Surface L3 / hover */
+  --color-graphite: 136 136 136;         /* #888888 - Low-emphasis icons / borders */
+  --color-smoke: 136 136 136;            /* #888888 - Metadata / caption text */
+  --color-pure-signal: 18 18 18;         /* #121212 - Primary text / Headings */
+  --color-soft-mist: 77 77 77;           /* #4d4d4d - Secondary / Body text */
+  --color-warm-filament: 124 104 71;     /* #7c6847 - Protocol terminal accents */
 
   --radius-sm: 2px;
   --radius-lg: 16px;
@@ -32,30 +33,56 @@
   --spacing-64: 64px;
 }
 
+/* Dark Theme Variables */
+html.dark,
+html[data-theme="dark"] {
+  --color-electric-indigo: 0 0 255;      /* #0000ff - Pure Vana Electric Indigo */
+  --color-cobalt-pulse: 65 65 252;       /* #4141fc - Hover Blue */
+  --color-periwinkle-veil: 139 139 254;  /* #8b8bfe - Highlight / secondary border */
+  --color-lime-beacon: 127 213 121;      /* #7fd579 - Success status */
+  --color-orchid-whisper: 216 150 255;   /* #d896ff - Alert / Accent */
+  --color-midnight-void: 13 13 13;       /* #0d0d0d - Canvas background */
+  --color-carbon-panel: 22 22 22;        /* #161616 - Card / Form surface L1 */
+  --color-graphite-lift: 37 37 37;       /* #252525 - Surface borders & elevated badges L2 */
+  --color-charcoal: 51 51 51;            /* #333333 - Component borders */
+  --color-steel-hover: 59 59 59;         /* #3b3b3b - Hover / disabled surfaces L3 */
+  --color-graphite: 77 77 77;            /* #4d4d4d - Low-emphasis icons / borders */
+  --color-smoke: 137 137 137;            /* #898989 - Metadata / caption text */
+  --color-pure-signal: 255 255 255;      /* #ffffff - Primary text / button labels */
+  --color-soft-mist: 234 234 234;        /* #eaeaea - Secondary / body text */
+  --color-warm-filament: 184 173 151;    /* #b8ad97 - Protocol terminal accents */
+}
+
 @layer base {
+  html {
+    color-scheme: light dark;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
+  }
+
   body {
-    background-color: var(--color-midnight-void);
-    color: var(--color-pure-signal);
+    background-color: rgb(var(--color-midnight-void));
+    color: rgb(var(--color-pure-signal));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
+    transition: background-color 200ms ease-out, color 200ms ease-out;
   }
 
-  /* Custom dark scrollbar */
+  /* Adaptive scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0d0d0d;
+    background: rgb(var(--color-midnight-void));
   }
   ::-webkit-scrollbar-thumb {
-    background: #252525;
+    background: rgb(var(--color-graphite-lift));
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3b3b3b;
+    background: rgb(var(--color-steel-hover));
   }
 }
 
@@ -63,12 +90,12 @@
 @layer components {
   /* Primary CTA Button (Filled) */
   .btn-primary {
-    @apply bg-electric-indigo hover:bg-cobalt-pulse active:bg-electric-indigo text-pure-signal font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer border border-transparent disabled:bg-steel-hover disabled:text-soft-mist/50 disabled:cursor-not-allowed;
+    @apply bg-electric-indigo hover:bg-cobalt-pulse active:bg-electric-indigo text-white font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition-all duration-150 flex items-center justify-center space-x-2 cursor-pointer border border-transparent disabled:bg-steel-hover disabled:text-soft-mist/50 disabled:cursor-not-allowed;
   }
 
   /* Secondary Button (Outlined Ghost) */
   .btn-secondary {
-    @apply bg-transparent border border-periwinkle-veil hover:border-cobalt-pulse text-pure-signal font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer disabled:border-steel-hover disabled:text-soft-mist/40 disabled:cursor-not-allowed;
+    @apply bg-transparent border border-graphite-lift hover:border-electric-indigo text-pure-signal font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition-all duration-150 flex items-center justify-center space-x-2 cursor-pointer disabled:border-steel-hover disabled:text-soft-mist/40 disabled:cursor-not-allowed hover:bg-carbon-panel/50;
   }
 
   /* Chromatic Lime Button */
@@ -81,17 +108,29 @@
     @apply bg-transparent border border-orchid-whisper hover:bg-orchid-whisper/10 text-orchid-whisper font-sans font-bold text-xs uppercase tracking-wider min-h-[44px] sm:min-h-[40px] py-3 px-4 sm:py-[11px] sm:px-6 rounded-sm transition duration-150 flex items-center justify-center space-x-2 cursor-pointer;
   }
 
-  /* Form Input Standard (text-base on mobile prevents iOS zoom, text-sm on sm+) */
+  /* Form Input Standard */
   .input-protocol {
-    @apply w-full bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/40 text-base sm:text-sm font-sans rounded-sm min-h-[44px] sm:min-h-[40px] p-3 outline-none transition duration-150;
+    @apply w-full bg-white dark:bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/50 text-base sm:text-sm font-sans rounded-sm min-h-[44px] sm:min-h-[40px] p-3 outline-none transition duration-150;
   }
 
   .input-protocol-mono {
-    @apply w-full bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/40 text-sm sm:text-xs font-mono rounded-sm min-h-[44px] sm:min-h-[40px] p-3 outline-none transition duration-150;
+    @apply w-full bg-white dark:bg-carbon-panel border border-graphite-lift focus:border-electric-indigo text-pure-signal placeholder-soft-mist/50 text-sm sm:text-xs font-mono rounded-sm min-h-[44px] sm:min-h-[40px] p-3 outline-none transition duration-150;
   }
 
   /* Card Standard */
   .card-protocol {
-    @apply bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 lg:p-8;
+    @apply bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 lg:p-8 transition-colors duration-200;
+  }
+}
+
+/* Respect user's motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
