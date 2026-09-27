@@ -142,7 +142,7 @@ export const DecryptForm: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 max-w-[600px] mx-auto shadow-none">
+      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 w-full shadow-none">
         <div className="flex items-center justify-between">
           <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
             // CIPHERTEXT (BASE64)

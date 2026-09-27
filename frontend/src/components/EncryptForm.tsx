@@ -89,7 +89,7 @@ export const EncryptForm: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Form Container (Carbon Panel #161616, border 1px Graphite Lift #252525, 2px radius, max-width 600px centered) */}
-      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 max-w-[600px] mx-auto shadow-none">
+      <form onSubmit={handleSubmit} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 w-full shadow-none">
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">

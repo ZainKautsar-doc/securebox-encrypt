@@ -218,7 +218,7 @@ export const FileDecrypt: React.FC = () => {
         </div>
       </div>
 
-      <form onSubmit={handleDecrypt} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 max-w-[600px] mx-auto shadow-none">
+      <form onSubmit={handleDecrypt} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 w-full shadow-none">
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
@@ -392,7 +392,7 @@ export const FileDecrypt: React.FC = () => {
       </form>
 
       {downloadInfo && (
-        <div className="bg-carbon-panel border border-lime-beacon/40 rounded-sm p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-[600px] mx-auto">
+        <div className="bg-carbon-panel border border-lime-beacon/40 rounded-sm p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
           <div>
             <h3 className="text-base font-bold text-pure-signal tracking-tight font-sans">
               Decryption Successful!

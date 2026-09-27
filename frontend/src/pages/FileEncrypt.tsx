@@ -187,7 +187,7 @@ export const FileEncrypt: React.FC = () => {
         </div>
       </div>
 
-      <form onSubmit={handleEncrypt} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 max-w-[600px] mx-auto shadow-none">
+      <form onSubmit={handleEncrypt} className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-8 space-y-5 w-full shadow-none">
         <div>
           <div className="flex items-center justify-between mb-2">
             <label className="block text-xs font-mono font-bold text-soft-mist uppercase tracking-wider">
@@ -278,7 +278,7 @@ export const FileEncrypt: React.FC = () => {
       </form>
 
       {downloadInfo && (
-        <div className="bg-carbon-panel border border-lime-beacon/40 rounded-sm p-6 space-y-6 max-w-[600px] mx-auto">
+        <div className="bg-carbon-panel border border-lime-beacon/40 rounded-sm p-6 space-y-6 w-full">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-graphite-lift">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-lime-beacon/20 text-lime-beacon rounded-sm flex items-center justify-center">
