@@ -5,7 +5,13 @@ from cryptography.hazmat.backends import default_backend
 
 def derive_key(password: str, salt: bytes | None = None) -> tuple[bytes, bytes]:
     """
-    Derives a 256-bit (32-byte) key from a password using scrypt KDF.
+    Menurunkan Kunci Enkripsi Simetris 256-bit (32 byte) dari password menggunakan scrypt KDF (RFC 7914).
+    
+    Parameter:
+    - n = 16384 (2^14): CPU & Memory cost parameter.
+    - r = 8: Block size parameter.
+    - p = 1: Parallelization parameter.
+    
     Returns: (key_bytes, salt_bytes)
     """
     if salt is None:

@@ -5,10 +5,14 @@ from app.crypto.kdf import derive_key
 
 def encrypt_aes_gcm(plaintext: bytes, password: str, nonce: bytes | None = None, salt: bytes | None = None) -> tuple[bytes, bytes, bytes, bytes]:
     """
-    Encrypts plaintext using AES-256-GCM.
+    Mengenkripsi plaintext menggunakan algoritma simetris AES-256-GCM (NIST SP 800-38D).
+    
+    Tahapan:
+    1. Menurunkan kunci 256-bit dan salt acak (16 byte) dari password via scrypt KDF.
+    2. Menghasilkan nonce/IV acak (12 byte / 96-bit) jika belum disediakan.
+    3. Mengenkripsi payload dan menghasilkan 16-byte authentication tag (Galois MAC).
+    
     Returns: (ciphertext, nonce, tag, salt)
-    Note: In cryptography library AESGCM, encrypt returns ciphertext + 16-byte tag appended at the end.
-    We split ciphertext and tag for explicit schema output.
     """
     key, salt = derive_key(password, salt)
     if nonce is None:
