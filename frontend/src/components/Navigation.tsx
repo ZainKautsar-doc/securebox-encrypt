@@ -7,6 +7,7 @@ import {
   X
 } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';
+import { ThemeToggle } from './ThemeToggle';
 
 export const Navigation: React.FC = () => {
   const { activeTab, setActiveTab, history } = useSecureBox();
@@ -41,7 +42,7 @@ export const Navigation: React.FC = () => {
   };
 
   return (
-    <header className="bg-midnight-void/95 backdrop-blur-md border-b border-graphite-lift sticky top-0 z-50">
+    <header className="bg-midnight-void/95 backdrop-blur-md border-b border-graphite-lift sticky top-0 z-50 transition-colors duration-200">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Brand Logo (Header Hierarchy Level 1) */}
@@ -50,10 +51,10 @@ export const Navigation: React.FC = () => {
             onClick={() => handleSelectTab('encrypt')}
           >
             <div className="w-8 h-8 bg-electric-indigo/20 border border-electric-indigo/50 text-electric-indigo flex items-center justify-center rounded-sm transition-transform duration-200 group-hover:scale-105">
-              <Shield className="w-4 h-4 text-periwinkle-veil" />
+              <Shield className="w-4 h-4 text-electric-indigo" />
             </div>
             <div className="flex items-center space-x-2">
-              <span className="font-sans font-bold text-base sm:text-lg tracking-tight text-pure-signal group-hover:text-periwinkle-veil transition-colors">
+              <span className="font-sans font-bold text-base sm:text-lg tracking-tight text-pure-signal group-hover:text-electric-indigo transition-colors">
                 SecureBox
               </span>
               <span className="hidden sm:inline-block font-mono text-[10px] text-warm-filament/90 bg-carbon-panel border border-graphite-lift px-2 py-0.5 rounded-sm uppercase tracking-wider">
@@ -72,8 +73,8 @@ export const Navigation: React.FC = () => {
                   onClick={() => handleSelectTab(item.id)}
                   className={`px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider uppercase whitespace-nowrap flex-shrink-0 transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-electric-indigo text-pure-signal font-semibold shadow-sm'
-                      : 'text-soft-mist/75 hover:text-pure-signal hover:bg-graphite-lift/60'
+                      ? 'bg-electric-indigo text-white font-semibold shadow-sm'
+                      : 'text-soft-mist hover:text-pure-signal hover:bg-carbon-panel'
                   }`}
                 >
                   {item.label}
@@ -82,15 +83,18 @@ export const Navigation: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action Utilities (History & Spec) */}
-          <div className="hidden sm:flex items-center space-x-2 flex-shrink-0">
+          {/* Right Action Utilities (Theme Toggle, History & Spec) with 12px / space-x-3 gap */}
+          <div className="hidden sm:flex items-center space-x-3 flex-shrink-0">
+            {/* Theme Toggle Button */}
+            <ThemeToggle />
+
             {/* History Button */}
             <button
               onClick={() => handleSelectTab('history')}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider uppercase whitespace-nowrap flex-shrink-0 transition cursor-pointer border ${
                 activeTab === 'history'
-                  ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold'
-                  : 'bg-carbon-panel text-soft-mist/80 border-graphite-lift hover:border-periwinkle-veil/50 hover:text-pure-signal'
+                  ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
+                  : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:border-electric-indigo hover:text-pure-signal'
               }`}
               title="Activity History"
             >
@@ -98,7 +102,7 @@ export const Navigation: React.FC = () => {
               <span>• HISTORY</span>
               {history.length > 0 && (
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-sm font-mono font-bold ${
-                  activeTab === 'history' ? 'bg-midnight-void text-pure-signal' : 'bg-graphite-lift text-periwinkle-veil'
+                  activeTab === 'history' ? 'bg-midnight-void text-electric-indigo' : 'bg-graphite-lift text-pure-signal'
                 }`}>
                   {history.length}
                 </span>
@@ -110,8 +114,8 @@ export const Navigation: React.FC = () => {
               onClick={() => handleSelectTab('how-it-works')}
               className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-sm font-mono text-xs tracking-wider uppercase whitespace-nowrap flex-shrink-0 transition cursor-pointer border ${
                 activeTab === 'how-it-works'
-                  ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold'
-                  : 'bg-transparent border-graphite-lift text-soft-mist/80 hover:border-periwinkle-veil/50 hover:text-pure-signal hover:bg-graphite-lift/40'
+                  ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
+                  : 'bg-transparent border-graphite-lift text-soft-mist hover:border-electric-indigo hover:text-pure-signal hover:bg-carbon-panel/40'
               }`}
               title="Protocol Specification & Architecture"
             >
@@ -122,7 +126,8 @@ export const Navigation: React.FC = () => {
 
           {/* Mobile Right Bar */}
           <div className="flex lg:hidden items-center space-x-2">
-            <span className="font-mono text-xs px-2.5 py-1 bg-carbon-panel text-soft-mist rounded-sm border border-graphite-lift truncate max-w-[140px]">
+            <ThemeToggle />
+            <span className="hidden xs:inline-block font-mono text-xs px-2.5 py-1 bg-carbon-panel text-soft-mist rounded-sm border border-graphite-lift truncate max-w-[120px]">
               {getActiveTabTitle()}
             </span>
             <button
@@ -139,7 +144,7 @@ export const Navigation: React.FC = () => {
 
       {/* Mobile Dropdown Menu (Stacked full-width items, 44px min-height tap targets) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-graphite-lift bg-midnight-void px-4 sm:px-6 pt-3 pb-6 space-y-4 shadow-xl animate-fade-in-down">
+        <div className="lg:hidden border-t border-graphite-lift bg-midnight-void px-4 sm:px-6 pt-3 pb-6 space-y-4 shadow-xl animate-fade-in-down transition-colors duration-200">
           <div>
             <span className="font-mono text-[10px] text-warm-filament uppercase tracking-wider block px-1 mb-2">
               // CRYPTOGRAPHIC PROTOCOLS
@@ -153,12 +158,12 @@ export const Navigation: React.FC = () => {
                     onClick={() => handleSelectTab(item.id)}
                     className={`w-full text-left min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs tracking-wider uppercase transition cursor-pointer flex items-center justify-between border ${
                       isActive
-                        ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold shadow-sm'
+                        ? 'bg-electric-indigo text-white border-electric-indigo font-semibold shadow-sm'
                         : 'bg-carbon-panel border-graphite-lift text-soft-mist hover:bg-graphite-lift hover:text-pure-signal'
                     }`}
                   >
                     <span>{item.label}</span>
-                    {isActive && <span className="w-2 h-2 rounded-full bg-pure-signal" />}
+                    {isActive && <span className="w-2 h-2 rounded-full bg-white" />}
                   </button>
                 );
               })}
@@ -174,7 +179,7 @@ export const Navigation: React.FC = () => {
                 onClick={() => handleSelectTab('history')}
                 className={`flex items-center justify-between min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs uppercase transition border ${
                   activeTab === 'history'
-                    ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold'
+                    ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
                     : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift'
                 }`}
               >
@@ -183,7 +188,9 @@ export const Navigation: React.FC = () => {
                   <span>• HISTORY</span>
                 </div>
                 {history.length > 0 && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-sm bg-midnight-void text-pure-signal font-bold">
+                  <span className={`text-[10px] px-2 py-0.5 rounded-sm font-bold ${
+                    activeTab === 'history' ? 'bg-midnight-void text-electric-indigo' : 'bg-midnight-void text-pure-signal'
+                  }`}>
                     {history.length}
                   </span>
                 )}
@@ -193,7 +200,7 @@ export const Navigation: React.FC = () => {
                 onClick={() => handleSelectTab('how-it-works')}
                 className={`flex items-center justify-center space-x-2 min-h-[44px] px-4 py-3 rounded-sm font-mono text-xs uppercase transition border ${
                   activeTab === 'how-it-works'
-                    ? 'bg-electric-indigo text-pure-signal border-electric-indigo font-semibold'
+                    ? 'bg-electric-indigo text-white border-electric-indigo font-semibold'
                     : 'bg-carbon-panel text-soft-mist border-graphite-lift hover:bg-graphite-lift'
                 }`}
               >

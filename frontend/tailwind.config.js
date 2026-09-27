@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ['class', '[data-theme="dark"]'],
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,21 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        'electric-indigo': '#324ce0dc', // Pure Vana Electric Indigo
-        'cobalt-pulse': '#4141fc',    // Hover blue
-        'periwinkle-veil': '#789ef1ff', // Highlight / secondary border
-        'lime-beacon': '#7fd579',     // Success status
-        'orchid-whisper': '#d896ff',  // Alert / Accent
-        'midnight-void': '#0d0d0d',   // Canvas background
-        'carbon-panel': '#161616',    // Card / Form surface
-        'graphite-lift': '#252525',   // Surface borders & elevated badges
-        'charcoal': '#333333',        // Component borders
-        'steel-hover': '#3b3b3b',     // Hover / disabled surfaces
-        'graphite': '#4d4d4d',        // Low-emphasis icons / borders
-        'smoke': '#898989',           // Metadata / caption text
-        'pure-signal': '#ffffff',     // Primary text / button labels
-        'soft-mist': '#eaeaea',       // Secondary / body text
-        'warm-filament': '#b8ad97',   // Protocol terminal accents
+        'electric-indigo': 'rgb(var(--color-electric-indigo) / <alpha-value>)',
+        'cobalt-pulse': 'rgb(var(--color-cobalt-pulse) / <alpha-value>)',
+        'periwinkle-veil': 'rgb(var(--color-periwinkle-veil) / <alpha-value>)',
+        'lime-beacon': 'rgb(var(--color-lime-beacon) / <alpha-value>)',
+        'orchid-whisper': 'rgb(var(--color-orchid-whisper) / <alpha-value>)',
+        'midnight-void': 'rgb(var(--color-midnight-void) / <alpha-value>)',
+        'carbon-panel': 'rgb(var(--color-carbon-panel) / <alpha-value>)',
+        'graphite-lift': 'rgb(var(--color-graphite-lift) / <alpha-value>)',
+        'charcoal': 'rgb(var(--color-charcoal) / <alpha-value>)',
+        'steel-hover': 'rgb(var(--color-steel-hover) / <alpha-value>)',
+        'graphite': 'rgb(var(--color-graphite) / <alpha-value>)',
+        'smoke': 'rgb(var(--color-smoke) / <alpha-value>)',
+        'pure-signal': 'rgb(var(--color-pure-signal) / <alpha-value>)',
+        'soft-mist': 'rgb(var(--color-soft-mist) / <alpha-value>)',
+        'warm-filament': 'rgb(var(--color-warm-filament) / <alpha-value>)',
+        light: {
+          'primary': '#121212',
+          'surface': '#ffffff',
+          'surface-elevated': '#f5f5f5',
+          'border': '#d4d4d4',
+          'text': '#121212',
+          'text-secondary': '#4d4d4d',
+        },
+        dark: {
+          'primary': '#ffffff',
+          'surface': '#0d0d0d',
+          'surface-elevated': '#161616',
+          'border': '#252525',
+          'text': '#ffffff',
+          'text-secondary': '#eaeaea',
+        }
       },
       borderRadius: {
         'sm': '2px',
@@ -41,4 +58,3 @@ export default {
   },
   plugins: [],
 }
-
