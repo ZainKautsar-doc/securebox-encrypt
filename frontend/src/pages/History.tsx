@@ -12,7 +12,9 @@ import {
   FileText, 
   FileCheck, 
   BarChart3,
-  Filter
+  Filter,
+  AlertTriangle,
+  X
 } from 'lucide-react';
 import { OperationType, HistoryItem } from '../types/history';
 
@@ -20,6 +22,16 @@ export const History: React.FC = () => {
   const { history, deleteHistoryItem, clearHistory, loadIntoDecryptText } = useSecureBox();
   const [filterType, setFilterType] = useState<string>('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  // State for Confirmation Modal
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    isOpen: boolean;
+    type: 'single' | 'all';
+    targetItem?: HistoryItem;
+  }>({
+    isOpen: false,
+    type: 'single'
+  });
 
   const filteredHistory = history.filter((item) => {
     if (filterType === 'all') return true;
@@ -57,6 +69,34 @@ export const History: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const openSingleDeleteModal = (item: HistoryItem) => {
+    setDeleteConfirm({
+      isOpen: true,
+      type: 'single',
+      targetItem: item
+    });
+  };
+
+  const openClearAllModal = () => {
+    setDeleteConfirm({
+      isOpen: true,
+      type: 'all'
+    });
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteConfirm({ isOpen: false, type: 'single', targetItem: undefined });
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteConfirm.type === 'single' && deleteConfirm.targetItem) {
+      deleteHistoryItem(deleteConfirm.targetItem.id);
+    } else if (deleteConfirm.type === 'all') {
+      clearHistory();
+    }
+    closeDeleteModal();
+  };
+
   const getIcon = (type: OperationType) => {
     switch (type) {
       case 'text-encrypt':
@@ -90,7 +130,7 @@ export const History: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 relative">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-graphite-lift">
         <div className="flex items-center space-x-3">
@@ -115,11 +155,7 @@ export const History: React.FC = () => {
               <span>EXPORT ALL JSON</span>
             </button>
             <button
-              onClick={() => {
-                if (window.confirm('Clear all local cryptographic history records?')) {
-                  clearHistory();
-                }
-              }}
+              onClick={openClearAllModal}
               className="bg-transparent border border-orchid-whisper text-orchid-whisper hover:bg-orchid-whisper/10 font-mono text-xs font-bold uppercase py-1.5 px-3 rounded-sm transition cursor-pointer flex items-center space-x-1.5"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -214,7 +250,7 @@ export const History: React.FC = () => {
                     </button>
                   )}
                   <button
-                    onClick={() => deleteHistoryItem(item.id)}
+                    onClick={() => openSingleDeleteModal(item)}
                     className="p-1.5 text-soft-mist/60 hover:text-orchid-whisper rounded-sm transition cursor-pointer"
                     title="Delete record"
                   >
@@ -318,6 +354,61 @@ export const History: React.FC = () => {
           ))}
         </div>
       )}
+
+      {/* Styled Dark Theme Confirmation Modal */}
+      {deleteConfirm.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-void/80 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-carbon-panel border border-orchid-whisper/50 rounded-sm shadow-2xl max-w-md w-full p-6 space-y-5 relative">
+            <button
+              onClick={closeDeleteModal}
+              className="absolute top-4 right-4 text-soft-mist/60 hover:text-pure-signal cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-start space-x-3">
+              <div className="p-2.5 bg-orchid-whisper/10 border border-orchid-whisper/30 text-orchid-whisper rounded-sm shrink-0">
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-bold text-pure-signal tracking-tight uppercase font-sans">
+                  {deleteConfirm.type === 'all' ? 'HAPUS SEMUA RIWAYAT' : 'HAPUS CATATAN RIWAYAT'}
+                </h3>
+                <p className="text-xs font-mono text-soft-mist/70 leading-relaxed">
+                  {deleteConfirm.type === 'all'
+                    ? 'Apakah Anda yakin ingin menghapus seluruh log riwayat kriptografi? Tindakan ini tidak dapat dibatalkan.'
+                    : `Apakah Anda yakin ingin menghapus log "${deleteConfirm.targetItem?.title || 'item ini'}" dari riwayat lokal?`}
+                </p>
+              </div>
+            </div>
+
+            {deleteConfirm.type === 'single' && deleteConfirm.targetItem && (
+              <div className="bg-midnight-void border border-graphite-lift rounded-sm p-3 text-xs font-mono text-soft-mist/80 space-y-1">
+                <div><span className="text-warm-filament">ALGORITMA:</span> {deleteConfirm.targetItem.algorithm.toUpperCase()}</div>
+                <div><span className="text-warm-filament">TIPE:</span> {deleteConfirm.targetItem.type.toUpperCase()}</div>
+                <div><span className="text-warm-filament">WAKTU:</span> {new Date(deleteConfirm.targetItem.timestamp).toLocaleString()}</div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-end space-x-3 pt-2 border-t border-graphite-lift">
+              <button
+                onClick={closeDeleteModal}
+                className="btn-secondary !py-2 !px-4 !text-xs font-mono"
+              >
+                BATAL
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="bg-orchid-whisper/20 hover:bg-orchid-whisper/30 text-orchid-whisper border border-orchid-whisper font-mono text-xs font-bold uppercase py-2 px-4 rounded-sm transition cursor-pointer flex items-center space-x-1.5"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>YA, HAPUS</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
