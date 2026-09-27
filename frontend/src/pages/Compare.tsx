@@ -38,11 +38,24 @@ export const Compare: React.FC = () => {
           <BarChart3 className="w-5 h-5" />
         </div>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Performance Benchmark</h1>
+          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Uji Performa (Performance Benchmark)</h1>
           <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
-            MEASURING AEAD THROUGHPUT & ENCRYPTION/DECRYPTION LATENCY ACROSS 1KB, 1MB, AND 10MB
+            KOMPARASI LATENSI & THROUGHPUT ENKRIPSI/DEKRIPSI REAL-TIME PADA UKURAN 1KB, 1MB, DAN 10MB
           </p>
         </div>
+      </div>
+
+      {/* Tujuan & Maksud Fitur Benchmark */}
+      <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 space-y-3">
+        <div className="flex items-center space-x-2">
+          <Zap className="w-4 h-4 text-warm-filament" />
+          <span className="font-mono text-xs font-bold text-warm-filament uppercase tracking-wider">
+            // MAKSUD & TUJUAN FITUR BENCHMARK
+          </span>
+        </div>
+        <p className="text-xs sm:text-sm text-soft-mist leading-relaxed font-sans">
+          Fitur ini bertujuan untuk <strong>mengukur dan membandingkan kecepatan kerja serta efisiensi antara AES-256-GCM vs ChaCha20-Poly1305 secara objektif dan real-time</strong> langsung pada sistem komputasi Anda. Benchmark ini mengevaluasi siklus lengkap (scrypt Key Derivation + Enkripsi + Dekripsi) di berbagai ukuran data nyata (1 KB, 1 MB, 10 MB) untuk membantu Anda memilih cipher yang paling optimal sesuai spesifikasi perangkat keras Anda.
+        </p>
       </div>
 
       {/* Runner Card */}
@@ -50,13 +63,13 @@ export const Compare: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center space-x-2 mb-1">
-              <span className="w-2 h-2 bg-electric-indigo rounded-full"></span>
+              <span className="w-2 h-2 bg-electric-indigo rounded-full animate-pulse"></span>
               <h2 className="text-sm font-bold font-mono text-pure-signal uppercase tracking-wider">
-                // BENCHMARK SUITE RUNNER
+                // EKSEKUSI SUITE BENCHMARK
               </h2>
             </div>
-            <p className="text-xs text-soft-mist/70">
-              Executes real-time key derivation (scrypt) + authenticated cipher cycles on backend.
+            <p className="text-xs text-soft-mist/70 font-sans">
+              Menjalankan siklus derivasi kunci (scrypt) dan cipher AEAD secara sinkron di memori backend.
             </p>
           </div>
           <button
@@ -65,7 +78,7 @@ export const Compare: React.FC = () => {
             className="btn-primary"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
-            <span>{loading ? 'RUNNING BENCHMARKS...' : 'EXECUTE BENCHMARK'}</span>
+            <span>{loading ? 'MENJALANKAN UJI...' : 'JALANKAN BENCHMARK'}</span>
           </button>
         </div>
 
@@ -82,12 +95,12 @@ export const Compare: React.FC = () => {
               <table className="w-full text-left text-xs font-mono">
                 <thead className="bg-graphite-lift text-pure-signal font-sans font-bold text-xs uppercase tracking-wider border-b border-graphite-lift">
                   <tr>
-                    <th className="p-3.5">PAYLOAD SIZE</th>
-                    <th className="p-3.5">AES-256-GCM ENC</th>
-                    <th className="p-3.5">AES-256-GCM DEC</th>
+                    <th className="p-3.5">UKURAN PAYLOAD</th>
+                    <th className="p-3.5">AES-256 ENC</th>
+                    <th className="p-3.5">AES-256 DEC</th>
                     <th className="p-3.5">CHACHA20 ENC</th>
                     <th className="p-3.5">CHACHA20 DEC</th>
-                    <th className="p-3.5">OPTIMAL CIPHER</th>
+                    <th className="p-3.5">CIPHER LEBIH CEPAT</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-graphite-lift">
@@ -130,7 +143,7 @@ export const Compare: React.FC = () => {
 
                   <div>
                     <div className="flex justify-between text-[11px] text-soft-mist/70 mb-1">
-                      <span>AES-256-GCM Total</span>
+                      <span>Total AES-256-GCM</span>
                       <span className="text-pure-signal font-bold">{(r.aes_encrypt_time + r.aes_decrypt_time).toFixed(2)} ms</span>
                     </div>
                     <div className="w-full bg-midnight-void rounded-sm h-2 border border-graphite-lift">
@@ -145,7 +158,7 @@ export const Compare: React.FC = () => {
 
                   <div>
                     <div className="flex justify-between text-[11px] text-soft-mist/70 mb-1">
-                      <span>ChaCha20 Total</span>
+                      <span>Total ChaCha20</span>
                       <span className="text-pure-signal font-bold">{(r.chacha_encrypt_time + r.chacha_decrypt_time).toFixed(2)} ms</span>
                     </div>
                     <div className="w-full bg-midnight-void rounded-sm h-2 border border-graphite-lift">
@@ -164,10 +177,11 @@ export const Compare: React.FC = () => {
             {/* Architecture Insights Callout */}
             <div className="p-4 bg-carbon-panel border border-graphite-lift rounded-sm flex items-start space-x-3">
               <ShieldCheck className="w-5 h-5 text-electric-indigo mt-0.5 flex-shrink-0" />
-              <div className="text-xs text-soft-mist space-y-1 leading-relaxed">
-                <p className="font-bold text-pure-signal uppercase font-mono">// ARCHITECTURE NOTES & HARDWARE DISPATCH</p>
+              <div className="text-xs text-soft-mist space-y-1 leading-relaxed font-sans">
+                <p className="font-bold text-pure-signal uppercase font-mono">// CATATAN ARSITEKTUR & REKOMENDASI</p>
                 <p>
-                  <strong>AES-256-GCM</strong> leverages dedicated CPU instructions (AES-NI) on modern x86_64 architectures. <strong>ChaCha20-Poly1305</strong> runs constant-time ARX operations in software with zero cache-timing vulnerability on ARM, mobile, and non-AES-NI systems.
+                  • <strong>AES-256-GCM</strong> unggul dalam throughput data besar jika CPU host Anda memiliki akselerasi hardware Intel/AMD AES-NI.<br />
+                  • <strong>ChaCha20-Poly1305</strong> memiliki latensi yang stabil, sangat hemat daya, dan kebal dari serangan cache-timing pada arsitektur ARM atau perangkat tanpa AES-NI khusus.
                 </p>
               </div>
             </div>
@@ -179,7 +193,7 @@ export const Compare: React.FC = () => {
       <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-6 sm:p-8 space-y-6">
         <h2 className="text-base font-bold text-pure-signal flex items-center space-x-2 font-mono uppercase">
           <BarChart3 className="w-4 h-4 text-electric-indigo" />
-          <span>// BENCHMARK METHODOLOGY & ARCHITECTURE</span>
+          <span>// METODOLOGI UJI & PANDUAN PEMILIHAN</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
@@ -188,13 +202,13 @@ export const Compare: React.FC = () => {
               <span className="text-electric-indigo">•</span>
               <span>AES-256-GCM (Hardware Accelerated)</span>
             </h3>
-            <p className="text-soft-mist leading-relaxed">
-              Advanced Encryption Standard in Galois/Counter Mode utilizes native silicon CPU instructions (AES-NI).
+            <p className="text-soft-mist leading-relaxed font-sans">
+              Standar enkripsi blok NIST SP 800-38D dengan akselerasi instruksi CPU bawaan (AES-NI).
             </p>
             <ul className="list-disc list-inside text-soft-mist/70 space-y-1 font-mono text-[11px] pt-1">
-              <li>Optimized for x86_64 servers & workstations.</li>
-              <li>High throughput on medium & large payloads.</li>
-              <li>128-bit hardware Galois MAC authentication.</li>
+              <li>Paling direkomendasikan untuk Server, PC, dan Laptop x86_64.</li>
+              <li>Throughput sangat tinggi pada pemrosesan file besar (1MB - 10MB).</li>
+              <li>Otentikasi Galois Field MAC 128-bit langsung di hardware.</li>
             </ul>
           </div>
 
@@ -203,13 +217,13 @@ export const Compare: React.FC = () => {
               <span className="text-lime-beacon">•</span>
               <span>ChaCha20-Poly1305 (Software Constant-Time)</span>
             </h3>
-            <p className="text-soft-mist leading-relaxed">
-              20-round stream cipher with Poly1305 authenticator designed by Daniel J. Bernstein.
+            <p className="text-soft-mist leading-relaxed font-sans">
+              Stream cipher 20-putaran karya Daniel J. Bernstein dengan autentikator Poly1305 (RFC 8439).
             </p>
             <ul className="list-disc list-inside text-soft-mist/70 space-y-1 font-mono text-[11px] pt-1">
-              <li>Consistent execution on ARM / mobile devices.</li>
-              <li>Immune to cache-timing side-channel attacks.</li>
-              <li>No dedicated AES hardware instructions required.</li>
+              <li>Paling direkomendasikan untuk Ponsel, Tablet, dan ARM (Apple Silicon / Raspberry Pi).</li>
+              <li>Kebal mutlak terhadap serangan kebocoran waktu memori (Cache-Timing Attacks).</li>
+              <li>Sangat cepat dan konsisten walau tanpa instruksi chip AES khusus.</li>
             </ul>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { FileUpload } from '../components/FileUpload';
-import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw, Layers, KeyRound, Eye, EyeOff } from 'lucide-react';
+import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw, Layers, KeyRound, Eye, EyeOff, ShieldCheck } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';
 
 export const FileDecrypt: React.FC = () => {
@@ -132,59 +132,88 @@ export const FileDecrypt: React.FC = () => {
           <FileCheck className="w-5 h-5" />
         </div>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Decrypt File</h1>
+          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Dekripsi Berkas (Decrypt File)</h1>
           <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
-            AUTHENTICATED BINARY DECRYPTION (.ENC) WITH RECONSTRUCTED KEY & METADATA CHECK
+            REKONSTRUKSI BERKAS ASLI DARI FORMAT .ENC DENGAN VALIDASI METADATA KRIPTOGRAFI
           </p>
         </div>
+      </div>
+
+      {/* Tujuan & Maksud Fitur */}
+      <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 space-y-3">
+        <div className="flex items-center space-x-2">
+          <ShieldCheck className="w-4 h-4 text-lime-beacon" />
+          <span className="font-mono text-xs font-bold text-warm-filament uppercase tracking-wider">
+            // MAKSUD & TUJUAN FITUR
+          </span>
+        </div>
+        <p className="text-xs sm:text-sm text-soft-mist leading-relaxed font-sans">
+          Fitur ini bertujuan untuk <strong>memulihkan file terenkripsi (.enc) kembali ke bentuk file aslinya</strong> (misalnya PDF, DOCX, JPG, ZIP). Anda cukup mengunggah file <code>.enc</code> bersama file <code>metadata.json</code> (atau memasukkan parameter Salt, Nonce, dan Tag secara manual) beserta password yang benar.
+        </p>
       </div>
 
       {/* Step-by-Step Decryption Flow */}
       <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 space-y-4">
         <div className="flex items-center space-x-2 text-warm-filament font-mono text-xs uppercase tracking-wider">
-          <Layers className="w-4 h-4 text-electric-indigo" />
-          <span>// FILE DECRYPTION PIPELINE (4 STEPS)</span>
+          <Layers className="w-4 h-4 text-lime-beacon" />
+          <span>// ALUR PROSES DEKRIPSI BERKAS (4 TAHAP)</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-electric-indigo text-sm">01. LOAD FILE</span>
-              <span className="text-[10px] font-mono text-soft-mist/40">STEP 1</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-electric-indigo text-xs">01. UNGGAH .ENC</span>
+                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 1</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Berkas & Metadata</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                Unggah file <code>.enc</code> dan muat file <code>metadata.json</code> untuk mengisi parameter otomatis.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              Upload <code>.enc</code> payload & load metadata JSON or enter params.
-            </p>
+            <span className="text-[10px] font-mono text-warm-filament pt-1 block">File .enc + JSON</span>
           </div>
 
-          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-electric-indigo text-sm">02. KEY RECON</span>
-              <span className="text-[10px] font-mono text-soft-mist/40">STEP 2</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-electric-indigo text-xs">02. REKONSTRUKSI</span>
+                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 2</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Penurunan Kunci</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                scrypt (atau RSA) menurunkan kembali Kunci 256-bit identik dari password & Salt yang valid.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              scrypt or RSA-OAEP derives 256-bit symmetric session key.
-            </p>
+            <span className="text-[10px] font-mono text-electric-indigo pt-1 block">Key Re-derived</span>
           </div>
 
-          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-electric-indigo text-sm">03. TAG CHECK</span>
-              <span className="text-[10px] font-mono text-soft-mist/40">STEP 3</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-electric-indigo text-xs">03. VERIFIKASI TAG</span>
+                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 3</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Validasi Integritas</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                Mesin AEAD memverifikasi Auth Tag 128-bit untuk memastikan berkas tidak rusak atau diubah.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              AEAD verifies 128-bit MAC tag. Rejects if tampered/wrong password.
-            </p>
+            <span className="text-[10px] font-mono text-orchid-whisper pt-1 block">Auth Tag Check</span>
           </div>
 
-          <div className="p-4 bg-graphite-lift border border-lime-beacon/50 rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-lime-beacon text-sm">04. RECOVER</span>
-              <span className="text-[10px] font-mono text-lime-beacon">VERIFIED</span>
+          <div className="p-4 bg-graphite-lift border border-lime-beacon/50 rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-lime-beacon text-xs">04. PULIHKAN</span>
+                <span className="text-[10px] font-mono text-lime-beacon bg-lime-beacon/10 px-1.5 py-0.5 rounded-sm">SUKSES</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Unduh Berkas Asli</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                File asli berhasil dipulihkan secara sempurna dan langsung dapat diunduh ke komputer Anda.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              Original file binary recovered bit-for-bit and ready to download.
-            </p>
+            <span className="text-[10px] font-mono text-lime-beacon pt-1 block">Original File Ready</span>
           </div>
         </div>
       </div>

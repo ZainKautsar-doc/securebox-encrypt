@@ -101,59 +101,88 @@ export const FileEncrypt: React.FC = () => {
           <FileText className="w-5 h-5" />
         </div>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Encrypt File</h1>
+          <h1 className="text-xl font-bold tracking-tight text-pure-signal">Enkripsi Berkas (Encrypt File)</h1>
           <p className="text-xs font-mono text-soft-mist/60 mt-0.5">
-            AUTHENTICATED BINARY ENCRYPTION (UP TO 10 MB PAYLOAD) WITH METADATA PACKAGING
+            PENYANDIAN BERKAS BINARI HINGGA 10 MB DENGAN PENGEMASAN METADATA OTOMATIS
           </p>
         </div>
+      </div>
+
+      {/* Tujuan & Maksud Fitur */}
+      <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 space-y-3">
+        <div className="flex items-center space-x-2">
+          <FileJson className="w-4 h-4 text-electric-indigo" />
+          <span className="font-mono text-xs font-bold text-warm-filament uppercase tracking-wider">
+            // MAKSUD & TUJUAN FITUR
+          </span>
+        </div>
+        <p className="text-xs sm:text-sm text-soft-mist leading-relaxed font-sans">
+          Fitur ini bertujuan untuk <strong>mengenkripsi dokumen, gambar, PDF, atau arsip binari apa pun menjadi file terenkripsi (.enc)</strong>. File yang dihasilkan tidak dapat dibuka atau diintip tanpa kunci yang sah. Anda juga akan mendapatkan file <code>metadata.json</code> (berisi Salt, Nonce, dan Tag) yang digunakan saat dekripsi.
+        </p>
       </div>
 
       {/* Step-by-Step Encryption Flow */}
       <div className="bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 space-y-4">
         <div className="flex items-center space-x-2 text-warm-filament font-mono text-xs uppercase tracking-wider">
           <Layers className="w-4 h-4 text-electric-indigo" />
-          <span>// FILE ENCRYPTION PIPELINE (4 STEPS)</span>
+          <span>// ALUR PROSES ENKRIPSI BERKAS (4 TAHAP)</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-electric-indigo text-sm">01. SELECT FILE</span>
-              <span className="text-[10px] font-mono text-soft-mist/40">STEP 1</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-electric-indigo text-xs">01. PILIH FILE</span>
+                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 1</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Unggah Berkas</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                Pilih file yang ingin diamankan (&le; 10 MB), ketik password, dan tentukan mode cipher.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              Upload file (&lt;10 MB), enter passphrase & pick AEAD cipher.
-            </p>
+            <span className="text-[10px] font-mono text-warm-filament pt-1 block">Max 10 MB</span>
           </div>
 
-          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-electric-indigo text-sm">02. SCRYPT KDF</span>
-              <span className="text-[10px] font-mono text-soft-mist/40">STEP 2</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-electric-indigo text-xs">02. DERIVASI KUNCI</span>
+                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 2</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">scrypt KDF</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                Dihasilkan Salt 16-byte unik, lalu password ditransformasikan menjadi Kunci Simetris 256-bit.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              16B random salt generated. 256-bit key derived in memory.
-            </p>
+            <span className="text-[10px] font-mono text-electric-indigo pt-1 block">Salt 16 Byte</span>
           </div>
 
-          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-electric-indigo text-sm">03. AEAD STREAM</span>
-              <span className="text-[10px] font-mono text-soft-mist/40">STEP 3</span>
+          <div className="p-4 bg-graphite-lift border border-graphite-lift rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-electric-indigo text-xs">03. ENKRIPSI STREAM</span>
+                <span className="text-[10px] font-mono text-soft-mist/40 bg-midnight-void px-1.5 py-0.5 rounded-sm">TAHAP 3</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Enkripsi AEAD</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                Nonce 12-byte dibuat, byte berkas diacak rapat, dan segel Auth Tag 128-bit dihasilkan.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              12B nonce generated. File encrypted + 16B Auth Tag produced.
-            </p>
+            <span className="text-[10px] font-mono text-lime-beacon pt-1 block">Nonce + Auth Tag</span>
           </div>
 
-          <div className="p-4 bg-graphite-lift border border-electric-indigo/50 rounded-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-lime-beacon text-sm">04. DOWNLOAD</span>
-              <span className="text-[10px] font-mono text-lime-beacon">READY</span>
+          <div className="p-4 bg-graphite-lift border border-electric-indigo/50 rounded-sm space-y-1.5 flex flex-col justify-between">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-mono font-bold text-lime-beacon text-xs">04. UNDUH PAKET</span>
+                <span className="text-[10px] font-mono text-lime-beacon bg-lime-beacon/10 px-1.5 py-0.5 rounded-sm">SIAP</span>
+              </div>
+              <h4 className="font-bold text-pure-signal font-sans">Berkas .enc & Metadata</h4>
+              <p className="text-soft-mist/80 text-[11px] leading-relaxed font-sans">
+                Unduh file terenkripsi (.enc) beserta metadata JSON untuk penyimpanan atau transmisi aman.
+              </p>
             </div>
-            <p className="text-soft-mist text-[12px] leading-relaxed">
-              Download encrypted <code>.enc</code> file & metadata JSON.
-            </p>
+            <span className="text-[10px] font-mono text-pure-signal pt-1 block">Download .enc</span>
           </div>
         </div>
       </div>
