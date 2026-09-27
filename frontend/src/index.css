@@ -4,21 +4,21 @@
 
 /* Light Theme Variables (Default / :root) */
 :root {
-  --color-electric-indigo: 0 0 255;      /* #0000ff - Pure Vana Electric Indigo */
-  --color-cobalt-pulse: 65 65 252;       /* #4141fc - Hover Blue */
-  --color-periwinkle-veil: 0 0 255;      /* #0000ff - High-contrast Light Accent */
+  --color-electric-indigo: 99 102 241;   /* #6366f1 - Softer Indigo / Blue */
+  --color-cobalt-pulse: 79 70 229;       /* #4f46e5 - Hover Blue */
+  --color-periwinkle-veil: 99 102 241;   /* #6366f1 - High-contrast Light Accent */
   --color-lime-beacon: 21 128 61;        /* #15803d - High-contrast Status Green */
   --color-orchid-whisper: 147 51 234;    /* #9333ea - High-contrast Purple */
   --color-midnight-void: 255 255 255;    /* #ffffff - Page Background / Canvas */
   --color-carbon-panel: 245 245 245;     /* #f5f5f5 - Elevated Surface L1 */
   --color-graphite-lift: 212 212 212;    /* #d4d4d4 - Border hairline & Surface L2 */
-  --color-charcoal: 212 212 212;         /* #d4d4d4 - Input / secondary borders */
+  --color-charcoal: 204 204 204;         /* #cccccc - Input / secondary borders */
   --color-steel-hover: 224 224 224;      /* #e0e0e0 - Elevated Surface L3 / hover */
-  --color-graphite: 136 136 136;         /* #888888 - Low-emphasis icons / borders */
-  --color-smoke: 136 136 136;            /* #888888 - Metadata / caption text */
+  --color-graphite: 115 115 115;         /* #737373 - Low-emphasis icons / borders */
+  --color-smoke: 102 102 102;            /* #666666 - Metadata / caption text */
   --color-pure-signal: 18 18 18;         /* #121212 - Primary text / Headings */
-  --color-soft-mist: 77 77 77;           /* #4d4d4d - Secondary / Body text */
-  --color-warm-filament: 124 104 71;     /* #7c6847 - Protocol terminal accents */
+  --color-soft-mist: 64 64 64;           /* #404040 - Secondary / Body text */
+  --color-warm-filament: 139 92 246;     /* #8b5cf6 - Purple accent instead of brown */
 
   --radius-sm: 2px;
   --radius-lg: 16px;
@@ -36,9 +36,9 @@
 /* Dark Theme Variables */
 html.dark,
 html[data-theme="dark"] {
-  --color-electric-indigo: 0 0 255;      /* #0000ff - Pure Vana Electric Indigo */
-  --color-cobalt-pulse: 65 65 252;       /* #4141fc - Hover Blue */
-  --color-periwinkle-veil: 139 139 254;  /* #8b8bfe - Highlight / secondary border */
+  --color-electric-indigo: 99 102 241;   /* #6366f1 - Softer Indigo / Blue */
+  --color-cobalt-pulse: 79 70 229;       /* #4f46e5 - Hover Blue */
+  --color-periwinkle-veil: 129 140 248;  /* #818cf8 - Highlight / secondary border */
   --color-lime-beacon: 127 213 121;      /* #7fd579 - Success status */
   --color-orchid-whisper: 216 150 255;   /* #d896ff - Alert / Accent */
   --color-midnight-void: 13 13 13;       /* #0d0d0d - Canvas background */

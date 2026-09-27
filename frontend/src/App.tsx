@@ -15,7 +15,7 @@ function MainContent() {
   const { activeTab, setActiveTab } = useSecureBox();
 
   return (
-    <div className="min-h-screen bg-midnight-void text-pure-signal flex flex-col font-sans selection:bg-electric-indigo selection:text-pure-signal transition-colors duration-200">
+    <div className="min-h-screen bg-midnight-void text-pure-signal flex flex-col font-sans selection:bg-electric-indigo selection:text-white transition-colors duration-200">
       <Navigation />
 
       <main className="flex-1 max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
