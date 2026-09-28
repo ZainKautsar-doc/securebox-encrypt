@@ -15,6 +15,7 @@ class EncryptResponse(BaseModel):
     nonce: str  # base64
     tag: str  # base64
     ciphertext: str  # base64
+    checksum_sha256: Optional[str] = None  # sha256 hex digest of ciphertext
 
 
 class DecryptRequest(BaseModel):
@@ -24,6 +25,7 @@ class DecryptRequest(BaseModel):
     salt: str = Field(..., description="Base64 encoded salt")
     nonce: str = Field(..., description="Base64 encoded nonce")
     tag: str = Field(..., description="Base64 encoded auth tag")
+    checksum_sha256: Optional[str] = None  # Optional integrity checksum
 
 
 class DecryptResponse(BaseModel):
@@ -40,6 +42,8 @@ class FileEncryptResponseMetadata(BaseModel):
     tag: str  # base64
     file_size: int
     filename: Optional[str] = None
+    checksum_sha256: Optional[str] = None
+
 
 
 class BenchmarkResponse(BaseModel):

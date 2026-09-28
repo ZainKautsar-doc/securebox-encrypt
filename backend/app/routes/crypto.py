@@ -1,4 +1,5 @@
 import base64
+import hashlib
 import time
 import os
 from typing import List
@@ -27,13 +28,16 @@ async def encrypt_text(payload: EncryptRequest):
                 detail=f"Invalid algorithm: '{payload.algorithm}'. Supported: 'aes-256-gcm', 'chacha20-poly1305'"
             )
         
+        checksum_sha256 = hashlib.sha256(ciphertext).hexdigest()
+
         return EncryptResponse(
             algorithm=algo,
             kdf="scrypt",
             salt=base64.b64encode(salt).decode('utf-8'),
             nonce=base64.b64encode(nonce).decode('utf-8'),
             tag=base64.b64encode(tag).decode('utf-8'),
-            ciphertext=base64.b64encode(ciphertext).decode('utf-8')
+            ciphertext=base64.b64encode(ciphertext).decode('utf-8'),
+            checksum_sha256=checksum_sha256
         )
     except HTTPException:
         raise
@@ -47,6 +51,8 @@ async def encrypt_text(payload: EncryptRequest):
 @router.post("/decrypt", response_model=DecryptResponse)
 async def decrypt_text(payload: DecryptRequest):
     algo = payload.algorithm.lower().strip()
+    checksum_verified = False
+
     try:
         try:
             ciphertext = base64.b64decode(payload.ciphertext)
@@ -56,8 +62,33 @@ async def decrypt_text(payload: DecryptRequest):
         except Exception:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Invalid base64 encoding in ciphertext, salt, nonce, or tag"
+                detail="Format Base64 rusak / tidak valid pada ciphertext, salt, nonce, atau tag."
             )
+
+        if len(salt) != 16:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Metadata Salt korup: Panjang salt harus 16 byte (ditemukan {len(salt)} byte)."
+            )
+        if len(nonce) != 12:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Metadata Nonce korup: Panjang nonce harus 12 byte (ditemukan {len(nonce)} byte)."
+            )
+        if len(tag) != 16:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Metadata Auth Tag korup: Panjang tag harus 16 byte (ditemukan {len(tag)} byte)."
+            )
+
+        if payload.checksum_sha256 and payload.checksum_sha256.strip():
+            actual_checksum = hashlib.sha256(ciphertext).hexdigest()
+            if actual_checksum.lower() != payload.checksum_sha256.strip().lower():
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Ciphertext rusak / korup: Checksum SHA-256 tidak cocok dengan metadata (data teks telah dimodifikasi atau rusak)."
+                )
+            checksum_verified = True
 
         if algo == "aes-256-gcm":
             plaintext_bytes = decrypt_aes_gcm(
@@ -90,10 +121,17 @@ async def decrypt_text(payload: DecryptRequest):
         raise
     except Exception:
         # Cryptography raises InvalidTag when authentication tag or key fails
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Authentication failed. Incorrect password, algorithm, or corrupted data."
-        )
+        if checksum_verified:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Password salah! Teks terenkripsi terbukti utuh (checksum valid), namun password yang Anda masukkan tidak cocok."
+            )
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Authentication failed. Incorrect password, algorithm, or corrupted data."
+            )
+
 
 
 @router.post("/compare", response_model=List[BenchmarkResponse])

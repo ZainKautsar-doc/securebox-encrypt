@@ -19,60 +19,62 @@ function MainContent() {
       <Navigation />
 
       <main className="flex-1 max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Protocol Hero Header (Carbon Panel, 20px mobile / 24px tablet / 32px desktop padding, 2px radius) */}
-        <div className="mb-10 sm:mb-12 bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 lg:p-8 relative transition-colors duration-200">
-          <div className="max-w-3xl">
-            <div className="flex items-center space-x-2 mb-2">
-              <span className="w-2 h-2 bg-electric-indigo rounded-full inline-block animate-pulse"></span>
-              <span className="font-mono text-[11px] sm:text-xs text-warm-filament tracking-widest uppercase">
-                // CRYPTOGRAPHIC PROTOCOL INTERFACE
-              </span>
-            </div>
-            
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-pure-signal leading-tight">
-              Authenticated Encryption & Decryption Engine
-            </h1>
-            
-            <p className="text-soft-mist text-sm sm:text-base mt-2.5 leading-relaxed">
-              Zero-knowledge ciphertext generation with memory-hard key derivation (scrypt) and authenticated AEAD ciphers (AES-256-GCM & ChaCha20-Poly1305).
-            </p>
+        {/* Protocol Hero Header - Only displayed on primary cryptographic operation tabs */}
+        {['encrypt', 'decrypt', 'file-encrypt', 'file-decrypt'].includes(activeTab) && (
+          <div className="mb-10 sm:mb-12 bg-carbon-panel border border-graphite-lift rounded-sm p-5 sm:p-6 lg:p-8 relative transition-colors duration-200">
+            <div className="max-w-3xl">
+              <div className="flex items-center space-x-2 mb-2">
+                <span className="w-2 h-2 bg-electric-indigo rounded-full inline-block animate-pulse"></span>
+                <span className="font-mono text-[11px] sm:text-xs text-warm-filament tracking-widest uppercase">
+                  // CRYPTOGRAPHIC PROTOCOL INTERFACE
+                </span>
+              </div>
+              
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-pure-signal leading-tight">
+                Authenticated Encryption & Decryption Engine
+              </h1>
+              
+              <p className="text-soft-mist text-sm sm:text-base mt-2.5 leading-relaxed">
+                Zero-knowledge ciphertext generation with memory-hard key derivation (scrypt) and authenticated AEAD ciphers (AES-256-GCM & ChaCha20-Poly1305).
+              </p>
 
-            <div className="mt-5 flex flex-wrap gap-2 text-xs font-mono">
-              <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
-                <Key className="w-3.5 h-3.5 text-electric-indigo" />
-                <span>scrypt (N=16384, r=8, p=1)</span>
-              </span>
-              <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
-                <Shield className="w-3.5 h-3.5 text-lime-beacon" />
-                <span>128-bit Auth Tag</span>
-              </span>
-              <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
-                <FileLock2 className="w-3.5 h-3.5 text-periwinkle-veil" />
-                <span>Max 10 MB Files</span>
-              </span>
-              <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
-                <Cpu className="w-3.5 h-3.5 text-orchid-whisper" />
-                <span>AES-NI & Constant-Time ARX</span>
-              </span>
-              <button
-                type="button"
-                onClick={() => setActiveTab('team')}
-                className="flex items-center space-x-1.5 bg-transparent border border-electric-indigo/60 hover:border-electric-indigo text-pure-signal px-3 py-1.5 rounded-sm transition cursor-pointer min-h-[36px]"
-              >
-                <Users className="w-3.5 h-3.5 text-electric-indigo" />
-                <span>Meet Team</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab('how-it-works')}
-                className="flex items-center space-x-1.5 bg-transparent border border-graphite-lift hover:border-electric-indigo text-pure-signal px-3 py-1.5 rounded-sm transition cursor-pointer min-h-[36px]"
-              >
-                <BookOpen className="w-3.5 h-3.5 text-electric-indigo" />
-                <span>Read Protocol Spec</span>
-              </button>
+              <div className="mt-5 flex flex-wrap gap-2 text-xs font-mono">
+                <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
+                  <Key className="w-3.5 h-3.5 text-electric-indigo" />
+                  <span>scrypt (N=16384, r=8, p=1)</span>
+                </span>
+                <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
+                  <Shield className="w-3.5 h-3.5 text-lime-beacon" />
+                  <span>128-bit Auth Tag</span>
+                </span>
+                <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
+                  <FileLock2 className="w-3.5 h-3.5 text-periwinkle-veil" />
+                  <span>Max 10 MB Files</span>
+                </span>
+                <span className="flex items-center space-x-1.5 bg-graphite-lift/50 dark:bg-graphite-lift text-pure-signal px-3 py-1.5 rounded-sm border border-graphite-lift">
+                  <Cpu className="w-3.5 h-3.5 text-orchid-whisper" />
+                  <span>AES-NI & Constant-Time ARX</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('team')}
+                  className="flex items-center space-x-1.5 bg-transparent border border-electric-indigo/60 hover:border-electric-indigo text-pure-signal px-3 py-1.5 rounded-sm transition cursor-pointer min-h-[36px]"
+                >
+                  <Users className="w-3.5 h-3.5 text-electric-indigo" />
+                  <span>Meet Team</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('how-it-works')}
+                  className="flex items-center space-x-1.5 bg-transparent border border-graphite-lift hover:border-electric-indigo text-pure-signal px-3 py-1.5 rounded-sm transition cursor-pointer min-h-[36px]"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-electric-indigo" />
+                  <span>Read Protocol Spec</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Tab Pages */}
         {activeTab === 'encrypt' && <Encrypt />}

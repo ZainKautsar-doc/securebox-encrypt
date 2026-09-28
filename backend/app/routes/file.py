@@ -1,4 +1,6 @@
 import base64
+import hashlib
+from typing import Optional
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status, Response
 from app.crypto.aes_gcm import encrypt_aes_gcm, decrypt_aes_gcm
 from app.crypto.chacha20 import encrypt_chacha20, decrypt_chacha20
@@ -42,6 +44,7 @@ async def encrypt_file(
         salt_b64 = base64.b64encode(salt).decode('utf-8')
         nonce_b64 = base64.b64encode(nonce).decode('utf-8')
         tag_b64 = base64.b64encode(tag).decode('utf-8')
+        checksum_sha256 = hashlib.sha256(ciphertext).hexdigest()
         orig_filename = file.filename or "file.bin"
         
         headers = {
@@ -50,10 +53,11 @@ async def encrypt_file(
             "X-Crypto-Salt": salt_b64,
             "X-Crypto-Nonce": nonce_b64,
             "X-Crypto-Tag": tag_b64,
+            "X-Crypto-Checksum-Sha256": checksum_sha256,
             "X-Crypto-Original-Filename": orig_filename,
             "X-Crypto-File-Size": str(file_size),
             "Content-Disposition": f'attachment; filename="{orig_filename}.enc"',
-            "Access-Control-Expose-Headers": "X-Crypto-Algorithm, X-Crypto-KDF, X-Crypto-Salt, X-Crypto-Nonce, X-Crypto-Tag, X-Crypto-Original-Filename, X-Crypto-File-Size, Content-Disposition"
+            "Access-Control-Expose-Headers": "X-Crypto-Algorithm, X-Crypto-KDF, X-Crypto-Salt, X-Crypto-Nonce, X-Crypto-Tag, X-Crypto-Checksum-Sha256, X-Crypto-Original-Filename, X-Crypto-File-Size, Content-Disposition"
         }
         
         return Response(
@@ -77,17 +81,34 @@ async def decrypt_file(
     algorithm: str = Form(...),
     salt: str = Form(...),
     nonce: str = Form(...),
-    tag: str = Form(...)
+    tag: str = Form(...),
+    checksum: Optional[str] = Form(None)
 ):
     if not password:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password cannot be empty")
 
     file_bytes = await file.read()
+    if len(file_bytes) == 0:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Berkas terenkripsi rusak / korup (0 byte)."
+        )
+
     if len(file_bytes) > MAX_FILE_SIZE:
         raise HTTPException(
             status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
             detail="File too large. Maximum supported file size is 10 MB."
         )
+
+    checksum_verified = False
+    if checksum and checksum.strip():
+        actual_checksum = hashlib.sha256(file_bytes).hexdigest()
+        if actual_checksum.lower() != checksum.strip().lower():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Berkas terenkripsi (.enc) rusak atau korup! Checksum SHA-256 tidak cocok dengan metadata (berkas telah dimodifikasi, terpotong, atau tidak lengkap)."
+            )
+        checksum_verified = True
 
     algo = algorithm.lower().strip()
     try:
@@ -98,7 +119,23 @@ async def decrypt_file(
         except Exception:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Invalid base64 encoding in salt, nonce, or tag metadata."
+                detail="Format Base64 rusak / tidak valid pada metadata Salt, Nonce, atau Tag."
+            )
+
+        if len(salt_bytes) != 16:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Metadata Salt korup: Panjang salt harus 16 byte (ditemukan {len(salt_bytes)} byte)."
+            )
+        if len(nonce_bytes) != 12:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Metadata Nonce korup: Panjang nonce harus 12 byte (ditemukan {len(nonce_bytes)} byte)."
+            )
+        if len(tag_bytes) != 16:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Metadata Auth Tag korup: Panjang tag harus 16 byte (ditemukan {len(tag_bytes)} byte)."
             )
 
         if algo == "aes-256-gcm":
@@ -141,7 +178,14 @@ async def decrypt_file(
     except HTTPException:
         raise
     except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Authentication failed. Incorrect password, algorithm, corrupted metadata, or tampered file."
-        )
+        if checksum_verified:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Password salah! Berkas .enc terbukti 100% utuh (checksum valid), namun password yang Anda masukkan tidak sesuai."
+            )
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Authentication failed. Incorrect password, algorithm, corrupted metadata, or tampered file."
+            )
+

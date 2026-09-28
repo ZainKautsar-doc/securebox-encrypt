@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { FileUpload } from '../components/FileUpload';
-import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw, Layers, KeyRound, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { FileCheck, Unlock, Loader2, Download, UploadCloud, RotateCcw, Layers, KeyRound, Eye, EyeOff, ShieldCheck, AlertTriangle, AlertCircle, FileX } from 'lucide-react';
 import { useSecureBox } from '../context/SecureBoxContext';
 
 export const FileDecrypt: React.FC = () => {
@@ -373,11 +373,51 @@ export const FileDecrypt: React.FC = () => {
           </div>
         )}
 
-        {error && (
-          <div className="p-3.5 bg-orchid-whisper/10 border border-orchid-whisper text-orchid-whisper rounded-sm text-xs font-mono flex items-center space-x-2">
-            <span>{error}</span>
-          </div>
-        )}
+        {error && (() => {
+          const isPasswordError = /password salah|incorrect password|authentication failed/i.test(error);
+          const isCorruptionError = /korup|rusak|checksum|tamper|invalid base64|base64 rusak|corrupt|salt|nonce|auth tag/i.test(error);
+
+          if (isPasswordError) {
+            return (
+              <div className="p-4 bg-red-500/10 border border-red-500/60 rounded-sm text-xs font-mono space-y-1.5 text-pure-signal">
+                <div className="flex items-center space-x-2 text-red-400 font-bold uppercase tracking-wider">
+                  <KeyRound className="w-4 h-4 text-red-400 flex-shrink-0" />
+                  <span>// DIAGNOSA: PASSWORD SALAH</span>
+                </div>
+                <p className="text-soft-mist text-xs leading-relaxed font-sans">{error}</p>
+                <div className="text-[11px] text-red-300/80 pt-1 border-t border-red-500/20 font-sans">
+                  Saran: Password yang dimasukkan tidak cocok dengan password saat file dienkripsi. Periksa huruf besar/kecil dan spasi.
+                </div>
+              </div>
+            );
+          }
+
+          if (isCorruptionError) {
+            return (
+              <div className="p-4 bg-amber-500/10 border border-amber-500/60 rounded-sm text-xs font-mono space-y-1.5 text-pure-signal">
+                <div className="flex items-center space-x-2 text-amber-400 font-bold uppercase tracking-wider">
+                  <FileX className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                  <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                  <span>// DIAGNOSA: FILE RUSAK / METADATA CORRUPT</span>
+                </div>
+                <p className="text-soft-mist text-xs leading-relaxed font-sans">{error}</p>
+                <div className="text-[11px] text-amber-300/80 pt-1 border-t border-amber-500/20 font-sans">
+                  Saran: File .enc atau parameter metadata (Salt/Nonce/Auth Tag) telah berubah, terpotong, atau rusak. Pastikan file dan metadata persis sama dengan saat enkripsi.
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div className="p-4 bg-orchid-whisper/10 border border-orchid-whisper text-pure-signal rounded-sm text-xs font-mono space-y-1">
+              <div className="flex items-center space-x-2 text-orchid-whisper font-bold uppercase">
+                <AlertCircle className="w-4 h-4 text-orchid-whisper flex-shrink-0" />
+                <span>// DIAGNOSA: DECRYPTION ERROR</span>
+              </div>
+              <p className="text-soft-mist text-xs leading-relaxed font-sans">{error}</p>
+            </div>
+          );
+        })()}
 
         <div className="pt-2">
           <button

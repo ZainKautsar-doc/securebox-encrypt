@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
-import { Unlock, Loader2, KeyRound, UploadCloud, RotateCcw, Eye, EyeOff } from 'lucide-react';
+import { Unlock, Loader2, KeyRound, UploadCloud, RotateCcw, Eye, EyeOff, ShieldAlert, AlertTriangle, AlertCircle, FileX } from 'lucide-react';
 import { ResultDisplay } from './ResultDisplay';
 import { useSecureBox } from '../context/SecureBoxContext';
 
 export const DecryptForm: React.FC = () => {
   const { decryptTextState, setDecryptTextState, addHistoryItem } = useSecureBox();
-  const { ciphertext, password, algorithm, salt, encrypted_session_key, nonce, tag, plaintext } = decryptTextState;
+  const { ciphertext, password, algorithm, salt, encrypted_session_key, nonce, tag, checksum_sha256, plaintext } = decryptTextState;
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,6 +19,7 @@ export const DecryptForm: React.FC = () => {
   const setEncryptedSessionKey = (val: string) => setDecryptTextState((prev) => ({ ...prev, encrypted_session_key: val }));
   const setNonce = (val: string) => setDecryptTextState((prev) => ({ ...prev, nonce: val }));
   const setTag = (val: string) => setDecryptTextState((prev) => ({ ...prev, tag: val }));
+  const setChecksumSha256 = (val: string) => setDecryptTextState((prev) => ({ ...prev, checksum_sha256: val }));
   const setPlaintext = (val: string | null) => setDecryptTextState((prev) => ({ ...prev, plaintext: val }));
 
   const handleReset = () => {
@@ -30,6 +31,7 @@ export const DecryptForm: React.FC = () => {
       encrypted_session_key: '',
       nonce: '',
       tag: '',
+      checksum_sha256: '',
       plaintext: null,
     });
     setError(null);
@@ -50,6 +52,8 @@ export const DecryptForm: React.FC = () => {
         if (json.nonce) setNonce(json.nonce);
         if (json.tag) setTag(json.tag);
         if (json.auth_tag) setTag(json.auth_tag);
+        if (json.checksum_sha256) setChecksumSha256(json.checksum_sha256);
+        if (json.checksum) setChecksumSha256(json.checksum);
         if (json.key_algorithm === 'rsa-oaep-sha256' || json.encrypted_session_key) {
           setAlgorithm('hybrid');
         } else if (json.algorithm) {
@@ -62,6 +66,7 @@ export const DecryptForm: React.FC = () => {
     };
     reader.readAsText(file);
   };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,8 +121,10 @@ export const DecryptForm: React.FC = () => {
           salt: salt.trim(),
           nonce: nonce.trim(),
           tag: tag.trim(),
+          checksum_sha256: checksum_sha256?.trim() || undefined,
         });
         setPlaintext(res.plaintext);
+
 
         addHistoryItem({
           type: 'text-decrypt',
@@ -298,11 +305,50 @@ export const DecryptForm: React.FC = () => {
           </div>
         )}
 
-        {error && (
-          <div className="p-3.5 bg-orchid-whisper/10 border border-orchid-whisper text-orchid-whisper rounded-sm text-xs font-mono flex items-center space-x-2">
-            <span>{error}</span>
-          </div>
-        )}
+        {error && (() => {
+          const isPasswordError = /password salah|incorrect password/i.test(error);
+          const isCorruptionError = /korup|rusak|checksum|tamper|invalid base64/i.test(error);
+
+          if (isPasswordError) {
+            return (
+              <div className="p-4 bg-red-500/10 border border-red-500/60 rounded-sm text-xs font-mono space-y-1.5 text-pure-signal">
+                <div className="flex items-center space-x-2 text-red-400 font-bold uppercase tracking-wider">
+                  <KeyRound className="w-4 h-4 text-red-400 flex-shrink-0" />
+                  <span>// DIAGNOSA: PASSWORD SALAH</span>
+                </div>
+                <p className="text-soft-mist text-xs leading-relaxed font-sans">{error}</p>
+                <div className="text-[11px] text-red-300/80 pt-1 border-t border-red-500/20 font-sans">
+                  Saran: Kunci enkripsi tidak cocok. Periksa kembali huruf besar/kecil atau spasi pada passphrase Anda.
+                </div>
+              </div>
+            );
+          }
+
+          if (isCorruptionError) {
+            return (
+              <div className="p-4 bg-amber-500/10 border border-amber-500/60 rounded-sm text-xs font-mono space-y-1.5 text-pure-signal">
+                <div className="flex items-center space-x-2 text-amber-400 font-bold uppercase tracking-wider">
+                  <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                  <span>// DIAGNOSA: DATA / METADATA CORRUPT</span>
+                </div>
+                <p className="text-soft-mist text-xs leading-relaxed font-sans">{error}</p>
+                <div className="text-[11px] text-amber-300/80 pt-1 border-t border-amber-500/20 font-sans">
+                  Saran: Ciphertext atau parameter metadata telah berubah, rusak, atau terpotong. Pastikan data persis sama dengan saat enkripsi.
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div className="p-4 bg-orchid-whisper/10 border border-orchid-whisper text-pure-signal rounded-sm text-xs font-mono space-y-1">
+              <div className="flex items-center space-x-2 text-orchid-whisper font-bold uppercase">
+                <AlertCircle className="w-4 h-4 text-orchid-whisper flex-shrink-0" />
+                <span>// DIAGNOSA: DECRYPTION ERROR</span>
+              </div>
+              <p className="text-soft-mist text-xs leading-relaxed font-sans">{error}</p>
+            </div>
+          );
+        })()}
 
         <div className="pt-2">
           <button

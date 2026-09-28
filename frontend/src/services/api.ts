@@ -13,6 +13,7 @@ export interface EncryptResponse {
   nonce: string;
   tag: string;
   ciphertext: string;
+  checksum_sha256?: string;
 }
 
 export interface DecryptRequest {
@@ -23,7 +24,9 @@ export interface DecryptRequest {
   encrypted_session_key?: string;
   nonce: string;
   tag: string;
+  checksum_sha256?: string;
 }
+
 
 export interface HybridEncryptRequest {
   plaintext: string;
@@ -201,6 +204,7 @@ export const api = {
     const salt = res.headers.get('X-Crypto-Salt') || '';
     const nonce = res.headers.get('X-Crypto-Nonce') || '';
     const tag = res.headers.get('X-Crypto-Tag') || '';
+    const checksum = res.headers.get('X-Crypto-Checksum-Sha256') || '';
     const kdf = res.headers.get('X-Crypto-KDF') || 'scrypt';
     const algo = res.headers.get('X-Crypto-Algorithm') || algorithm;
     const origFilename = res.headers.get('X-Crypto-Original-Filename') || file.name;
@@ -216,6 +220,7 @@ export const api = {
         salt,
         nonce,
         tag,
+        checksum_sha256: checksum,
         file_size: fileSize,
         filename: origFilename,
       },
@@ -229,7 +234,8 @@ export const api = {
     salt: string,
     nonce: string,
     tag: string,
-    encrypted_session_key?: string
+    encrypted_session_key?: string,
+    checksum?: string
   ): Promise<{ blob: Blob; filename: string }> {
     if (algorithm === 'hybrid') {
       const formData = new FormData();
@@ -266,11 +272,15 @@ export const api = {
     formData.append('salt', salt);
     formData.append('nonce', nonce);
     formData.append('tag', tag);
+    if (checksum) {
+      formData.append('checksum', checksum);
+    }
 
     const res = await fetch(`${API_BASE}/crypto/file/decrypt`, {
       method: 'POST',
       body: formData,
     });
+
 
     if (!res.ok) {
       const json = await res.json().catch(() => ({}));

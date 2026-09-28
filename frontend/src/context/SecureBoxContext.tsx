@@ -17,6 +17,7 @@ interface DecryptTextState {
   encrypted_session_key: string;
   nonce: string;
   tag: string;
+  checksum_sha256?: string;
   plaintext: string | null;
 }
 
@@ -37,7 +38,9 @@ interface FileDecryptState {
   encrypted_session_key: string;
   nonce: string;
   tag: string;
+  checksum?: string;
 }
+
 
 interface SecureBoxContextType {
   activeTab: string;
@@ -62,11 +65,14 @@ interface SecureBoxContextType {
   loadIntoDecryptText: (data: {
     ciphertext?: string;
     salt?: string;
+    encrypted_session_key?: string;
     nonce?: string;
     tag?: string;
-    algorithm?: 'aes-256-gcm' | 'chacha20-poly1305';
+    algorithm?: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
+    checksum_sha256?: string;
   }) => void;
 }
+
 
 const STORAGE_KEYS = {
   HISTORY: 'securebox_history',
@@ -162,6 +168,7 @@ export const SecureBoxProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     nonce?: string;
     tag?: string;
     algorithm?: 'aes-256-gcm' | 'chacha20-poly1305' | 'hybrid';
+    checksum_sha256?: string;
   }) => {
     setDecryptTextState((prev) => ({
       ...prev,
@@ -171,10 +178,12 @@ export const SecureBoxProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       nonce: data.nonce ?? prev.nonce,
       tag: data.tag ?? prev.tag,
       algorithm: data.algorithm ?? prev.algorithm,
+      checksum_sha256: data.checksum_sha256 ?? prev.checksum_sha256,
       plaintext: null,
     }));
     setActiveTab('decrypt');
   };
+
 
   return (
     <SecureBoxContext.Provider
