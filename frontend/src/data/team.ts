@@ -32,6 +32,7 @@ export const teamMembers: TeamMember[] = [
     category: 'crypto',
     tag: 'ENGINE // ARCHITECT',
     initials: 'FAN',
+    avatarUrl: 'https://github.com/FitoAnugrah.png',
     bio: 'Memimpin arsitektur komputasi kriptografi zero-knowledge pada backend. Merancang engine derivasi kunci memory-hard scrypt, integrasi cipher AEAD native, dan sistem hybrid encryption berbasis RSA-OAEP.',
     skills: ['Python 3.10+', 'FastAPI', 'cryptography native', 'scrypt KDF', 'AES-256-GCM', 'ChaCha20-Poly1305', 'RSA-OAEP'],
     keyContributions: [
@@ -42,7 +43,7 @@ export const teamMembers: TeamMember[] = [
     ],
     funFact: 'Loves building memory-safe cryptographic primitives & drinking single-origin espresso.',
     socials: {
-      github: 'https://github.com/ZainKautsar-doc/securebox-encrypt',
+      github: 'https://github.com/FitoAnugrah',
       email: 'fito@securebox.dev',
     },
   },
@@ -54,6 +55,7 @@ export const teamMembers: TeamMember[] = [
     category: 'security',
     tag: 'SECURITY // VERIFICATION',
     initials: 'MNP',
+    avatarUrl: 'https://github.com/apeeppp.png',
     bio: 'Bertanggung jawab atas verifikasi keamanan sistem, validasi integritas ciphertext, pengujian ketahanan terhadap modifikasi bit (tamper detection), serta benchmarking performa throughput.',
     skills: ['Pytest', 'Ciphertext Integrity', 'Shannon Entropy', 'Avalanche Analysis', 'Docker', 'Linux'],
     keyContributions: [
@@ -64,7 +66,7 @@ export const teamMembers: TeamMember[] = [
     ],
     funFact: 'Hardcore Linux kernel enthusiast with zero trust in unauthenticated data streams.',
     socials: {
-      github: 'https://github.com/ZainKautsar-doc/securebox-encrypt',
+      github: 'https://github.com/apeeppp',
       email: 'nazril@securebox.dev',
     },
   },

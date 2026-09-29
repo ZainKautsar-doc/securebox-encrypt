@@ -237,7 +237,6 @@ export const Team: React.FC = () => {
           </button>
         </div>
       </div>
-
     </div>
   );
 };
