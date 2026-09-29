@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
-import { Unlock, Loader2, KeyRound, UploadCloud, RotateCcw, Eye, EyeOff, ShieldAlert, AlertTriangle, AlertCircle, FileX } from 'lucide-react';
+import { Unlock, Loader2, KeyRound, UploadCloud, RotateCcw, Eye, EyeOff, AlertTriangle, AlertCircle } from 'lucide-react';
 import { ResultDisplay } from './ResultDisplay';
 import { useSecureBox } from '../context/SecureBoxContext';
 

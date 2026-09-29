@@ -146,6 +146,7 @@ export const api = {
       tag: string;
       file_size: number;
       filename: string;
+      checksum_sha256?: string;
     };
   }> {
     if (algorithm === 'hybrid') {
