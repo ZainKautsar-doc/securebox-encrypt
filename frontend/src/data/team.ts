@@ -18,7 +18,7 @@ export const teamMembers: TeamMember[] = [
       'Komponen drag-and-drop file encryption/decryption biner hingga 10 MB dengan format .enc & JSON',
       'Implementasi Dark/Light theme switch dengan palet warna protokol kontras tinggi'
     ],
-    funFact: 'Obsessed with micro-interactions, sub-millisecond render times, and terminal aesthetics.',
+    funFact: 'Tante tante culik aku dong....',
     socials: {
       github: 'https://github.com/ZainKautsar-doc',
       email: 'zainkautsarridha@gmail.com',
@@ -41,7 +41,7 @@ export const teamMembers: TeamMember[] = [
       'Stateless REST API routes (/api/encrypt & /api/decrypt) dengan zero plaintext server retention',
       'Dual-layer Hybrid Encryption (RSA-OAEP 2048-bit + ephemeral AES session key)'
     ],
-    funFact: 'Loves building memory-safe cryptographic primitives & drinking single-origin espresso.',
+    funFact: 'ku gak mau malam minggu cuma bengong....',
     socials: {
       github: 'https://github.com/FitoAnugrah',
       email: 'fito@securebox.dev',
@@ -64,7 +64,7 @@ export const teamMembers: TeamMember[] = [
       'Modul analisis matematis tingkat lanjut: Shannon entropy, avalanche effect, & histogram byte',
       'Audit pipeline arsitektur stateless untuk menjamin prinsip zero-knowledge compliance'
     ],
-    funFact: 'Temanku semua pada jahat tanteee~',
+    funFact: 'Tante tante ajak dugem dong',
     socials: {
       github: 'https://github.com/apeeppp',
       email: 'nazril@securebox.dev',
