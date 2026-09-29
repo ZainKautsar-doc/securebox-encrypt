@@ -57,14 +57,14 @@ export const teamMembers: TeamMember[] = [
     initials: 'MNP',
     avatarUrl: 'https://github.com/apeeppp.png',
     bio: 'Bertanggung jawab atas verifikasi keamanan sistem, validasi integritas ciphertext, pengujian ketahanan terhadap modifikasi bit (tamper detection), serta benchmarking performa throughput.',
-    skills: ['Pytest', 'Ciphertext Integrity', 'Shannon Entropy', 'Avalanche Analysis', 'Docker', 'Linux'],
+    skills: ['Pytest', 'Ciphertext Integrity', 'Shannon Entropy', 'Avalanche Analysis'],
     keyContributions: [
       'Automated testing integritas data: memastikan deteksi manipulasi 1-bit seketika (InvalidTag)',
       'Benchmark komparatif throughput dan latensi (1 KB, 1 MB, 10 MB) antara AES-NI vs ChaCha20',
       'Modul analisis matematis tingkat lanjut: Shannon entropy, avalanche effect, & histogram byte',
       'Audit pipeline arsitektur stateless untuk menjamin prinsip zero-knowledge compliance'
     ],
-    funFact: 'Hardcore Linux kernel enthusiast with zero trust in unauthenticated data streams.',
+    funFact: 'Temanku semua pada jahat tanteee~',
     socials: {
       github: 'https://github.com/apeeppp',
       email: 'nazril@securebox.dev',
