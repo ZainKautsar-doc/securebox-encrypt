@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
-import { TeamMember } from '../types/team';
-import { Github, Mail, Check, Terminal, ChevronDown, ChevronUp, Cpu, Shield, Code2 } from 'lucide-react';
+import React, { useState } from "react";
+import { TeamMember } from "../types/team";
+import {
+  Github,
+  Mail,
+  Check,
+  Terminal,
+  ChevronDown,
+  ChevronUp,
+  Cpu,
+  Shield,
+  Code2,
+} from "lucide-react";
 
 interface TeamMemberCardProps {
   member: TeamMember;
+  showFunFact?: boolean;
+  onToggleFunFact?: () => void;
 }
 
-export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
+export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, showFunFact: propShowFunFact, onToggleFunFact }) => {
   const [showContributions, setShowContributions] = useState(false);
-  const [showFunFact, setShowFunFact] = useState(false);
+  const [localShowFunFact, setLocalShowFunFact] = useState(false);
+  
+  const showFunFact = propShowFunFact !== undefined ? propShowFunFact : localShowFunFact;
+
+  const handleToggleFunFact = () => {
+    if (onToggleFunFact) {
+      onToggleFunFact();
+    } else {
+      setLocalShowFunFact(!localShowFunFact);
+    }
+  };
   const [copied, setCopied] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -20,11 +42,11 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'crypto':
+      case "crypto":
         return <Cpu className="w-3.5 h-3.5 text-electric-indigo" />;
-      case 'frontend':
+      case "frontend":
         return <Code2 className="w-3.5 h-3.5 text-periwinkle-veil" />;
-      case 'security':
+      case "security":
         return <Shield className="w-3.5 h-3.5 text-lime-beacon" />;
       default:
         return <Terminal className="w-3.5 h-3.5 text-electric-indigo" />;
@@ -38,7 +60,9 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
         <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-graphite-lift text-[11px] font-mono">
           <div className="flex items-center space-x-1.5 text-warm-filament">
             {getCategoryIcon(member.category)}
-            <span className="font-semibold tracking-wider uppercase">{member.tag}</span>
+            <span className="font-semibold tracking-wider uppercase">
+              {member.tag}
+            </span>
           </div>
           {member.npm && (
             <span className="px-2 py-0.5 bg-midnight-void border border-graphite-lift text-soft-mist rounded-sm">
@@ -134,10 +158,10 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
           <div className="mb-4">
             <button
               type="button"
-              onClick={() => setShowFunFact(!showFunFact)}
+              onClick={handleToggleFunFact}
               className="text-[11px] font-mono text-warm-filament/90 hover:text-warm-filament flex items-center space-x-1.5 cursor-pointer underline underline-offset-2"
             >
-              <span>{showFunFact ? 'Hide' : 'View'} Engineering Note</span>
+              <span>{showFunFact ? "Hide" : "View"} Engineering Note</span>
             </button>
             {showFunFact && (
               <div className="mt-2 p-2.5 bg-midnight-void border border-warm-filament/30 rounded-sm text-[11px] font-mono text-warm-filament leading-relaxed">
@@ -175,7 +199,9 @@ export const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member }) => {
               {copied ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-lime-beacon" />
-                  <span className="text-[10px] text-lime-beacon font-bold">COPIED</span>
+                  <span className="text-[10px] text-lime-beacon font-bold">
+                    COPIED
+                  </span>
                 </>
               ) : (
                 <>

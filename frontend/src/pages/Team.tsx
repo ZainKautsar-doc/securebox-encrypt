@@ -19,6 +19,7 @@ export const Team: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<
     "all" | "crypto" | "frontend" | "security"
   >("all");
+  const [showEngineeringNotes, setShowEngineeringNotes] = useState(false);
 
   const filteredMembers =
     selectedCategory === "all"
@@ -196,7 +197,12 @@ export const Team: React.FC = () => {
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
           {filteredMembers.map((member) => (
-            <TeamMemberCard key={member.id} member={member} />
+            <TeamMemberCard 
+              key={member.id} 
+              member={member} 
+              showFunFact={showEngineeringNotes}
+              onToggleFunFact={() => setShowEngineeringNotes(prev => !prev)}
+            />
           ))}
         </div>
       </div>
