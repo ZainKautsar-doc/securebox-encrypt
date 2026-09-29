@@ -1,5 +1,5 @@
 import os
-from typing import Tuple
+from typing import Tuple, Optional
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.asymmetric import rsa
 from app.crypto.rsa_service import encrypt_rsa_oaep, decrypt_rsa_oaep
@@ -8,8 +8,8 @@ from app.crypto.rsa_service import encrypt_rsa_oaep, decrypt_rsa_oaep
 def encrypt_hybrid(
     data: bytes,
     public_key: rsa.RSAPublicKey,
-    session_key: bytes = None,
-    nonce: bytes = None
+    session_key: Optional[bytes] = None,
+    nonce: Optional[bytes] = None
 ) -> Tuple[bytes, bytes, bytes, bytes]:
     """
     Performs hybrid encryption:
